@@ -1,0 +1,21 @@
+@font-face {
+  font-family: Comfortaa;
+  src: url(./assets/Comfortaa-VariableFont_wght.ttf);
+}
+
+.body {
+  background-color: #D7D2CE;
+  font-family: Comfortaa;
+  background-size: cover;
+  min-height:100vh;
+}
+
+@media screen and (max-width:425px) and (min-width: 320px) {
+  .body {
+    background-color: #D7D2CE;
+    font-family: Comfortaa;
+    background-size: cover;
+    height:max-content;
+  }
+  
+}

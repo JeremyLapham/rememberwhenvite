@@ -1,0 +1,87 @@
+.addFolderTxt {
+    margin:100px 0 50px 0;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.folderIMG {
+    width:123px;
+    margin-bottom:76px;
+}
+
+.inputTxt {
+    padding-left:4px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.inputFolder {
+    margin-bottom:50px;
+    width: 300px;
+    height:40px;
+}
+
+.addfolderBtn {
+    background-color: #A99282;
+    font-size:15px;
+    font-weight:bold;
+    margin-bottom: 2rem;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.cancelfolderBtn {
+    background-color: #857B74;
+    font-size:15px;
+    font-weight:bold;
+    margin-bottom: 2rem;
+    width:118 !important;
+    height:31px !important;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+@media screen and (min-width: 1024px) {
+    .addFolderTxt {
+        font-size: 28px;
+        font-weight: bolder;
+        margin-top: 3rem !important;
+    }
+
+    .folderIMG {
+        width: 200px !important;
+        height: 280px !important;
+    }
+
+    .inputTxt {
+        font-size: 25px;
+    }
+
+    .inputFolder {
+        width: 400px !important;
+        height: 48px !important;
+        border: solid 1px black !important;
+    }
+
+    .addfolderBtn {
+        width: 150px !important;
+        height: 48px !important;
+        font-size: 25px !important;
+        margin-top: 2rem;
+    }
+
+    .cancelfolderBtn {
+        width: 200px !important;
+        height: 65px !important;
+        font-size: 25px !important;
+        margin-top: 0;
+    }
+
+    .mobileAddRow2 {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .desktopAddRow2 {
+        display: none !important;
+    }
+}

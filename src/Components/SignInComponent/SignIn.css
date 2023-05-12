@@ -1,0 +1,160 @@
+.signInPlacing {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.rememberTxt {
+    font-size: 35px;
+    width: 269px;
+    font-weight: 800;
+}
+
+.logo {
+    margin-bottom: -1.5rem;
+    width: 260px;
+    display: block !important;
+}
+
+.signInBtn {
+    width: 250px;
+    height: 45px;
+    background-color: #857B74;
+    font-weight: 800;
+    font-size: 18px;
+    margin-top: 1rem;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.signInBtnTwo {
+    width: 250px;
+    height: 45px;
+    background-color: #D7D2CE;
+    font-weight: 800;
+    font-size: 18px;
+    margin-top: 1rem;
+    margin-left: 2rem;
+    margin-bottom: 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.noAccount {
+    font-size: 14px;
+    width: 250px;
+    margin-top: 1rem;
+}
+
+.signInBg {
+    background-color: #857B74;
+    height: 100%;
+    margin: 47px 0 0 -12px;
+    min-width: 100vw;
+    border-radius: 50px 50px 0 0;
+    box-sizing: border-box;
+}
+
+.inputField {
+    border-radius: 10px;
+    margin-left: 2rem;
+    height: 45px;
+    width: 300px;
+    border: none;
+}
+
+.userNameInput {
+    font-size: 20px;
+    margin: 86px 0 0 2rem;
+    font-weight: bold;
+}
+
+.passwordInput {
+    font-size: 20px;
+    margin: 39px 0 0 2rem;
+    font-weight: bold;
+}
+
+.forgotPass {
+    font-size: 15px;
+    font-weight: bold;
+    margin: 2rem -0.5rem 1rem 0;
+}
+
+.dontHaveAccount {
+    width: 64px;
+    font-size: 14px;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-decoration: underline;
+}
+
+.showPassword {
+    margin: 2rem 0 1rem 0.5rem;
+    font-size: 15px;
+    font-weight: bolder !important;
+}
+
+.loading {
+    color:white;
+    font-size:30px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 1000px 1000px rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (min-width: 1024px) {
+    .loading {
+        color:white;
+        font-size:40px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 1000px 1000px rgba(0, 0, 0, 0.5);
+    }
+
+    .logo {
+        margin-bottom: -5rem;
+        width: 520px;
+    }
+
+    .signInBtn {
+        width: 470px;
+        height: 70px;
+        font-size: 25px;
+    }
+
+    .signInBtnTwo {
+        width: 500px;
+        height: 70px;
+        font-size: 30px;
+    }
+
+    .inputField {
+        margin-left: 25rem;
+        width: 500px;
+    }
+
+    .userNameInput {
+        margin-left: 24.8rem;
+    }
+
+    .passwordInput {
+        margin-left: 24.8rem;
+    }
+
+    .forgotPass {
+        margin-right: 23.3rem;
+    }
+
+    .showPassword {
+        margin-left: 25rem;
+    }
+}
