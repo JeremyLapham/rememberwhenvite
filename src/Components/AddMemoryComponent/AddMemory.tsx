@@ -24,7 +24,7 @@ export default function AddMemory() {
     const [memoryId, setMemoryId] = useState(isEditMemory ? memoryEdit.id : 0);
     const [folder, setFolder] = useState(0);
     const [folders, setFolders] = useState([]);
-    // console.log(setMemoryId);
+    console.log(setMemoryId);
 
     const handleTitle = (e: { target: { value: string } }) => setMemoryTitle(e.target.value);
     const handleDescription = (e: { target: { value: string } }) => setMemoryDescription(e.target.value);

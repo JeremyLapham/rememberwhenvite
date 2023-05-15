@@ -10,7 +10,7 @@ import swal from 'sweetalert';
 import DesktopNav from '../DesktopNavComponent/DesktopNav';
 
 export default function AddFolder() {
-    const { usersId,setFromAddFolder,setSelectedFolder ,folderEdit, isEditFolder} = useContext(MyContext);
+    const { usersId, setFromAddFolder, setSelectedFolder, folderEdit, isEditFolder } = useContext(MyContext);
 
     const [showModal, setShowModal] = useState(false);
     const [folderName, setFolderName] = useState(isEditFolder ? folderEdit.name : '');
@@ -51,6 +51,9 @@ export default function AddFolder() {
                 setSelectedFolder(fold);
                 setFromAddFolder(true);
                 result = await Folder(fold);
+                setTimeout(() => {
+                    navigate('/dashboard');
+                }, 2000);
             }
             if (result) {
                 setShowModal(true);
@@ -62,9 +65,6 @@ export default function AddFolder() {
 
     const handleClose = () => setShowModal(false);
 
-    const handleViewFolder = async () => {
-        navigate('/ClickedFolder');
-    }
     return (
         <Container fluid>
             <Row>
@@ -74,15 +74,6 @@ export default function AddFolder() {
                             <Col className='d-flex justify-content-center'>
                                 <p className='modalTxt'>Your folder was {folderEdit ? 'Edited' : 'added'}</p>
                             </Col>
-                        </Row>
-                        <Row>
-                        {folderEdit ? '' : 
-                            <Col className='d-flex justify-content-center'>
-                                <Button className='viewBtn' variant="" onClick={handleViewFolder}>
-                                    View
-                                </Button>
-                            </Col>
-                            }
                         </Row>
                     </Modal.Body>
                 </Modal>
