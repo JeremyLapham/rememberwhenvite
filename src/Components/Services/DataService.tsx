@@ -14,7 +14,6 @@ export async function createAccount(createdUser: { Id: number; Username: string;
         throw new Error(message);
     }
     let data = await res.json();
-    console.log(data);
     return data;
 }
 
@@ -33,7 +32,6 @@ export async function login(loginUser: { Username: string; Password: string; }) 
     }
 
     let data = await res.json();
-    console.log(data);
     return data;
 }
 
@@ -52,7 +50,6 @@ export async function Folder(folder: object) {
     }
 
     let data = await res.json();
-    console.log(data);
     return data;
 }
 
@@ -89,7 +86,6 @@ export async function addMemoryItem(memoryItem: object) {
         throw new Error(message);
     }
     let data = await res.json();
-    console.log(data);
     return data;
 }
 
@@ -123,7 +119,6 @@ export async function updateMemoryItem(memoryItem: object) {
         throw new Error(message);
     }
     let data = await res.json();
-    console.log(data);
     return data;
 }
 
@@ -140,7 +135,6 @@ export async function updateFolder(folder: object) {
         throw new Error(message);
     }
     let data = await res.json();
-    console.log(data);
     return data;
 }
 
@@ -157,7 +151,6 @@ export async function DeleteFolder(folder: object) {
         throw new Error(message);
     }
     let data = await res.json();
-    console.log(data);
     return data;
 }
 export async function DeleteMemory(memory: object) {
@@ -173,6 +166,5 @@ export async function DeleteMemory(memory: object) {
         throw new Error(message);
     }
     let data = await res.json();
-    console.log(data);
     return data;
 }

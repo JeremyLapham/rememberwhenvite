@@ -6,7 +6,6 @@
     width:172px;
     height:56px;
     margin-top:80px;
-    margin-bottom:90%;
 }
 
 .settingTxt {
@@ -18,4 +17,10 @@
 .elephant {
     width:160px;
     margin-top:140px;
+}
+
+@media screen and (min-width:1024px) {
+    .elephant {
+        display: none !important;
+    }
 }

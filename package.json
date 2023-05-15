@@ -15,6 +15,7 @@
     "@mui/material": "^5.13.0",
     "@popperjs/core": "^2.11.7",
     "bootstrap": "^5.2.3",
+    "mic-recorder-to-mp3": "^2.2.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
     "react-dom": "^18.2.0",
@@ -23,6 +24,7 @@
     "sweetalert": "^2.1.2"
   },
   "devDependencies": {
+    "@types/node": "^20.1.4",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@types/react-router-dom": "^5.3.3",

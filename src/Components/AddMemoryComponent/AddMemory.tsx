@@ -7,6 +7,7 @@ import { addMemoryItem, getMemoryItemsByUserId, updateMemoryItem, getFolderByUse
 import { MyContext } from '../context';
 import swal from 'sweetalert';
 import DesktopNav from '../DesktopNavComponent/DesktopNav';
+// import AudioRecorder from './AudioRecording';
 
 export default function AddMemory() {
     const { usersId, setSelectedMemory, isEditMemory, memoryEdit, setFolderId, setMemoryItems, folderId } = useContext(MyContext);
@@ -23,7 +24,7 @@ export default function AddMemory() {
     const [memoryId, setMemoryId] = useState(isEditMemory ? memoryEdit.id : 0);
     const [folder, setFolder] = useState(0);
     const [folders, setFolders] = useState([]);
-    console.log(setMemoryId);
+    // console.log(setMemoryId);
 
     const handleTitle = (e: { target: { value: string } }) => setMemoryTitle(e.target.value);
     const handleDescription = (e: { target: { value: string } }) => setMemoryDescription(e.target.value);
@@ -95,8 +96,14 @@ export default function AddMemory() {
     const handleViewMemory = async () => {
         navigate('/memory');
     }
+
+
+
+
+
     return (
         <Container fluid>
+            {/* <AudioRecorder /> */}
             <Row>
                 <Modal className='modalBG' show={show} onHide={handleClose}>
                     <Modal.Body className={isEditMemory ? `modalBodyUpdate` : `modalBody`}>

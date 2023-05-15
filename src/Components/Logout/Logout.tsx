@@ -5,6 +5,7 @@ import { Button, Col, Container, Row } from 'react-bootstrap';
 import elephant from '../../assets/elephantLogo.svg';
 import { useNavigate } from 'react-router-dom';
 import { MyContext, resetContext } from '../context';
+import DesktopNav from '../DesktopNavComponent/DesktopNav';
 
 export default function Logout() {
     const navigate = useNavigate();
@@ -19,6 +20,7 @@ export default function Logout() {
     return (
         <Container fluid>
             <CustomNavbar />
+            <DesktopNav />
             <Row>
                 <Col>
                     <img className='elephant' src={elephant} alt='Elephant logo in logout page' />
@@ -34,7 +36,6 @@ export default function Logout() {
                     <Button onClick={() => LogOut()} className='logoutBtn' variant=''>Logout</Button>
                 </Col>
             </Row>
-
         </Container>
     )
 }
