@@ -65,6 +65,7 @@ export default function DashBoard() {
     }
 
     const handlememoryClickDash = (memory: Memory) => {
+        sessionStorage.setItem('Memory', JSON.stringify(memory));
         setSelectedMemory(memory);
         navigate('/memory')
     }

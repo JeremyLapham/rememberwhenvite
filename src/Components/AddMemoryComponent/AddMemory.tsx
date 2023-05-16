@@ -24,7 +24,7 @@ export default function AddMemory() {
     const [memoryId, setMemoryId] = useState(isEditMemory ? memoryEdit.id : 0);
     const [folder, setFolder] = useState(0);
     const [folders, setFolders] = useState([]);
-    console.log(setMemoryId);
+    // console.log(setMemoryId);
 
     const handleTitle = (e: { target: { value: string } }) => setMemoryTitle(e.target.value);
     const handleDescription = (e: { target: { value: string } }) => setMemoryDescription(e.target.value);
@@ -84,9 +84,12 @@ export default function AddMemory() {
 
     useEffect(() => {
         const GetFolders = async () => {
-            let displayFolder = await getFolderByUserId(usersId);
-            setFolders(displayFolder);
-            setFolderId(displayFolder.id);
+            const UserId = sessionStorage.getItem('UserId');
+            if (UserId !== null) {
+                let displayFolder = await getFolderByUserId(parseInt(UserId));
+                setFolders(displayFolder);
+                setFolderId(displayFolder.id);
+            }
         }
         GetFolders()
     }, []);
@@ -182,7 +185,6 @@ export default function AddMemory() {
                             </Form.Group>
                         </Col>
                     </Row>
-
                     <Row>
                         <Col>
                             <Form.Group className="mb-3 d-flex flex-column align-items-center">

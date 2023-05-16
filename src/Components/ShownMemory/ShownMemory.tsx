@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './ShownMemory.css';
 import CustomNavbar from '../navComponent/NavbarComponent';
 import { Button, Col, Container, Modal, Row } from 'react-bootstrap';
@@ -9,7 +9,7 @@ import { DeleteMemory } from '../Services/DataService';
 import DesktopNav from '../DesktopNavComponent/DesktopNav';
 
 export default function ShownMemory() {
-    const { selectedMemory, setIsMemoryEdit, setMemoryEdit } = useContext(MyContext);
+    const { selectedMemory, setIsMemoryEdit, setMemoryEdit, setSelectedMemory } = useContext(MyContext);
     const [show, setShow] = useState(false);
     const [showImg, setShowImg] = useState(false);
 
@@ -21,6 +21,16 @@ export default function ShownMemory() {
     const handleBackButtonClick = () => {
         navigate('/dashboard');
     };
+
+    useEffect(() => {
+        const Memory = sessionStorage.getItem('Memory');
+        if (Memory) {
+            setSelectedMemory(JSON.parse(Memory));
+        } else {
+            sessionStorage.setItem('Memory', JSON.stringify(selectedMemory));
+            setSelectedMemory(selectedMemory);
+        }
+    }, []);
 
     const handleEditMemory = () => {
         setMemoryEdit({

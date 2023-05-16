@@ -10,7 +10,7 @@ import swal from 'sweetalert';
 import DesktopNav from '../DesktopNavComponent/DesktopNav';
 
 export default function AddFolder() {
-    const { usersId, setFromAddFolder, setSelectedFolder, folderEdit, isEditFolder } = useContext(MyContext);
+    const { setFromAddFolder, setSelectedFolder, folderEdit, isEditFolder } = useContext(MyContext);
 
     const [showModal, setShowModal] = useState(false);
     const [folderName, setFolderName] = useState(isEditFolder ? folderEdit.name : '');
@@ -25,6 +25,7 @@ export default function AddFolder() {
 
 
     const handleFolder = async () => {
+        const UserId = sessionStorage.getItem('UserId');
         if (folderName === '') {
             swal("Please enter a name for your folder");
         } else {
@@ -32,7 +33,7 @@ export default function AddFolder() {
             if (isEditFolder) {
                 const fold = {
                     Id: folderEdit.id,
-                    userId: usersId,
+                    userId: UserId,
                     name: folderName,
                     isDeleted: false
                 }
@@ -44,7 +45,7 @@ export default function AddFolder() {
             } else {
                 const fold = {
                     id: 0,
-                    userId: usersId,
+                    userId: UserId,
                     name: folderName,
                     isDeleted: false
                 }
