@@ -22,7 +22,7 @@
     border: 1px solid !important;
     border-radius: 10px !important;
     padding: 0 !important;
-    margin: 1rem 0 0 1rem
+    margin: 1rem 0 0 0;
 }
 
 .folderImg {
@@ -37,6 +37,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 .memoryTitle {
@@ -115,6 +116,7 @@
     .allFolderBtn {
         width: 10rem;
         height: 10rem;
+        margin: 16px 0 0 0 !important;
     }
 
     .folderImg {

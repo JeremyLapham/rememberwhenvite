@@ -1,17 +1,19 @@
 import { useContext, useState } from 'react'
 import "./NavbarStyle.css";
-import { Container, Navbar, Offcanvas, Nav } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Container, Navbar, Offcanvas, Nav, Modal, Button } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 import home from '../../assets/home.svg';
 import setting from '../../assets/setting.svg';
 import addnew from '../../assets/addnew.svg';
 import memories from '../../assets/memories.svg';
-import { MyContext } from '../context';
+import { MyContext, resetContext } from '../context';
 
 export default function CustomNavbar() {
     const [isActive, setIsActive] = useState(false);
 
-    const { setMoreMemoryClicked, setIsMemoryEdit, setIsEditFolder } = useContext(MyContext);
+    const { setMoreMemoryClicked, setIsMemoryEdit, setIsEditFolder, folderLength, setMemoryItems, setUsersId, setUser, setFolders, setFolderEdit } = useContext(MyContext);
+
+    const navigate = useNavigate();
 
     const handleClick = () => {
         setIsActive(!isActive);
@@ -26,8 +28,34 @@ export default function CustomNavbar() {
         setIsActive(!isActive);
     }
 
+    const LogOut = () => {
+        resetContext(setUser, setUsersId, setMemoryItems, setMoreMemoryClicked, setFolders, setIsEditFolder, setFolderEdit);
+        sessionStorage.clear();
+        navigate('/');
+    }
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     return (
         <Navbar expand="md" className="navbar-container">
+            <>
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                    </Modal.Header>
+                    <Modal.Body>Are you sure you want to logout?</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Cancel
+                        </Button>
+                        <Button variant="primary" onClick={() => LogOut()}>
+                            Logout
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            </>
             <Container fluid>
                 <Navbar.Toggle
                     aria-controls="responsive-navbar-nav"
@@ -49,12 +77,8 @@ export default function CustomNavbar() {
                             <Nav.Link as={Link} to='/DashBoard' onClick={handleMemoryClick}><img src={home} alt='home picture' />
                                 <h1 className='navWords d-inline'>Home</h1></Nav.Link>
                         </div>
-                        <div style={{ marginLeft: '24px' }}>
-                            <Nav.Link as={Link} to='/Settings'><img src={setting} alt='home picture' />
-                                <h1 className='navWords d-inline'>Settings</h1></Nav.Link>
-                        </div>
                         <div style={{ marginLeft: '21px' }}>
-                            <Nav.Link as={Link} to='/AddMemory' onClick={() => setIsMemoryEdit(false)}><img src={addnew} alt='addnew picture' />
+                            <Nav.Link disabled={folderLength === 0 ? true : false} as={Link} to='/AddMemory' onClick={() => setIsMemoryEdit(false)}><img src={addnew} alt='addnew picture' />
                                 <h1 className='navWords d-inline'>Add Memory</h1></Nav.Link>
                         </div>
                         <div style={{ marginLeft: '21px' }}>
@@ -64,6 +88,10 @@ export default function CustomNavbar() {
                         <div style={{ marginLeft: '22px' }}>
                             <Nav.Link as={Link} to='/DashBoard' onClick={handleMoreMemoryClick}><img src={memories} alt='home picture' />
                                 <h1 className='navWords d-inline'>Memories</h1></Nav.Link>
+                        </div>
+                        <div style={{ marginLeft: '24px' }}>
+                            <Nav.Link onClick={handleShow}><img src={setting} alt='home picture' />
+                                <h1 className='navWords d-inline'>Logout</h1></Nav.Link>
                         </div>
                     </Offcanvas.Body>
                 </Offcanvas>

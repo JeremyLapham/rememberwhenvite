@@ -6,7 +6,7 @@ import Navlogo from "../../assets/elephantLogo.svg";
 import { MyContext, resetContext } from "../context";
 
 export default function DesktopNav() {
-    const { setMoreMemoryClicked, setUser, setFolders, setUsersId, setFolderEdit, setMemoryItems, setIsEditFolder, setIsMemoryEdit } = useContext(MyContext);
+    const { setMoreMemoryClicked, setUser, setFolders, setUsersId, setFolderEdit, setMemoryItems, setIsEditFolder, setIsMemoryEdit, folderLength } = useContext(MyContext);
 
     const [isActive, setIsActive] = useState(false);
 
@@ -32,7 +32,6 @@ export default function DesktopNav() {
         sessionStorage.clear();
         navigate('/');
     }
-
 
     return (
         <Navbar>
@@ -62,11 +61,11 @@ export default function DesktopNav() {
                             <Button className="navBtn navGroup">Home</Button>
                         </Nav.Link>
                         <Nav.Link
+                            disabled={folderLength === 0 ? true : false}
                             as={Link}
                             to="/AddMemory"
-                            onClick={() => setIsMemoryEdit(false)}
-                        >
-                            <Button className="navBtn btnBorder">Add Memory</Button>
+                            onClick={() => setIsMemoryEdit(false)}>
+                            <Button disabled={folderLength === 0 ? true : false} className="navBtn btnBorder">Add Memory</Button>
                         </Nav.Link>
                         <Nav.Link
                             as={Link}

@@ -10,13 +10,15 @@ import { DeleteFolder, getMemoryByFolderId } from '../Services/DataService';
 import DesktopNav from '../DesktopNavComponent/DesktopNav';
 
 export default function ClickedFolder() {
-    const { folderName, selectedFolder, setSelectedMemory, setFolderEdit, setIsEditFolder, setIsMemoryEdit, fromAddFolder } = useContext(MyContext);
+    const { folderName, selectedFolder, setSelectedMemory, setFolderEdit, setIsEditFolder, setIsMemoryEdit, fromAddFolder, setFolderName } = useContext(MyContext);
 
     const [memoryItem, setMemoryItem] = useState([]);
 
     useEffect(() => {
         const GetMemories = async () => {
-            let memory = await getMemoryByFolderId(selectedFolder.id);
+            const folder: any = JSON.parse(sessionStorage.Folder);
+            let memory = await getMemoryByFolderId(folder.id);
+            setFolderName(folder.name);
             setMemoryItem(memory);
         }
         GetMemories()
@@ -26,6 +28,7 @@ export default function ClickedFolder() {
 
     const handleClickedMemory = (memory: any) => {
         setSelectedMemory(memory);
+        sessionStorage.setItem('Memory', JSON.stringify(memory));
         navigate('/memory');
     }
 
@@ -112,8 +115,8 @@ export default function ClickedFolder() {
                                             <Button onClick={() => handleClickedMemory(memory)} variant='' className='allFolderBtn'>
                                                 <img className='folderImg' src={memory.image} alt='clickable image' />
                                             </Button>
-                                            <p className='text-center memoryTitle'>{Title}</p>
-                                            <p className='text-center memoryDate'>{memory.date}</p>
+                                            <p className='memoryTitle'>{Title}</p>
+                                            <p className='memoryDate'>{memory.date}</p>
                                         </Col>
                                     );
                                 })
@@ -123,7 +126,7 @@ export default function ClickedFolder() {
                 </Col>
             </Row>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <Button onClick={handleEditFolder} className='editBtnFold' variant='' >Edit</Button>
+                <Button onClick={handleEditFolder} className='editBtnFold' variant=''>Edit</Button>
                 <Button onClick={() => { setShow(true); }} className='deleteBtnFold' variant='' >Delete</Button>
                 <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Feature in development</Tooltip>}>
                     <span className="d-inline-block">

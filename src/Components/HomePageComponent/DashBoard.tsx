@@ -1,5 +1,5 @@
-import { useContext, useEffect } from 'react';
-import { Col, Container, Row, Button } from 'react-bootstrap';
+import { useContext, useEffect, useState } from 'react';
+import { Col, Container, Row, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import logo from '../../assets/elephantLogo.svg';
 import folderImg from '../../assets/folderpic.png'
 import './DashBoard.css';
@@ -11,8 +11,8 @@ import { MyContext } from '../context';
 import DesktopNav from '../DesktopNavComponent/DesktopNav';
 
 export default function DashBoard() {
-    const { username, setSelectedMemory, setUser, setIsMemoryEdit, setIsEditFolder, setFolderName, setSelectedFolder, setMoreMemoryClicked, setFolders, setUsersId, setMemoryItems, folders, moreMemoryClicked, memoryItems } = useContext(MyContext);
-
+    const { username, setSelectedMemory, setUser, setIsMemoryEdit, setIsEditFolder, setFolderName, setSelectedFolder, setMoreMemoryClicked, setFolders, setUsersId, setMemoryItems, folders, moreMemoryClicked, memoryItems, setFolderLength } = useContext(MyContext);
+    const [dots, setDots] = useState('');
     interface Memory {
         id: number,
         title: string,
@@ -39,6 +39,7 @@ export default function DashBoard() {
                 const displayFolder = await getFolderByUserId(parseInt(userId));
                 setMemoryItems(userMemoryItems);
                 setFolders(displayFolder);
+                setFolderLength(folders.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length);
             } else {
                 const loggedIn = loggedInData();
                 sessionStorage.setItem('UserId', JSON.stringify(loggedIn.userId));
@@ -48,19 +49,38 @@ export default function DashBoard() {
                 const displayFolder = await getFolderByUserId(loggedIn.userId);
                 setMemoryItems(userMemoryItems);
                 setFolders(displayFolder);
+                setFolderLength(folders.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length);
             }
         }
-
+        setFolderLength(folders.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length);
         if (!checkToken()) {
             navigate('/SignInInfo');
         } else {
             GetLoggedInData();
         }
+        const interval = setInterval(() => {
+            setDots((prevDots) => prevDots.length >= 3 ? '' : prevDots + '.');
+        }, 500);
+
+        return () => clearInterval(interval);
     }, []);
 
-    const handleFolderClick = (folder: { Id: number, name: string, isDeleted: boolean, folderId: number, userId: number }, name: string) => {
+    const [showNoMemoriesMessage, setShowNoMemoriesMessage] = useState(false);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setShowNoMemoriesMessage(true);
+        }, 7000);
+
+        return () => {
+            clearTimeout(timeout);
+        };
+    }, []);
+
+    const handleFolderClick = (folder: { id: number, name: string, isDeleted: boolean, folderId: number, userId: number }, name: string) => {
         setSelectedFolder(folder);
         setFolderName(name);
+        sessionStorage.setItem('Folder', JSON.stringify(folder));
         navigate('/ClickedFolder');
     }
 
@@ -80,14 +100,18 @@ export default function DashBoard() {
                 <Col xs={6} className='d-flex flex-column justify-content-end'>
                     <Row>
                         <div className='d-flex justify-content-end'>
-                            <Button onClick={() => { navigate('/AddMemory'); setIsMemoryEdit(false); }} className='addNew' variant='' style={{ display: 'flex', alignItems: 'center' }} disabled={folders.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length === 0}>
-                                <Col xs={9}>
-                                    <p className='addNewTxt'>Add Memory</p>
-                                </Col>
-                                <Col xs={3} className='d-flex justify-content-center'>
-                                    <IoAddSharp size={28} />
-                                </Col>
-                            </Button>
+                            <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">{folders.length === 0 ? 'Add folders to be able to add memories' : ''}</Tooltip>}>
+                                <span>
+                                    <Button onClick={() => { navigate('/AddMemory'); setIsMemoryEdit(false); }} className='addNew' variant='' style={{ display: 'flex', alignItems: 'center' }} disabled={folders.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length === 0}>
+                                        <Col xs={9}>
+                                            <p className='addNewTxt'>Add Memory</p>
+                                        </Col>
+                                        <Col xs={3} className='d-flex justify-content-center'>
+                                            <IoAddSharp size={28} />
+                                        </Col>
+                                    </Button>
+                                </span>
+                            </OverlayTrigger>
                         </div>
                     </Row>
                     <Row>
@@ -124,22 +148,30 @@ export default function DashBoard() {
                     <Row>
                         <Col className='d-flex justify-content-center folderDisplay'>
                             <Row className='desktopFolder'>
-                                {folders.length === 0 ? 'Loading' : 
-                                folders.filter((item: { isDeleted: boolean; }) => !item.isDeleted).map((folder: { Id: number, name: string, isDeleted: boolean, folderId: number, userId: number }, idx: number) => {
-                                    let Title = folder.name.substring(0, 6);
-                                    if(Title.length === 6) {
-                                        Title = `${Title}...`
-                                    }
-                                    return (
-                                        <Col className='spaceFolders' key={idx} xs={4} md={4} lg={4} xl={4}>
-                                            <Button className='folderBtn' onClick={() => { handleFolderClick(folder, folder.name); }} variant=''>
-                                                <img src={folderImg} className='folderSize' />
-                                                <p className='folderFont'>{Title}</p>
-                                            </Button>
-                                        </Col>
-                                    )
-                                })
-                            }
+                                {folders.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length === 0 ?
+                                    <Col className="text-center">
+                                        {showNoMemoriesMessage ?
+                                            <h1>You have no folders</h1>
+                                            :
+                                            <h1>Loading{dots}</h1>
+                                        }
+                                    </Col>
+                                    :
+                                    folders.filter((item: { isDeleted: boolean; }) => !item.isDeleted).map((folder: { id: number; name: string; isDeleted: boolean; folderId: number; userId: number }, idx: number) => {
+                                        let Title = folder.name.substring(0, 6);
+                                        if (Title.length === 6) {
+                                            Title = `${Title}...`;
+                                        }
+                                        return (
+                                            <Col className="spaceFolders" key={idx} xs={4} md={4} lg={4} xl={4}>
+                                                <Button className="folderBtn" onClick={() => { handleFolderClick(folder, folder.name); }} variant="">
+                                                    <img src={folderImg} className="folderSize" alt="Folder" />
+                                                    <p className="folderFont">{Title}</p>
+                                                </Button>
+                                            </Col>
+                                        );
+                                    })
+                                }
                             </Row>
                         </Col>
                     </Row>
@@ -147,28 +179,43 @@ export default function DashBoard() {
                 :
                 <Row>
                     <Col className='memoryBox'>
-                        {memoryItems.length === 0 ? 'Loading' : 
-                        memoryItems.filter((item: { isDeleted: boolean; }) => !item.isDeleted).map((cardInfo: Memory, idx: number) => {
-                            let Title = cardInfo.title.substring(0, 10);
-                            if(Title.length === 10) {
-                                Title = `${Title}...`
-                            }
-                            return (
-                                <Button onClick={() => handlememoryClickDash(cardInfo)} key={idx} style={{ position: 'relative' }} variant=''>
-                                    <img className='memoryCards' src={cardInfo.image} alt='Your memory image is here' />
-                                    <div className='txtOnImg'>{Title}</div>
-                                    <div className='dateOnImg'>{cardInfo.date}</div>
-                                </Button>
-                            );
-                        })
-                    }
+                        {memoryItems.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length === 0 ?
+                            <Col className="text-center">
+                                {showNoMemoriesMessage ?
+                                    <h1>You have no memories</h1>
+                                    :
+                                    <h1>Loading{dots}</h1>
+                                }
+                            </Col>
+                            :
+                            memoryItems.filter((item: { isDeleted: boolean; }) => !item.isDeleted).map((cardInfo: Memory, idx: number) => {
+                                let Title = cardInfo.title.substring(0, 10);
+                                if (Title.length === 10) {
+                                    Title = `${Title}...`
+                                }
+                                return (
+                                    <Button onClick={() => handlememoryClickDash(cardInfo)} key={idx} style={{ position: 'relative' }} variant=''>
+                                        <img className='memoryCards' src={cardInfo.image} alt='Your memory image is here' />
+                                        <div className='txtOnImg'>{Title}</div>
+                                        <div className='dateOnImg'>{cardInfo.date}</div>
+                                    </Button>
+                                );
+                            })
+                        }
                     </Col>
                 </Row>
             }
 
             <Row className="desktopBtnRow">
                 <Col className="desktopAddCol">
-                    <Button variant='' onClick={() => { navigate("/AddMemory"); setIsMemoryEdit(false); }} className="desktopAddBtn" disabled={folders.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length === 0}>Add Memory +</Button>
+                    <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">{folders.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length === 0 ? 'Add folders to be able to add memories' : ''}</Tooltip>}>
+                        <span className="d-inline-block">
+                            <Button variant=''
+                                onClick={() => { navigate("/AddMemory"); setIsMemoryEdit(false); }}
+                                className="desktopAddBtn"
+                                disabled={folders.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length === 0}>Add Memory +</Button>
+                        </span>
+                    </OverlayTrigger>
                 </Col>
                 <Col className="d-flex justify-content-center">
                     <Button onClick={handleClick} className="moreMemories" variant="">
