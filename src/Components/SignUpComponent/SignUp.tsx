@@ -11,29 +11,35 @@ export default function SignUpInfo() {
     const [Password, setPassword] = useState('');
     const [Email, setEmail] = useState('');
     const [clickSignUp, setClickSignUp] = useState(false);
+    const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()])(?=.{8,})/;
+
     const navigate = useNavigate();
 
     const handelSubmit = () => {
-        setClickSignUp(true);
-        let userData = {
-            Id: 0,
-            Username,
-            Email,
-            Password
-        }
-        const GetLoggedInData = async () => {
-            let result = await createAccount(userData)
-
-            if (result) {
-                setTimeout(() => {
-                    navigate('/SignInInfo');
-                }, 2000);
-            } else {
-                setClickSignUp(false);
-                toggleShowA();
+        if (Password.match(regex)) {
+            let userData = {
+                Id: 0,
+                Username,
+                Email,
+                Password
             }
+            const GetLoggedInData = async () => {
+                let result = await createAccount(userData)
+
+                if (result) {
+                    setClickSignUp(true);
+                    setTimeout(() => {
+                        navigate('/SignInInfo');
+                    }, 2000);
+                } else {
+                    setClickSignUp(false);
+                    toggleShowA();
+                }
+            }
+            GetLoggedInData()
+        } else {
+            alert('');
         }
-        GetLoggedInData()
     }
 
 

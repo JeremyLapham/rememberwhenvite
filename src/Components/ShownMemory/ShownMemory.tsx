@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import './ShownMemory.css';
 import CustomNavbar from '../navComponent/NavbarComponent';
-import { Button, Col, Container, Modal, Row } from 'react-bootstrap';
+import { Button, Col, Container, Modal, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
 import elephantLogo from '../../assets/elephantLogo.svg';
 import { useNavigate } from 'react-router-dom';
 import { MyContext } from '../context';
@@ -103,7 +103,7 @@ export default function ShownMemory() {
                         <img className='phantLogo' src={elephantLogo} alt='Elephant logo but now hes in the memory that you clicked and is watching your every move' />
                     </Col>
                 </Row>
-                <Col lg={6} md={6} xs={12} className='d-flex flex-column align-items-center'>
+                <Col lg={6} md={6} xs={12} className='imgCol'>
                     <Row>
                         <Col className='d-flex justify-content-center'>
                             <Button variant='' onClick={() => setShowImg(true)}>
@@ -140,7 +140,11 @@ export default function ShownMemory() {
                         <Button onClick={() => { setShow(true); }} className='deleteBtn' variant=''>Delete</Button>
                     </Col>
                     <Col lg={3} md={3} xs={4} className='d-flex justify-content-center'>
-                        <Button className='shareBtn' variant=''>Share</Button>
+                        <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Feature in development</Tooltip>}>
+                            <span className="d-inline-block">
+                                <Button disabled style={{ pointerEvents: 'none' }} className='shareBtn' variant=''>Share</Button>
+                            </span>
+                        </OverlayTrigger>
                     </Col>
                 </Row>
                 <Row className='d-flex justify-content-center'>

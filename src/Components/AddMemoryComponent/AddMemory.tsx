@@ -21,10 +21,9 @@ export default function AddMemory() {
     const [memoryDescription, setMemoryDescription] = useState(isEditMemory ? memoryEdit.description : '');
     const [memoryTags, setMemoryTags] = useState(isEditMemory ? memoryEdit.tags : '');
     const [memoryDate, setMemoryDate] = useState(isEditMemory ? memoryEdit.date : '');
-    const [memoryId, setMemoryId] = useState(isEditMemory ? memoryEdit.id : 0);
+    const [memoryId] = useState(isEditMemory ? memoryEdit.id : 0);
     const [folder, setFolder] = useState(0);
     const [folders, setFolders] = useState([]);
-    // console.log(setMemoryId);
 
     const handleTitle = (e: { target: { value: string } }) => setMemoryTitle(e.target.value);
     const handleDescription = (e: { target: { value: string } }) => setMemoryDescription(e.target.value);
@@ -83,6 +82,7 @@ export default function AddMemory() {
     }
 
     useEffect(() => {
+        sessionStorage.removeItem('Memory');
         const GetFolders = async () => {
             const UserId = sessionStorage.getItem('UserId');
             if (UserId !== null) {
@@ -99,10 +99,6 @@ export default function AddMemory() {
     const handleViewMemory = async () => {
         navigate('/memory');
     }
-
-
-
-
 
     return (
         <Container fluid>

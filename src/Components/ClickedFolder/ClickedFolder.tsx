@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import CustomNavbar from '../navComponent/NavbarComponent';
-import { Col, Container, Row, Button, Modal } from 'react-bootstrap';
+import { Col, Container, Row, Button, Modal, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import heart from '../../assets/folderpic.png';
 import { useNavigate } from 'react-router-dom';
 import './ClickedFolder.css';
@@ -57,7 +57,6 @@ export default function ClickedFolder() {
                             </Col>
                         </Row>
                         <Row>
-
                             <Col className='d-flex justify-content-center'>
                                 <Button className='confirmDeleteBtnFold' variant="" onClick={handleDeleteFolder}>
                                     Delete
@@ -104,12 +103,16 @@ export default function ClickedFolder() {
                         <Row className='d-flex justify-content-center'>
                             {memoryItem.length === 0 ? <h2>No current memories</h2> :
                                 memoryItem.filter((item: { isDeleted: any; }) => !item.isDeleted).map((memory: any, idx: any) => {
+                                    let Title = memory.title.substring(0, 10);
+                                    if (Title.length === 10) {
+                                        Title = `${Title}...`
+                                    }
                                     return (
                                         <Col key={idx} xs={4} md={3} lg={3} className='cardNoPad'>
                                             <Button onClick={() => handleClickedMemory(memory)} variant='' className='allFolderBtn'>
                                                 <img className='folderImg' src={memory.image} alt='clickable image' />
                                             </Button>
-                                            <p className='text-center memoryTitle'>{memory.title}</p>
+                                            <p className='text-center memoryTitle'>{Title}</p>
                                             <p className='text-center memoryDate'>{memory.date}</p>
                                         </Col>
                                     );
@@ -122,7 +125,11 @@ export default function ClickedFolder() {
             <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <Button onClick={handleEditFolder} className='editBtnFold' variant='' >Edit</Button>
                 <Button onClick={() => { setShow(true); }} className='deleteBtnFold' variant='' >Delete</Button>
-                <Button className='shareBtnFold' variant=''>Share</Button>
+                <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Feature in development</Tooltip>}>
+                    <span className="d-inline-block">
+                        <Button disabled style={{ pointerEvents: 'none' }} className='shareBtnFold' variant=''>Share</Button>
+                    </span>
+                </OverlayTrigger>
             </div>
             <Row className="desktopBtnRow">
                 <Col className="desktopAddCol">

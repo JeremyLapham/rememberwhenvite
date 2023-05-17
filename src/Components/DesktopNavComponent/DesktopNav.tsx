@@ -1,16 +1,14 @@
 import { useContext, useState } from "react";
 import "./DesktopNav.css";
-import { Navbar, Button, Nav, Container, Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Navbar, Button, Nav, Container, Row, Col, Modal } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import Navlogo from "../../assets/elephantLogo.svg";
-import { MyContext } from "../context";
+import { MyContext, resetContext } from "../context";
 
 export default function DesktopNav() {
-    const [isActive, setIsActive] = useState(false);
+    const { setMoreMemoryClicked, setUser, setFolders, setUsersId, setFolderEdit, setMemoryItems, setIsEditFolder, setIsMemoryEdit } = useContext(MyContext);
 
-    const { setMoreMemoryClicked } = useContext(MyContext);
-    const { setIsEditFolder } = useContext(MyContext);
-    const { setIsMemoryEdit } = useContext(MyContext);
+    const [isActive, setIsActive] = useState(false);
 
     const handleMemoryClick = () => {
         setMoreMemoryClicked(false);
@@ -21,8 +19,38 @@ export default function DesktopNav() {
         setIsActive(!isActive);
     };
 
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    const navigate = useNavigate();
+
+
+    const LogOut = () => {
+        resetContext(setUser, setUsersId, setMemoryItems, setMoreMemoryClicked, setFolders, setIsEditFolder, setFolderEdit);
+        sessionStorage.clear();
+        navigate('/');
+    }
+
+
     return (
         <Navbar>
+            <>
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                    </Modal.Header>
+                    <Modal.Body>Are you sure you want to logout?</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Cancel
+                        </Button>
+                        <Button variant="primary" onClick={() => LogOut()}>
+                            Logout
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            </>
             <Container fluid>
                 <Row className="navRow">
                     <Col md={4} className="d-flex align-items-center">
@@ -33,25 +61,25 @@ export default function DesktopNav() {
                         <Nav.Link as={Link} to="/DashBoard" onClick={handleMemoryClick}>
                             <Button className="navBtn navGroup">Home</Button>
                         </Nav.Link>
-                        <Nav.Link as={Link} to="/Settings">
-                            <Button className="navBtn btnBorder">Setting</Button>
-                        </Nav.Link>
                         <Nav.Link
                             as={Link}
                             to="/AddMemory"
                             onClick={() => setIsMemoryEdit(false)}
                         >
-                            <Button className="navBtn">Add Memory</Button>
+                            <Button className="navBtn btnBorder">Add Memory</Button>
                         </Nav.Link>
                         <Nav.Link
                             as={Link}
                             to="/AddFolder"
                             onClick={() => setIsEditFolder(false)}
                         >
-                            <Button className="navBtn btnBorder">Add Folder</Button>
+                            <Button className="navBtn">Add Folder</Button>
                         </Nav.Link>
                         <Nav.Link as={Link} to="/DashBoard" onClick={handleMoreMemoryClick}>
-                            <Button className="navBtn">Memories</Button>
+                            <Button className="navBtn btnBorder">Memories</Button>
+                        </Nav.Link>
+                        <Nav.Link onClick={handleShow}>
+                            <Button className="navBtn">Logout</Button>
                         </Nav.Link>
                     </Col>
                 </Row>

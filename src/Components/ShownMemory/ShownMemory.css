@@ -10,6 +10,7 @@
     font-size: 20px;
     font-weight: light;
     margin-bottom: 25px;
+    word-wrap: break-word;
 }
 
 .phantLogo {
@@ -24,6 +25,7 @@
     border: 1px solid;
     margin-bottom: 23px;
     object-fit: cover;
+    padding:0 !important;
 }
 
 .displayHashtags {
@@ -57,6 +59,7 @@
     margin: 19px 10px;
     height: 136px;
     overflow-y: scroll;
+    word-wrap: break-word;
 }
 
 .memoryDesDate {
@@ -65,15 +68,15 @@
 }
 
 .editBtn {
-    background-color: #ccedc9;
+    background-color: #ccedc9 !important;
 }
 
 .deleteBtn {
-    background-color: #FF6161;
+    background-color: #FF6161 !important;
 }
 
 .shareBtn {
-    background-color: #B7D1DA;
+    background-color: #B7D1DA !important;
 }
 
 .editBtn,
@@ -218,6 +221,7 @@
         width: 450px;
         height: 450px;
         object-fit: cover;
+        padding:0 !important;
     }
 
     .displayHashtags {

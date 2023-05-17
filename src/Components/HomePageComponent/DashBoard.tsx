@@ -124,16 +124,22 @@ export default function DashBoard() {
                     <Row>
                         <Col className='d-flex justify-content-center folderDisplay'>
                             <Row className='desktopFolder'>
-                                {folders.filter((item: { isDeleted: boolean; }) => !item.isDeleted).map((folder: { Id: number, name: string, isDeleted: boolean, folderId: number, userId: number }, idx: number) => {
+                                {folders.length === 0 ? 'Loading' : 
+                                folders.filter((item: { isDeleted: boolean; }) => !item.isDeleted).map((folder: { Id: number, name: string, isDeleted: boolean, folderId: number, userId: number }, idx: number) => {
+                                    let Title = folder.name.substring(0, 6);
+                                    if(Title.length === 6) {
+                                        Title = `${Title}...`
+                                    }
                                     return (
                                         <Col className='spaceFolders' key={idx} xs={4} md={4} lg={4} xl={4}>
                                             <Button className='folderBtn' onClick={() => { handleFolderClick(folder, folder.name); }} variant=''>
                                                 <img src={folderImg} className='folderSize' />
-                                                <p className='folderFont'>{folder.name}</p>
+                                                <p className='folderFont'>{Title}</p>
                                             </Button>
                                         </Col>
                                     )
-                                })}
+                                })
+                            }
                             </Row>
                         </Col>
                     </Row>
@@ -141,15 +147,21 @@ export default function DashBoard() {
                 :
                 <Row>
                     <Col className='memoryBox'>
-                        {memoryItems.filter((item: { isDeleted: boolean; }) => !item.isDeleted).map((cardInfo: Memory, idx: number) => {
+                        {memoryItems.length === 0 ? 'Loading' : 
+                        memoryItems.filter((item: { isDeleted: boolean; }) => !item.isDeleted).map((cardInfo: Memory, idx: number) => {
+                            let Title = cardInfo.title.substring(0, 10);
+                            if(Title.length === 10) {
+                                Title = `${Title}...`
+                            }
                             return (
                                 <Button onClick={() => handlememoryClickDash(cardInfo)} key={idx} style={{ position: 'relative' }} variant=''>
                                     <img className='memoryCards' src={cardInfo.image} alt='Your memory image is here' />
-                                    <div className='txtOnImg'>{cardInfo.title}</div>
+                                    <div className='txtOnImg'>{Title}</div>
                                     <div className='dateOnImg'>{cardInfo.date}</div>
                                 </Button>
                             );
-                        })}
+                        })
+                    }
                     </Col>
                 </Row>
             }
