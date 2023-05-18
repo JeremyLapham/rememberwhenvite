@@ -79,7 +79,7 @@ export default function ShownMemory() {
                     </Modal.Body>
                 </Modal>
 
-                <Modal show={showImg} onHide={handleCloseImg}>
+                <Modal contentClassName="custom-modal-content" show={showImg} onHide={handleCloseImg}>
                     <Modal.Body className='imgModal'>
                         <img className='memoryImgModal' src={selectedMemory.image} alt='the picture of the memory that was selected' />
                     </Modal.Body>
@@ -106,9 +106,18 @@ export default function ShownMemory() {
                 <Col lg={6} md={6} xs={12} className='imgCol'>
                     <Row>
                         <Col className='d-flex justify-content-center'>
-                            <Button variant='' onClick={() => setShowImg(true)}>
-                                <img className='memoryImg' src={selectedMemory.image} alt='the picture of the memory that was selected' />
-                            </Button>
+                            <OverlayTrigger
+                                placement='top'
+                                overlay={
+                                    <Tooltip id={`tooltip-top`}>
+                                        Click to enlarge
+                                    </Tooltip>
+                                }>
+
+                                <Button variant='' onClick={() => setShowImg(true)}>
+                                    <img className='memoryImg' src={selectedMemory.image} alt='the picture of the memory that was selected' />
+                                </Button>
+                            </OverlayTrigger>
                         </Col>
                     </Row>
                 </Col>

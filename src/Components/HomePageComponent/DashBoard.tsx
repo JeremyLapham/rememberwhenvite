@@ -100,6 +100,18 @@ export default function DashBoard() {
                 <Col xs={6} className='d-flex flex-column justify-content-end'>
                     <Row>
                         <div className='d-flex justify-content-end'>
+                            <Button onClick={() => { navigate('/AddFolder'); setIsEditFolder(false); }} className='addNewFolder' variant='' style={{ display: 'flex', alignItems: 'center' }}>
+                                <Col xs={9}>
+                                    <p className='addNewTxt'>Add Folder</p>
+                                </Col>
+                                <Col xs={3} className='d-flex justify-content-center'>
+                                    <IoAddSharp size={28} />
+                                </Col>
+                            </Button>
+                        </div>
+                    </Row>
+                    <Row>
+                        <div className='d-flex justify-content-end'>
                             <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">{folders.length === 0 ? 'Add folders to be able to add memories' : ''}</Tooltip>}>
                                 <span>
                                     <Button onClick={() => { navigate('/AddMemory'); setIsMemoryEdit(false); }} className='addNew' variant='' style={{ display: 'flex', alignItems: 'center' }} disabled={folders.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length === 0}>
@@ -112,18 +124,6 @@ export default function DashBoard() {
                                     </Button>
                                 </span>
                             </OverlayTrigger>
-                        </div>
-                    </Row>
-                    <Row>
-                        <div className='d-flex justify-content-end'>
-                            <Button onClick={() => { navigate('/AddFolder'); setIsEditFolder(false); }} className='addNewFolder' variant='' style={{ display: 'flex', alignItems: 'center' }}>
-                                <Col xs={9}>
-                                    <p className='addNewTxt'>Add Folder</p>
-                                </Col>
-                                <Col xs={3} className='d-flex justify-content-center'>
-                                    <IoAddSharp size={28} />
-                                </Col>
-                            </Button>
                         </div>
                     </Row>
                 </Col>

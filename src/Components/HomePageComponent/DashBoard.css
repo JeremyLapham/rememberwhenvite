@@ -31,8 +31,8 @@
   border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   display: flex;
+  margin-top: 0 !important;
   align-items: center;
-  margin-bottom: 50px;
   display: inline-block;
 }
 
@@ -40,6 +40,7 @@
   background-color: #f4f2f0 !important;
   height: 51px;
   width: 195px;
+  margin-bottom: 50px;
   border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   display: flex;
