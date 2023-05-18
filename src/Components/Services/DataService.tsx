@@ -90,18 +90,18 @@ export async function addMemoryItem(memoryItem: object) {
 }
 
 export async function getMemoryItemsByUserId(userid: number) {
-    let res = await fetch(`https://rememberwhenagain.azurewebsites.net/Memory/GetItemsByUserId/${userid}`);
+    let res = await fetch(`https://rememberwhenagain.azurewebsites.net/Memory/GetItemsByUserId/${userid}/false`);
     let data = await res.json();
     return data;
 }
 
 export async function getFolderByUserId(userid: number) {
-    let res = await fetch(`https://rememberwhenagain.azurewebsites.net/Folder/GetFoldersByUserId/${userid}`);
+    let res = await fetch(`https://rememberwhenagain.azurewebsites.net/Folder/GetFoldersByUserId/${userid}/false`);
     let data = await res.json();
     return data;
 }
 export async function getMemoryByFolderId(folderId: number) {
-    let res = await fetch(`https://rememberwhenagain.azurewebsites.net/Memory/GetItemsByFolderId/${folderId}`);
+    let res = await fetch(`https://rememberwhenagain.azurewebsites.net/Memory/GetItemsByFolderId/${folderId}/false`);
     let data = await res.json();
     return data;
 }

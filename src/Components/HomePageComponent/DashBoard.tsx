@@ -70,7 +70,7 @@ export default function DashBoard() {
     useEffect(() => {
         const timeout = setTimeout(() => {
             setShowNoMemoriesMessage(true);
-        }, 7000);
+        }, 4000);
 
         return () => {
             clearTimeout(timeout);

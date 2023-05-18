@@ -13,6 +13,7 @@ export default function ClickedFolder() {
     const { folderName, selectedFolder, setSelectedMemory, setFolderEdit, setIsEditFolder, setIsMemoryEdit, fromAddFolder, setFolderName } = useContext(MyContext);
 
     const [memoryItem, setMemoryItem] = useState([]);
+    const [dots, setDots] = useState('');
 
     useEffect(() => {
         const GetMemories = async () => {
@@ -22,6 +23,11 @@ export default function ClickedFolder() {
             setMemoryItem(memory);
         }
         GetMemories()
+        const interval = setInterval(() => {
+            setDots((prevDots) => prevDots.length >= 3 ? '' : prevDots + '.');
+        }, 500);
+
+        return () => clearInterval(interval);
     }, []);
 
     const navigate = useNavigate();
@@ -48,6 +54,18 @@ export default function ClickedFolder() {
     }
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
+
+    const [showNoMemoriesMessage, setShowNoMemoriesMessage] = useState(false);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setShowNoMemoriesMessage(true);
+        }, 4000);
+
+        return () => {
+            clearTimeout(timeout);
+        };
+    }, []);
 
     return (
         <Container fluid>
@@ -104,7 +122,15 @@ export default function ClickedFolder() {
                 <Col className='d-flex justify-content-center'>
                     <div className='displayMemory'>
                         <Row className='d-flex justify-content-center'>
-                            {memoryItem.length === 0 ? <h2>No current memories</h2> :
+                            {memoryItem.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length === 0 ?
+                                <Col className="text-center">
+                                    {showNoMemoriesMessage ?
+                                        <h1>You have no memories</h1>
+                                        :
+                                        <h1>Loading{dots}</h1>
+                                    }
+                                </Col>
+                                :
                                 memoryItem.filter((item: { isDeleted: any; }) => !item.isDeleted).map((memory: any, idx: any) => {
                                     let Title = memory.title.substring(0, 10);
                                     if (Title.length === 10) {

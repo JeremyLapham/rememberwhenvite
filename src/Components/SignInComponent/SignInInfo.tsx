@@ -66,57 +66,72 @@ export default function SignInInfo() {
                 </Col>
             </Row>
             <div>
-                {clickedSignIn ? 
-                <h1 className='loading'>{`Loading${dots}`}</h1> : ''}
-                </div>
+                {clickedSignIn ?
+                    <h1 className='loading'>{`Loading${dots}`}</h1> : ''}
+            </div>
             <Row>
                 <Col className='d-flex justify-content-center'>
                     <img className='logo mt-5' src={logo} alt='remember when logo, elephant holding balloon' />
                 </Col>
             </Row>
-            <Row>
-                <Col>
-                    <div className='signInBg'>
-                        <Container>
-                            <Row className='pt-4'>
-                                <Col className='d-flex justify-content-center'>
-                                    <h1 style={{ textDecoration: 'underline' }}>Sign In</h1>
-                                </Col>
-                                <Col className='d-flex justify-content-center'>
-                                    <Button onClick={handleSignInClick} variant=''><h1>Sign Up</h1></Button>
-                                </Col>
-                                <Row>
-                                    <Col>
-                                        <h4 className='userNameInput'>Username</h4>
-                                        <input onChange={({ target: { value } }) => setUsername(value)} type='text' value={Username} className='inputField' placeholder='Enter your username' />
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col>
-                                        <h4 className='passwordInput'>Password</h4>
-                                        <input onChange={({ target: { value } }) => setPassword(value)} className='inputField' type={isChecked ? 'text' : 'password'} placeholder='Enter your password' />
-                                    </Col>
-                                </Row>
-                                <Row className='d-flex align-items-center'>
-                                    <Col className='d-flex justify-content-start'>
-                                        <label>
-                                            <input className='showPassword' type="checkbox" checked={isChecked} onChange={handleShowPassword} />
-                                            Show password
-                                        </label>
-                                    </Col>
-                                    <Col className='d-flex justify-content-end'>
-                                        <h6 className='forgotPass'>Forgot Password?</h6>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col className='d-flex justify-content-center'>
-                                        <Button onClick={() => handleLogin(Username)} className='signInBtnTwo' variant=''>Sign In</Button>
-                                    </Col>
-                                </Row>
-                            </Row>
-                        </Container>
-                    </div>
-                </Col>
+            <Row className='signInBg pt-4'>
+                <Row>
+                    <Col className='d-flex justify-content-center'>
+                        <h1 style={{ textDecoration: 'underline' }}>Sign In</h1>
+                    </Col>
+                    <Col className='d-flex justify-content-center'>
+                        <Button onClick={handleSignInClick} variant=''><h1>Sign Up</h1></Button>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col className='d-flex justify-content-center'>
+                        <h4 className='userNameInput'>Username</h4>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col className='d-flex justify-content-center'>
+                        <input onChange={({ target: { value } }) => setUsername(value)} type='text' value={Username} className='inputField' placeholder='Enter your username' />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col className='d-flex justify-content-center'>
+                        <h4 className='passwordInput'>Password</h4>
+                    </Col>
+                </Row>
+                <Row>
+                {/* <Form.Group controlId="Username">
+                                <InputGroup className='userInput'>
+                                    <InputGroup.Text className='icon'>
+                                        <FontAwesomeIcon icon={faUser} />
+                                    </InputGroup.Text>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Username"
+                                        className='passInput2'
+                                        onChange={({ target: { value } }) => setUserName(value)}
+                                    />
+                                </InputGroup>
+                            </Form.Group> */}
+                    <Col className='d-flex justify-content-center'>
+                        <input onChange={({ target: { value } }) => setPassword(value)} className='inputField' type={isChecked ? 'text' : 'password'} placeholder='Enter your password' />
+                    </Col>
+                </Row>
+                <Row className='d-flex justity-items-end'>
+                    <Col className='d-flex justify-content-end'>
+                        <label>
+                            <input className='showPassword' type="checkbox" checked={isChecked} onChange={handleShowPassword} />
+                            Show password
+                        </label>
+                    </Col>
+                    <Col className='d-flex justify-content-start'>
+                        <h6 className='forgotPass'>Forgot Password?</h6>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col className='d-flex justify-content-center'>
+                        <Button onClick={() => handleLogin(Username)} className='signInBtnTwo' variant=''>Sign In</Button>
+                    </Col>
+                </Row>
             </Row>
         </Container>
     )

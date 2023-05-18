@@ -50,11 +50,9 @@
 
 .signInBg {
     background-color: #857B74;
-    height: 100%;
-    margin: 47px 0 0 -12px;
-    min-width: 100vw;
+    margin: 47px 0 0 -0;
+    width: auto;
     border-radius: 50px 50px 0 0;
-    box-sizing: border-box;
 }
 
 .inputField {
@@ -138,23 +136,23 @@
     }
 
     .inputField {
-        margin-left: 25rem;
+        /* margin-left: 25rem; */
         width: 500px;
     }
 
     .userNameInput {
-        margin-left: 24.8rem;
+        margin-left: -22rem;
     }
 
     .passwordInput {
-        margin-left: 24.8rem;
+        margin-left: -22rem;
     }
 
     .forgotPass {
-        margin-right: 23.3rem;
+        margin-left: 5rem;
     }
 
     .showPassword {
-        margin-left: 25rem;
+        margin-right: 5rem;
     }
 }
