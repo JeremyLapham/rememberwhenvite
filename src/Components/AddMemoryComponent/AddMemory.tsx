@@ -75,6 +75,7 @@ export default function AddMemory() {
             } else {
                 swal("Please make sure you enter in every field");
             }
+            setSaveClick(false);
         } else {
             let item = {
                 Id: memoryId,
@@ -126,6 +127,15 @@ export default function AddMemory() {
 
     const handleViewMemory = async () => {
         navigate('/memory');
+    }
+
+    const [saveClick,setSaveClick] = useState(false);
+
+    const handleSaveClick = () => {
+        setSaveClick(true);
+        setTimeout(() => {
+            setSaveClick(false);
+        }, 2000);
     }
 
     return (
@@ -239,7 +249,7 @@ export default function AddMemory() {
                         {isEditMemory ?
                             <Button onClick={() => { setShow(true); }} className='addBtn' variant=''>Update</Button>
                             :
-                            <Button onClick={() => { handleSave(); }} className='addBtn' variant=''>Add</Button>
+                            <Button onClick={() => { handleSave(); handleSaveClick()}} className='addBtn' variant='' disabled={saveClick}>Add</Button>
                         }
                     </Col>
                     <Col className='d-flex justify-content-start'>
