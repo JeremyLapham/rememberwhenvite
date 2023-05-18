@@ -14,7 +14,6 @@ export default function AddMemory() {
 
     const navigate = useNavigate()
     const [show, setShow] = useState(false);
-    const [selectedImage, setSelectedImage] = useState(null);
 
     const [memoryImage, setMemoryImage] = useState(isEditMemory ? memoryEdit.image : '');
     const [memoryTitle, setMemoryTitle] = useState(isEditMemory ? memoryEdit.title : '');
@@ -25,6 +24,8 @@ export default function AddMemory() {
     const [folder, setFolder] = useState(0);
     const [folders, setFolders] = useState([]);
 
+    // console.log(memoryEdit.image)
+
     const handleTitle = (e: { target: { value: string } }) => setMemoryTitle(e.target.value);
     const handleDescription = (e: { target: { value: string } }) => setMemoryDescription(e.target.value);
     const handleFolder = ({ target }: { target: { value: any } }) => {
@@ -32,7 +33,31 @@ export default function AddMemory() {
         setFolder(target.value);
     };
     const handleTags = (e: { target: { value: string } }) => setMemoryTags(e.target.value);
-    const handleDate = (e: { target: { value: string } }) => setMemoryDate(e.target.value);
+
+    // const formatAsDate = (date: string) => {
+    //     const cleanedValue = date.replace(/\D/g, '');
+
+    //     let formattedValue = '';
+    //     if (cleanedValue.length > 2) {
+    //         formattedValue += cleanedValue.substring(0, 2) + '/';
+    //         if (cleanedValue.length > 4) {
+    //             formattedValue += cleanedValue.substring(3, 5) + '/';
+    //             if(formattedValue.length > 5) {
+    //                 formattedValue += cleanedValue.substring(6, 10);
+    //             }
+    //         } else {
+    //             formattedValue += cleanedValue.substring(2);
+    //         }
+    //     } else {
+    //         formattedValue = cleanedValue;
+    //     }
+
+    //     return formattedValue;
+    // };
+    const handleDate = (e: { target: { value: string } }) => {
+        // const formatDate = formatAsDate(e.target.value)
+        setMemoryDate(e.target.value.substring(0,10));
+    }
 
     const handleImage = (e: any) => {
         let file = e.target.files[0];
@@ -41,12 +66,15 @@ export default function AddMemory() {
             setMemoryImage(reader.result);
         }
         reader.readAsDataURL(file);
-        setSelectedImage(file);
     }
 
     const handleSave = async () => {
         if (memoryImage === '' || memoryDate === '' || memoryTitle === '' || memoryDescription === '' || memoryTags === '' || folder === 0) {
-            swal("Please make sure you enter in every field");
+            if (isEditMemory && folder === 0) {
+                swal("Please check to make sure a folder has been selected or changed");
+            } else {
+                swal("Please make sure you enter in every field");
+            }
         } else {
             let item = {
                 Id: memoryId,
@@ -150,7 +178,7 @@ export default function AddMemory() {
                             <Form.Group className="mb-3 d-flex flex-column align-items-center" controlId="Image">
                                 <Form.Label className='addImgTxt'>Add image</Form.Label>
                                 <Button style={{ position: 'relative' }} id='custom-input' className='selectedImgBtn'>
-                                    {selectedImage && <img className='selectedImg' src={memoryImage || URL.createObjectURL(selectedImage)} alt="Selected image" />}
+                                    {memoryImage && <img className='selectedImg' src={memoryImage || URL.createObjectURL(memoryImage)} alt="Selected image" />}
                                     <Form.Control className='input1' onChange={handleImage} type="file" accept='image/png, image/jpg' placeholder="Enter an image" />
                                 </Button>
                             </Form.Group>
