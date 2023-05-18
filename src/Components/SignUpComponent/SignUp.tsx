@@ -5,6 +5,7 @@ import './SignUp.css';
 import { Button, Col, Container, Row, Toast } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { createAccount } from '../Services/DataService';
+import swal from 'sweetalert';
 
 export default function SignUpInfo() {
     const [Username, setUsername] = useState('');
@@ -38,7 +39,7 @@ export default function SignUpInfo() {
             }
             GetLoggedInData()
         } else {
-            alert('');
+            swal('Please make sure your password has atleast One Uppercase, One Lowercase, One number, One Special Character, and atleast 8 Characters long');
         }
     }
 
@@ -64,7 +65,7 @@ export default function SignUpInfo() {
             <Row>
                 <Col className="mb-2">
                     <Toast className='toast' show={clickSignUp} onClose={() => setClickSignUp(false)} delay={4000} autohide>
-                        <Toast.Body>Account has been made</Toast.Body>
+                        <Toast.Body style={{color:'black'}}>Account has been made</Toast.Body>
                     </Toast>
                 </Col>
             </Row>
