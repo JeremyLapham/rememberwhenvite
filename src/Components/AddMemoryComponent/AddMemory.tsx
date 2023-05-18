@@ -105,7 +105,7 @@ export default function AddMemory() {
                 let userMemoryItems = await getMemoryItemsByUserId(usersId);
                 setMemoryItems(userMemoryItems);
             } else {
-                alert(`Blog Item was not ${isEditMemory ? 'Updated' : 'Added'}`)
+                alert(`Memory was not ${isEditMemory ? 'Updated' : 'Added'}`)
             }
         }
     }
@@ -142,7 +142,7 @@ export default function AddMemory() {
         <Container fluid>
             {/* <AudioRecorder /> */}
             <Row>
-                <Modal className='modalBG' show={show} onHide={handleClose}>
+                <Modal className='modalBG' show={show} onHide={handleClose} backdrop="static" keyboard={false}>
                     <Modal.Body className={isEditMemory ? `modalBodyUpdate` : `modalBody`}>
                         <Row>
                             <Col className='d-flex justify-content-center'>
@@ -189,7 +189,7 @@ export default function AddMemory() {
                                 <Form.Label className='addImgTxt'>Add image</Form.Label>
                                 <Button style={{ position: 'relative' }} id='custom-input' className='selectedImgBtn'>
                                     {memoryImage && <img className='selectedImg' src={memoryImage || URL.createObjectURL(memoryImage)} alt="Selected image" />}
-                                    <Form.Control className='input1' onChange={handleImage} type="file" accept='image/png, image/jpg' placeholder="Enter an image" />
+                                    <Form.Control className='input1' onChange={handleImage} type="file" accept='image/png, image/jpg, image/jpeg' placeholder="Enter an image" />
                                 </Button>
                             </Form.Group>
                         </Col>

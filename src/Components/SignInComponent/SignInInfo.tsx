@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
 import logo from '../../assets/elephantLogo.svg';
 import './SignIn.css';
-import { Button, Col, Container, Row, Toast } from 'react-bootstrap';
+import { Button, Col, Container, Row, Toast, Form, InputGroup } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { GetLoggedInUserData, login } from '../Services/DataService';
 import { MyContext } from '../context';
+import { SlLock, SlLockOpen } from 'react-icons/sl';
 
 export default function SignInInfo() {
     const { setUser } = useContext(MyContext);
@@ -49,9 +50,9 @@ export default function SignInInfo() {
     }
 
     const [showA, setShowA] = useState(false);
-    const [isChecked, setIsChecked] = useState(false);
-    const handleShowPassword = (e: { target: { checked: boolean | ((prevState: boolean) => boolean); }; }) => {
-        setIsChecked(e.target.checked);
+    const [isClicked, setIsClicked] = useState(false);
+    const handleShowPassword = () => {
+        setIsClicked(!isClicked)
     }
 
     const toggleShowA = () => setShowA(!showA);
@@ -99,31 +100,30 @@ export default function SignInInfo() {
                     </Col>
                 </Row>
                 <Row>
-                {/* <Form.Group controlId="Username">
-                                <InputGroup className='userInput'>
-                                    <InputGroup.Text className='icon'>
-                                        <FontAwesomeIcon icon={faUser} />
-                                    </InputGroup.Text>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Username"
-                                        className='passInput2'
-                                        onChange={({ target: { value } }) => setUserName(value)}
-                                    />
-                                </InputGroup>
-                            </Form.Group> */}
                     <Col className='d-flex justify-content-center'>
-                        <input onChange={({ target: { value } }) => setPassword(value)} className='inputField' type={isChecked ? 'text' : 'password'} placeholder='Enter your password' />
+                        <Form>
+                            <Form.Group controlId="Password">
+                                <InputGroup className='inputField'>
+                                    <Form.Control
+                                        type={`${isClicked ? 'text' : 'password'}`}
+                                        placeholder="Enter your password"
+                                        onChange={({ target: { value } }) => setPassword(value)}
+                                    />
+                                    <Button className='lockBG' variant='' onClick={handleShowPassword}>
+                                        <InputGroup.Text className='lockBG'>
+                                            {isClicked ?
+                                                <SlLockOpen size={25} />
+                                                :
+                                                <SlLock size={25} />}
+                                        </InputGroup.Text>
+                                    </Button>
+                                </InputGroup>
+                            </Form.Group>
+                        </Form>
                     </Col>
                 </Row>
-                <Row className='d-flex justity-items-end'>
-                    <Col className='d-flex justify-content-end'>
-                        <label>
-                            <input className='showPassword' type="checkbox" checked={isChecked} onChange={handleShowPassword} />
-                            Show password
-                        </label>
-                    </Col>
-                    <Col className='d-flex justify-content-start'>
+                <Row>
+                    <Col className='d-flex justify-content-center'>
                         <h6 className='forgotPass'>Forgot Password?</h6>
                     </Col>
                 </Row>

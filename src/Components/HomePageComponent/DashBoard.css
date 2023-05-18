@@ -360,7 +360,7 @@
   }
 }
 
-@media only screen and (min-width: 800px) {
+@media only screen and (max-width: 800px) {
   .folderBox {
     width: 50rem !important;
   }
@@ -369,6 +369,27 @@
     display: flex;
     justify-content: center;
   }
+
+  .desktopAddBtn {
+    display: none !important;
+  }
+
+  .desktopAddBtn2 {
+    display: none !important;
+  }
+
+  .desktopFolder {
+    width: 500px;
+  }
+  .folderFont {
+    font-size: 15px;
+    font-weight: bold;
+    width: 120px;
+    word-wrap: break-word;
+    text-align: center;
+  }
+
+  
 }
 
 @media only screen and (max-width: 500px) {

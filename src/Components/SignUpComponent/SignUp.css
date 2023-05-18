@@ -1,6 +1,12 @@
 .signUpInput {
     font-size: 20px;
-    margin: 32px 0 0px 2rem;
+    margin: 32px 0 0px -10rem;
+    font-weight: bold;
+}
+
+.email {
+    font-size: 20px;
+    margin: 32px 0 0px -13rem;
     font-weight: bold;
 }
 
@@ -27,9 +33,18 @@
     box-shadow: 0 0 1000px 1000px rgba(0, 0, 0, 0.5);
 }
 
+.centerInput {
+    display: flex;
+    justify-content: center;
+}
+
 @media screen and (min-width: 1024px) {
     .signUpInput {
-        margin-left: 24.8rem;
+        margin-left: -22rem;
+    }
+
+    .email {
+        margin-left:-25rem;
     }
 
     .signUpBtn {

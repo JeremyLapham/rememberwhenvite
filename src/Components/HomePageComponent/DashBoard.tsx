@@ -178,7 +178,7 @@ export default function DashBoard() {
                 </Container>
                 :
                 <Row>
-                    <Col className={`${memoryItems.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length >= 7 ? 'longMemoryBox' : 'memoryBox'}`}>
+                    <Col className={`${memoryItems.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length >= 6 ? 'longMemoryBox' : 'memoryBox'}`}>
                         {memoryItems.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length === 0 ?
                             <Col className="text-center">
                                 {showNoMemoriesMessage ?

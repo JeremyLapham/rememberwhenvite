@@ -80,6 +80,20 @@
     }
 }
 
+@media screen and (max-width: 1020px) and (min-width:600px) {
+    .cancelfolderBtn {
+        width: 170px !important;
+        height: 60px !important;
+        font-size: 25px !important;
+        margin-top: 0;
+    }
+
+    .inputFolder {
+        width: 400px !important;
+        height: 48px !important;
+        border: solid 1px black !important;
+    }
+}
 @media screen and (max-width: 380px) {
     .desktopAddRow2 {
         display: none !important;

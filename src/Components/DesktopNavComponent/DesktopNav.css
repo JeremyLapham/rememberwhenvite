@@ -30,7 +30,7 @@
     border-right: 2px solid black !important;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 800px) {
     .logo {
         display: none !important;
     }

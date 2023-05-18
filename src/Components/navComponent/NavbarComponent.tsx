@@ -40,7 +40,7 @@ export default function CustomNavbar() {
     const handleShow = () => setShow(true);
 
     return (
-        <Navbar expand="md" className="navbar-container">
+        <Navbar expand="lg" className="navbar-container">
             <>
                 <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>

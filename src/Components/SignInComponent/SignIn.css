@@ -49,6 +49,7 @@
 }
 
 .signInBg {
+    height:100%;
     background-color: #857B74;
     margin: 47px 0 0 -0;
     width: auto;
@@ -65,20 +66,20 @@
 
 .userNameInput {
     font-size: 20px;
-    margin: 86px 0 0 2rem;
+    margin: 86px 0 0 -10rem;
     font-weight: bold;
 }
 
 .passwordInput {
     font-size: 20px;
-    margin: 39px 0 0 2rem;
+    margin: 39px 0 0 -10.5rem;
     font-weight: bold;
 }
 
 .forgotPass {
     font-size: 15px;
     font-weight: bold;
-    margin: 2rem -0.5rem 1rem 0;
+    margin: 2rem 0rem 1rem 12rem;
 }
 
 .dontHaveAccount {
@@ -104,6 +105,11 @@
     transform: translate(-50%, -50%);
     background-color: rgba(0, 0, 0, 0.5);
     box-shadow: 0 0 1000px 1000px rgba(0, 0, 0, 0.5);
+}
+
+.lockBG {
+    background-color: white !important;
+    border:0px !important;
 }
 
 @media screen and (min-width: 1024px) {
@@ -149,7 +155,7 @@
     }
 
     .forgotPass {
-        margin-left: 5rem;
+        margin-left: 23.2rem;
     }
 
     .showPassword {

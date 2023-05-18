@@ -81,7 +81,7 @@
   height: 31px !important;
   display: flex !important;
   justify-content: center !important;
-  align-items: center ;
+  align-items: center;
   background-color: #A99282 !important;
   font-size: 15px !important;
   font-weight: bold !important;
@@ -188,7 +188,7 @@
     font-size: 25px !important;
     margin-left: 20rem !important;
   }
-  
+
   .changeBtn {
     width: 200px !important;
     height: 65px !important;
@@ -196,7 +196,7 @@
     font-weight: bold !important;
     background-color: #E9EDC9 !important;
   }
-  
+
   .cancelBtn {
     width: 200px !important;
     height: 65px !important;
@@ -273,31 +273,40 @@
     height: 65px !important;
     font-size: 35px !important;
     font-weight: bold !important;
-    margin-top:50px !important;
+    margin-top: 50px !important;
   }
 
   .addImgTxt {
     margin-right: 19rem;
   }
-  
+
   .addHashtagTxt {
     margin-right: 20rem;
   }
-  
+
   .addFolderInputTxt {
     margin-right: 21.2rem;
   }
-  
+
   .addMemoryTxt {
     margin-right: 18rem;
   }
-  
+
   .addDateTxt {
     margin-right: 22.2rem;
   }
-  
+
   .addDescriptionTxt {
     margin-right: 14.2rem;
+  }
+}
+
+@media screen and (max-width: 1020px) and (min-width:600px) {
+  .addBtn {
+    width: 170px !important;
+    height: 60px !important;
+    font-size: 25px !important;
+    margin-left: 0rem !important;
   }
 }
 
