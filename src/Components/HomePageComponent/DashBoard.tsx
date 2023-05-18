@@ -178,7 +178,7 @@ export default function DashBoard() {
                 </Container>
                 :
                 <Row>
-                    <Col className='memoryBox'>
+                    <Col className={`${memoryItems.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length >= 7 ? 'longMemoryBox' : 'memoryBox'}`}>
                         {memoryItems.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length === 0 ?
                             <Col className="text-center">
                                 {showNoMemoriesMessage ?
@@ -223,7 +223,7 @@ export default function DashBoard() {
                     </Button>
                 </Col>
                 <Col className="desktopAddCol">
-                    <Button variant='' onClick={() => { navigate("/AddFolder"); setIsEditFolder(false); }} className="desktopAddBtn2">Add Folder +</Button>
+                    <Button variant='' onClick={() => { setIsEditFolder(false); navigate("/AddFolder");}} className="desktopAddBtn2">Add Folder +</Button>
                 </Col>
             </Row>
         </Container >

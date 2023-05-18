@@ -73,7 +73,7 @@ export default function AddFolder() {
                     <Modal.Body className='modalBody'>
                         <Row>
                             <Col className='d-flex justify-content-center'>
-                                <p className='modalTxt'>Your folder was {folderEdit ? 'Edited' : 'added'}</p>
+                                <p className='modalTxt'>Your folder was {isEditFolder ? 'edited' : 'added'}</p>
                             </Col>
                         </Row>
                     </Modal.Body>

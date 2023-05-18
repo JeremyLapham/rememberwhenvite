@@ -121,7 +121,7 @@ export default function ShownMemory() {
                         </Col>
                     </Row>
                 </Col>
-                <Col lg={6} md={6} xs={12} className='d-flex flex-column align-items-start'>
+                <Col lg={6} md={6} xs={12} className='infoBoxes'>
                     <Row>
                         <Col className='d-flex justify-content-center'>
                             <div className='displayHashtags'>
@@ -156,8 +156,8 @@ export default function ShownMemory() {
                         </OverlayTrigger>
                     </Col>
                 </Row>
-                <Row className='d-flex justify-content-center'>
-                    <Col>
+                <Row >
+                    <Col className='d-flex justify-content-center'>
                         <Button onClick={handleBackButtonClick} className='backBtnMobile' variant=''>Back</Button>
                     </Col>
                 </Row>
