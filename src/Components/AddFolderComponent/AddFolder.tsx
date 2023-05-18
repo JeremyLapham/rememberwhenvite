@@ -66,6 +66,15 @@ export default function AddFolder() {
 
     const handleClose = () => setShowModal(false);
 
+    const [saveClick,setSaveClick] = useState(false);
+
+    const handleSaveClick = () => {
+        setSaveClick(true);
+        setTimeout(() => {
+            setSaveClick(false);
+        }, 5000);
+    }
+
     return (
         <Container fluid>
             <Row>
@@ -117,7 +126,7 @@ export default function AddFolder() {
                     {isEditFolder ?
                         <Button onClick={() => { handleFolder(); setShowModal(true); }} className='addBtn' variant=''>Update</Button>
                         :
-                        <Button onClick={() => { handleFolder(); }} className='addBtn' variant=''>Add</Button>
+                        <Button onClick={() => { handleFolder(); handleSaveClick()}} className='addBtn' variant='' disabled={saveClick}>Add</Button>
                     }
                 </Col>
                 <Col className='d-flex justify-content-start'>

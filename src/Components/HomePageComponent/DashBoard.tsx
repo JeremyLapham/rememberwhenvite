@@ -223,7 +223,7 @@ export default function DashBoard() {
                     </Button>
                 </Col>
                 <Col className="desktopAddCol">
-                    <Button variant='' onClick={() => { setIsEditFolder(false); navigate("/AddFolder");}} className="desktopAddBtn2">Add Folder +</Button>
+                    <Button variant='' onClick={() => { setIsEditFolder(false); navigate("/AddFolder"); }} className="desktopAddBtn2">Add Folder +</Button>
                 </Col>
             </Row>
         </Container >

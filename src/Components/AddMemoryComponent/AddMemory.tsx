@@ -135,7 +135,7 @@ export default function AddMemory() {
         setSaveClick(true);
         setTimeout(() => {
             setSaveClick(false);
-        }, 2000);
+        }, 5000);
     }
 
     return (
