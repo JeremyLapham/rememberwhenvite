@@ -8,6 +8,8 @@
     width: 365px;
     border-radius: 20px;
     border: 1px solid;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .nameFolder {
@@ -92,6 +94,7 @@
     font-weight: 700;
     font-size: 15px !important;
 }
+
 .cancelDeleteFold {
     width: 90px !important;
     height: 31px !important;
@@ -100,6 +103,10 @@
     border-radius: 5px !important;
     font-weight: 700;
     font-size: 15px !important;
+}
+
+.rowMaring {
+    margin-left: 0;
 }
 
 @media screen and (min-width: 1024px) {
@@ -129,7 +136,7 @@
     }
 
     .memoryDate {
-        font-size: 15px !important;
+        font-size: 13px !important;
     }
 
     .memoryTitle {
@@ -159,6 +166,7 @@
         height: 65px !important;
         font-size: 35px !important;
     }
+
     .cancelDeleteFold {
         width: 200px !important;
         height: 65px !important;
@@ -166,6 +174,46 @@
     }
 
 
+}
+
+@media screen and (max-width:1023px) and (min-width:500px) {
+    .displayMemory {
+        width: 40rem;
+        height: 37rem;
+        text-align: center;
+    }
+
+    .rowMaring {
+        margin: 0 2rem;
+    }
+
+    .allFolderBtn,
+    .folderImg {
+        width: 150px;
+        height: 150px;
+    }
+
+    .memoryTitle {
+        font-size: 15px;
+    }
+
+    .memoryDate {
+        font-size: 13px;
+    }
+
+    .shareBtnFold,
+    .deleteBtnFold,
+    .editBtnFold {
+        width: 150px;
+        height: 41px;
+        margin: 30px 1rem 0 1rem;
+    }
+
+    .moreMemories {
+        width: 400px;
+        height: 50px;
+        margin-bottom:3rem;
+    }
 }
 
 @media screen and (max-width: 380px) {

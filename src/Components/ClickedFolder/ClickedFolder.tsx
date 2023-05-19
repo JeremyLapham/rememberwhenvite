@@ -99,7 +99,7 @@ export default function ClickedFolder() {
                     <h1 className='nameFolder text-center'>{fromAddFolder ? selectedFolder.name : folderName}...</h1>
                 </Col>
             </Row>
-            <Row className='d-flex align-items-center'>
+            <Row className='d-flex align-items-center rowMaring'>
                 <Col>
                     <img className='heart' src={heart} alt='remember heart in clicked folder ' />
                 </Col>
@@ -137,7 +137,7 @@ export default function ClickedFolder() {
                                         Title = `${Title}...`
                                     }
                                     return (
-                                        <Col key={idx} xs={4} md={3} lg={3} className='cardNoPad'>
+                                        <Col key={idx} xs={4} md={4} lg={3} className='cardNoPad'>
                                             <Button onClick={() => handleClickedMemory(memory)} variant='' className='allFolderBtn'>
                                                 <img className='folderImg' src={memory.image} alt='clickable image' />
                                             </Button>
