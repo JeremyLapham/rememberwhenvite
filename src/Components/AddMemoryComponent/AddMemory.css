@@ -301,13 +301,48 @@
   }
 }
 
-@media screen and (max-width: 1020px) and (min-width:600px) {
+@media screen and (max-width: 1020px) and (min-width:766px) {
   .addBtn {
     width: 170px !important;
     height: 60px !important;
     font-size: 25px !important;
-    margin-left: 0rem !important;
   }
+
+  .addCancelBtn {
+    width: 170px !important;
+    height: 60px !important;
+    font-size: 25px !important;
+  }
+
+  .desktopInfoRow {
+    margin-top: 2.5rem !important;
+    display: flex;
+    justify-content: center;
+    margin-bottom:2rem !important;
+  }
+
+  .selectedImgBtn {
+    width: 300px !important;
+    height: 300px !important;
+  }
+
+  .selectedImg {
+    height: 300px;
+    width: 300px;
+  }
+
+  .addImgTxt {
+    margin-right: 12rem;
+  }
+
+  .firstInfoCol {
+    margin-bottom: 5rem !important;
+  }
+
+  .secondInfoCol {
+    margin-bottom: 5rem !important;
+  }
+
 }
 
 @media screen and (max-width: 380px) {

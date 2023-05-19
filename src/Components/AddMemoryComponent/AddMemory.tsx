@@ -178,7 +178,7 @@ export default function AddMemory() {
                 </Col>
             </Row>
             <Row className='desktopInfoRow'>
-                <Col md={4} lg={4} className='firstInfoCol'>
+                <Col md={6} lg={4} className='firstInfoCol'>
                     <Row>
                         <Col>
                             <Form.Group className="mb-3 d-flex flex-column align-items-center" controlId="Image">
@@ -199,7 +199,7 @@ export default function AddMemory() {
                         </Col>
                     </Row>
                 </Col>
-                <Col md={4} lg={4} className='secondInfoCol'>
+                <Col md={6} lg={4} className='secondInfoCol'>
                     <Row>
                         <Col>
                             <Form.Group className="mb-3 d-flex flex-column align-items-center">
