@@ -185,15 +185,12 @@
 
 @media screen and (min-width: 1024px) and (max-width:20000px) {
     .modalBody {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        top: 50px;
-        left: calc(50% - 335px);
-        height: 200px;
-        width: 200px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        height: 300px;
+        width: 700px;
     }
 
     .infoBoxes {
@@ -350,7 +347,7 @@
         width: 500px;
         height: 45px;
         display: block;
-        margin:40px !important;
+        margin: 40px !important;
     }
 
     .editBtn,
@@ -366,7 +363,7 @@
     }
 
     .infoBoxes {
-        margin-top:3rem;
+        margin-top: 3rem;
     }
 
     .memoryName {
