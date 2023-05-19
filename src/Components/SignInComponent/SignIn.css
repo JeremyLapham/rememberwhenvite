@@ -111,8 +111,8 @@
     border:0px !important;
 }
 
-.signUpTxt {
-    margin-top: -1rem;
+.signInTxt1 {
+    margin-top: -0.5rem;
 }
 
 @media screen and (min-width: 1024px) {
