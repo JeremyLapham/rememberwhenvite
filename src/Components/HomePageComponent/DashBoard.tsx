@@ -52,7 +52,7 @@ export default function DashBoard() {
                 setFolderLength(folders.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length);
             }
         }
-        setFolderLength(folders.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length);
+        setFolderLength(folders.length);
         if (!checkToken()) {
             navigate('/SignInInfo');
         } else {
@@ -148,7 +148,7 @@ export default function DashBoard() {
                     <Row>
                         <Col className='d-flex justify-content-center folderDisplay'>
                             <Row className='desktopFolder'>
-                                {folders.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length === 0 ?
+                                {folders.length === 0 ?
                                     <Col className="text-center">
                                         {showNoMemoriesMessage ?
                                             <h1>You have no folders</h1>
@@ -157,7 +157,7 @@ export default function DashBoard() {
                                         }
                                     </Col>
                                     :
-                                    folders.filter((item: { isDeleted: boolean; }) => !item.isDeleted).map((folder: { id: number; name: string; isDeleted: boolean; folderId: number; userId: number }, idx: number) => {
+                                    folders.map((folder: { id: number; name: string; isDeleted: boolean; folderId: number; userId: number }, idx: number) => {
                                         let Title = folder.name.substring(0, 6);
                                         if (Title.length === 6) {
                                             Title = `${Title}...`;
@@ -179,7 +179,7 @@ export default function DashBoard() {
                 :
                 <Row>
                     <Col className={`${memoryItems.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length >= 6 ? 'longMemoryBox' : 'memoryBox'}`}>
-                        {memoryItems.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length === 0 ?
+                        {memoryItems.length === 0 ?
                             <Col className="text-center">
                                 {showNoMemoriesMessage ?
                                     <h1>You have no memories</h1>
@@ -188,7 +188,7 @@ export default function DashBoard() {
                                 }
                             </Col>
                             :
-                            memoryItems.filter((item: { isDeleted: boolean; }) => !item.isDeleted).map((cardInfo: Memory, idx: number) => {
+                            memoryItems.map((cardInfo: Memory, idx: number) => {
                                 let Title = cardInfo.title.substring(0, 10);
                                 if (Title.length === 10) {
                                     Title = `${Title}...`

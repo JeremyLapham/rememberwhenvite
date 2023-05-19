@@ -34,30 +34,26 @@ export default function AddMemory() {
     };
     const handleTags = (e: { target: { value: string } }) => setMemoryTags(e.target.value);
 
-    // const formatAsDate = (date: string) => {
-    //     const cleanedValue = date.replace(/\D/g, '');
+    // const [formattedDate, setFormattedDate] = useState('');
 
-    //     let formattedValue = '';
-    //     if (cleanedValue.length > 2) {
-    //         formattedValue += cleanedValue.substring(0, 2) + '/';
-    //         if (cleanedValue.length > 4) {
-    //             formattedValue += cleanedValue.substring(3, 5) + '/';
-    //             if(formattedValue.length > 5) {
-    //                 formattedValue += cleanedValue.substring(6, 10);
-    //             }
-    //         } else {
-    //             formattedValue += cleanedValue.substring(2);
-    //         }
-    //     } else {
-    //         formattedValue = cleanedValue;
-    //     }
 
-    //     return formattedValue;
-    // };
-    const handleDate = (e: { target: { value: string } }) => {
-        // const formatDate = formatAsDate(e.target.value)
-        setMemoryDate(e.target.value.substring(0,10));
+    function formatDate(input: any) {
+        const cleanedInput = input.replace(/\D/g, '');
+
+        const day = cleanedInput.slice(0, 2);
+        const month = cleanedInput.slice(2, 4);
+        const year = cleanedInput.slice(4, 8);
+
+        const formattedDate = [day, month, year].filter(Boolean).join('/');
+
+        setMemoryDate(formattedDate);
     }
+
+    // const handleDate = (e: { target: { value: string } }) => {
+    //     // const formatDate = formatAsDate(e.target.value)
+    //     setMemoryDate(e.target.value.substring(0, 10));
+    // }
+
 
     const handleImage = (e: any) => {
         let file = e.target.files[0];
@@ -129,7 +125,7 @@ export default function AddMemory() {
         navigate('/memory');
     }
 
-    const [saveClick,setSaveClick] = useState(false);
+    const [saveClick, setSaveClick] = useState(false);
 
     const handleSaveClick = () => {
         setSaveClick(true);
@@ -210,7 +206,7 @@ export default function AddMemory() {
                                 <Form.Label className='addFolderInputTxt'>Folder</Form.Label>
                                 <Form.Select className='textInputs' onChange={handleFolder} value={folderId}>
                                     <option hidden>Folder</option>
-                                    {folders.filter((item: { isDeleted: any; }) => !item.isDeleted).map((option: any, idx: number) => {
+                                    {folders.map((option: any, idx: number) => {
                                         return (
                                             <option key={idx} value={option.id}>{option.name}</option>
                                         );
@@ -231,7 +227,7 @@ export default function AddMemory() {
                         <Col>
                             <Form.Group className="mb-3 d-flex flex-column align-items-center">
                                 <Form.Label className='addDateTxt'>Date</Form.Label>
-                                <Form.Control className='textInputs' type='text' placeholder='MM/DD/YYYY or DD/MM/YYYY' onChange={handleDate} value={memoryDate} />
+                                <Form.Control className='textInputs' type='text' placeholder='MM/DD/YYYY or DD/MM/YYYY' onChange={(e) => formatDate(e.target.value)} value={memoryDate} />
                             </Form.Group>
                         </Col>
                     </Row>
@@ -249,7 +245,7 @@ export default function AddMemory() {
                         {isEditMemory ?
                             <Button onClick={() => { setShow(true); }} className='addBtn' variant=''>Update</Button>
                             :
-                            <Button onClick={() => { handleSave(); handleSaveClick()}} className='addBtn' variant='' disabled={saveClick}>Add</Button>
+                            <Button onClick={() => { handleSave(); handleSaveClick() }} className='addBtn' variant='' disabled={saveClick}>Add</Button>
                         }
                     </Col>
                     <Col className='d-flex justify-content-start'>

@@ -78,7 +78,7 @@ export default function AddFolder() {
     return (
         <Container fluid>
             <Row>
-                <Modal className='modalBG' show={showModal} onHide={handleClose}>
+                <Modal className='modalBG' show={showModal} onHide={handleClose} backdrop="static" keyboard={false}>
                     <Modal.Body className='modalBody'>
                         <Row>
                             <Col className='d-flex justify-content-center'>

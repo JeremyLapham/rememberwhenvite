@@ -122,7 +122,7 @@ export default function ClickedFolder() {
                 <Col className='d-flex justify-content-center'>
                     <div className='displayMemory'>
                         <Row className='d-flex justify-content-center'>
-                            {memoryItem.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length === 0 ?
+                            {memoryItem.length === 0 ?
                                 <Col className="text-center">
                                     {showNoMemoriesMessage ?
                                         <h1>You have no memories</h1>
@@ -131,7 +131,7 @@ export default function ClickedFolder() {
                                     }
                                 </Col>
                                 :
-                                memoryItem.filter((item: { isDeleted: any; }) => !item.isDeleted).map((memory: any, idx: any) => {
+                                memoryItem.map((memory: any, idx: any) => {
                                     let Title = memory.title.substring(0, 10);
                                     if (Title.length === 10) {
                                         Title = `${Title}...`
