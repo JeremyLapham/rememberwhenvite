@@ -48,6 +48,10 @@
     justify-content: center;
 }
 
+.signUpTxt {
+    margin-top: -0.5rem;
+}
+
 @media screen and (min-width: 1024px) {
     .signUpInput {
         margin-left: -24.5rem;
