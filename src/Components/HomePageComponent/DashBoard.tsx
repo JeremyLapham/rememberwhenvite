@@ -11,7 +11,7 @@ import { MyContext } from '../context';
 import DesktopNav from '../DesktopNavComponent/DesktopNav';
 
 export default function DashBoard() {
-    const { username, setSelectedMemory, setUser, setIsMemoryEdit, setIsEditFolder, setFolderName, setSelectedFolder, setMoreMemoryClicked, setFolders, setUsersId, setMemoryItems, folders, moreMemoryClicked, memoryItems, setFolderLength } = useContext(MyContext);
+    const { username, setSelectedMemory, setUser, setIsMemoryEdit, setIsEditFolder, setFolderName, setSelectedFolder, setMoreMemoryClicked, setFolders, setUsersId, setMemoryItems, folders, moreMemoryClicked, memoryItems } = useContext(MyContext);
     const [dots, setDots] = useState('');
     interface Memory {
         id: number,
@@ -39,7 +39,6 @@ export default function DashBoard() {
                 const displayFolder = await getFolderByUserId(parseInt(userId));
                 setMemoryItems(userMemoryItems);
                 setFolders(displayFolder);
-                setFolderLength(folders.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length);
             } else {
                 const loggedIn = loggedInData();
                 sessionStorage.setItem('UserId', JSON.stringify(loggedIn.userId));
@@ -49,10 +48,8 @@ export default function DashBoard() {
                 const displayFolder = await getFolderByUserId(loggedIn.userId);
                 setMemoryItems(userMemoryItems);
                 setFolders(displayFolder);
-                setFolderLength(folders.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length);
             }
         }
-        setFolderLength(folders.length);
         if (!checkToken()) {
             navigate('/SignInInfo');
         } else {
