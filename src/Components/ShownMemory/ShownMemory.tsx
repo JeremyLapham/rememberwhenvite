@@ -139,7 +139,7 @@ export default function ShownMemory() {
                     </Row>
                 </Col>
                 <Row className='rowMargin'>
-                    <Col lg={3} md={3} xs={0} className='d-flex justify-content-center'>
+                    <Col lg={3} md={0} xs={0} className='d-flex justify-content-center'>
                         <Button onClick={handleBackButtonClick} className='backBtnDesktop' variant=''>Back</Button>
                     </Col>
                     <Col lg={3} md={3} xs={4} className='d-flex justify-content-center'>
@@ -156,7 +156,7 @@ export default function ShownMemory() {
                         </OverlayTrigger>
                     </Col>
                 </Row>
-                <Row >
+                <Row style={{padding:0,margin:0}}>
                     <Col className='d-flex justify-content-center'>
                         <Button onClick={handleBackButtonClick} className='backBtnMobile' variant=''>Back</Button>
                     </Col>
