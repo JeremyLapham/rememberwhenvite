@@ -8,6 +8,8 @@
     width: 365px;
     border-radius: 20px;
     border: 1px solid;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .nameFolder {
@@ -197,6 +199,20 @@
 
     .memoryDate {
         font-size: 13px;
+    }
+
+    .shareBtnFold,
+    .deleteBtnFold,
+    .editBtnFold {
+        width: 150px;
+        height: 41px;
+        margin: 30px 1rem 0 1rem;
+    }
+
+    .moreMemories {
+        width: 400px;
+        height: 50px;
+        margin-bottom:3rem;
     }
 }
 
