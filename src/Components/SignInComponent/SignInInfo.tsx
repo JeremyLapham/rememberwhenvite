@@ -81,7 +81,7 @@ export default function SignInInfo() {
                         <h1 className='signInTxt' style={{ textDecoration: 'underline' }}>Sign In</h1>
                     </Col>
                     <Col className='d-flex justify-content-center'>
-                        <Button onClick={handleSignInClick} variant=''><h1>Sign Up</h1></Button>
+                        <Button onClick={handleSignInClick} variant=''><h1 className='signUpTxt'>Sign Up</h1></Button>
                     </Col>
                 </Row>
                 <Row>

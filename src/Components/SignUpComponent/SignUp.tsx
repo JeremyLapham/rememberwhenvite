@@ -86,7 +86,7 @@ export default function SignUpInfo() {
                         <Container>
                             <Row className='pt-4'>
                                 <Col className='centerInput'>
-                                    <Button onClick={handleSignInClick} variant=''><h1>Sign In</h1></Button>
+                                    <Button onClick={handleSignInClick} variant=''><h1 className='signUpTxt'>Sign In</h1></Button>
                                 </Col>
                                 <Col className='centerInput'>
                                     <h1 style={{ textDecoration: 'underline' }}>Sign Up</h1>
@@ -113,7 +113,7 @@ export default function SignUpInfo() {
                                 </Row>
                                 <Row>
                                     <Col className='centerInput'>
-                                        <h4 className='signUpInput'>Password</h4>
+                                        <h4 className='signUpInputPassword'>Password</h4>
                                     </Col>
                                 </Row>
                                 <Row>
