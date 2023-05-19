@@ -82,72 +82,70 @@ export default function SignUpInfo() {
             </Row>
             <Row>
                 <Col>
-                    <div className='signInBg'>
-                        <Container>
-                            <Row className='pt-4'>
+                    <Row className='signInBg pt-4'>
+                        <Row className=''>
+                            <Col className='centerInput'>
+                                <Button onClick={handleSignInClick} variant=''><h1 className='signUpTxt'>Sign In</h1></Button>
+                            </Col>
+                            <Col className='centerInput'>
+                                <h1 style={{ textDecoration: 'underline' }}>Sign Up</h1>
+                            </Col>
+                            <Row>
                                 <Col className='centerInput'>
-                                    <Button onClick={handleSignInClick} variant=''><h1 className='signUpTxt'>Sign In</h1></Button>
+                                    <h4 className='signUpInput'>Username</h4>
                                 </Col>
-                                <Col className='centerInput'>
-                                    <h1 style={{ textDecoration: 'underline' }}>Sign Up</h1>
-                                </Col>
-                                <Row>
-                                    <Col className='centerInput'>
-                                        <h4 className='signUpInput'>Username</h4>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col className='centerInput'>
-                                        <input onChange={({ target: { value } }) => setUsername(value)} type='text' className='inputField' placeholder='Enter your username' />
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col className='centerInput'>
-                                        <h4 className='email'>Email</h4>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col className='centerInput'>
-                                        <input onChange={({ target: { value } }) => setEmail(value)} className='inputField' type='email' placeholder='Enter your email' />
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col className='centerInput'>
-                                        <h4 className='signUpInputPassword'>Password</h4>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col className='centerInput'>
-                                    <Form>
-                                            <Form.Group controlId="Password">
-                                                <InputGroup className='inputField'>
-                                                    <Form.Control
-                                                        type={`${isClicked ? 'text' : 'password'}`}
-                                                        placeholder="Enter your password"
-                                                        className='inputField'
-                                                        onChange={({ target: { value } }) => setPassword(value)}
-                                                    />
-                                                    <Button className='lockBG' variant='' onClick={handleShowPassword}>
-                                                        <InputGroup.Text className='lockBG'>
-                                                            {isClicked ?
-                                                                <SlLockOpen size={25} />
-                                                                :
-                                                                <SlLock size={25} />}
-                                                        </InputGroup.Text>
-                                                    </Button>
-                                                </InputGroup>
-                                            </Form.Group>
-                                        </Form>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col className='centerInput'>
-                                        <Button onClick={handelSubmit} className='signUpBtn' variant='' disabled={clickSignUp}>Sign Up</Button>
-                                    </Col>
-                                </Row>
                             </Row>
-                        </Container>
-                    </div>
+                            <Row>
+                                <Col className='centerInput'>
+                                    <input onChange={({ target: { value } }) => setUsername(value)} type='text' className='inputField' placeholder='Enter your username' />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col className='centerInput'>
+                                    <h4 className='email'>Email</h4>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col className='centerInput'>
+                                    <input onChange={({ target: { value } }) => setEmail(value)} className='inputField' type='email' placeholder='Enter your email' />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col className='centerInput'>
+                                    <h4 className='signUpInputPassword'>Password</h4>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col className='centerInput'>
+                                    <Form>
+                                        <Form.Group controlId="Password">
+                                            <InputGroup className='inputField'>
+                                                <Form.Control
+                                                    type={`${isClicked ? 'text' : 'password'}`}
+                                                    placeholder="Enter your password"
+                                                    className='inputField'
+                                                    onChange={({ target: { value } }) => setPassword(value)}
+                                                />
+                                                <Button className='lockBG' variant='' onClick={handleShowPassword}>
+                                                    <InputGroup.Text className='lockBG'>
+                                                        {isClicked ?
+                                                            <SlLockOpen size={25} />
+                                                            :
+                                                            <SlLock size={25} />}
+                                                    </InputGroup.Text>
+                                                </Button>
+                                            </InputGroup>
+                                        </Form.Group>
+                                    </Form>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col className='centerInput'>
+                                    <Button onClick={handelSubmit} className='signUpBtn' variant='' disabled={clickSignUp}>Sign Up</Button>
+                                </Col>
+                            </Row>
+                        </Row>
+                    </Row>
                 </Col>
             </Row>
         </Container>
