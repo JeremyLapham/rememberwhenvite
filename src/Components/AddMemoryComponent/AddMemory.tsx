@@ -3,17 +3,18 @@ import { Col, Container, Row, Button, Form, Modal } from 'react-bootstrap';
 import './AddMemory.css';
 import { useNavigate } from 'react-router-dom';
 import CustomNavbar from '../navComponent/NavbarComponent';
-import { addMemoryItem, getMemoryItemsByUserId, updateMemoryItem, getFolderByUserId } from '../Services/DataService';
+import { addMemoryItem, updateMemoryItem, getFolderByUserId } from '../Services/DataService';
 import { MyContext } from '../context';
 import swal from 'sweetalert';
 import DesktopNav from '../DesktopNavComponent/DesktopNav';
 // import AudioRecorder from './AudioRecording';
 
 export default function AddMemory() {
-    const { usersId, setSelectedMemory, isEditMemory, memoryEdit, setFolderId, setMemoryItems, folderId } = useContext(MyContext);
+    const { usersId, setSelectedMemory, isEditMemory, memoryEdit, setFolderId, folderId, setFromAddMemory } = useContext(MyContext);
 
     const navigate = useNavigate()
     const [show, setShow] = useState(false);
+    console.log(isEditMemory);
 
     const [memoryImage, setMemoryImage] = useState(isEditMemory ? memoryEdit.image : '');
     const [memoryTitle, setMemoryTitle] = useState(isEditMemory ? memoryEdit.title : '');
@@ -90,18 +91,16 @@ export default function AddMemory() {
             if (isEditMemory) {
                 result = await updateMemoryItem(item);
                 setTimeout(() => {
-                    navigate('/memory')
+                    navigate('/dashboard')
                 }, 500);
             } else {
+                setFromAddMemory(true)
                 result = await addMemoryItem(item);
             }
             setShow(true);
 
-            if (result) {
-                let userMemoryItems = await getMemoryItemsByUserId(usersId);
-                setMemoryItems(userMemoryItems);
-            } else {
-                alert(`Memory was not ${isEditMemory ? 'Updated' : 'Added'}`)
+            if(result === false) {
+                alert(`Memory was not ${isEditMemory ? 'Updated' : 'Added'}`);
             }
         }
     }

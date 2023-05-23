@@ -177,7 +177,7 @@ export default function DashBoard() {
                 </Container>
                 :
                 <Row>
-                    <Col className={`${memoryItems.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length >= 6 ? 'longMemoryBox' : 'memoryBox'}`}>
+                    <Col className={`${memoryItems.length >= 6 ? 'longMemoryBox' : 'memoryBox'}`}>
                         {memoryItems.length === 0 ?
                             <Col className="text-center">
                                 {showNoMemoriesMessage ?
@@ -213,12 +213,12 @@ export default function DashBoard() {
 
             <Row className="desktopBtnRow">
                 <Col className="desktopAddCol">
-                    <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">{folders.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length === 0 ? 'Add folders to be able to add memories' : ''}</Tooltip>}>
+                    <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">{folders.length === 0 ? 'Add folders to be able to add memories' : ''}</Tooltip>}>
                         <span className="d-inline-block">
                             <Button variant=''
                                 onClick={() => { navigate("/AddMemory"); setIsMemoryEdit(false); }}
                                 className="desktopAddBtn"
-                                disabled={folders.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length === 0}>Add Memory +</Button>
+                                disabled={folders.length === 0}>Add Memory +</Button>
                         </span>
                     </OverlayTrigger>
                 </Col>

@@ -27,6 +27,7 @@ export default function App() {
   const [memoryEdit, setMemoryEdit] = useState({});
   const [isEditMemory, setIsMemoryEdit] = useState(false);
   const [fromAddFolder, setFromAddFolder] = useState(false);
+  const [fromAddMemory, setFromAddMemory] = useState(false);
   const [folderLength, setFolderLength] = useState(0);
 
 
@@ -37,7 +38,7 @@ export default function App() {
 
   return (
     <div className='body'>
-      <MyContext.Provider value={{ username, setUser, memoryItems, setMemoryItems, usersId, setUsersId, moreMemoryClicked, setMoreMemoryClicked, selectedMemory, setSelectedMemory, folders, setFolders, folderId, setFolderId, folderName, setFolderName, selectedFolder, setSelectedFolder, folderEdit, setFolderEdit, isEditFolder, setIsEditFolder, memoryEdit, setMemoryEdit, isEditMemory, setIsMemoryEdit, fromAddFolder, setFromAddFolder, folderLength, setFolderLength }}>
+      <MyContext.Provider value={{ username, setUser, memoryItems, setMemoryItems, usersId, setUsersId, moreMemoryClicked, setMoreMemoryClicked, selectedMemory, setSelectedMemory, folders, setFolders, folderId, setFolderId, folderName, setFolderName, selectedFolder, setSelectedFolder, folderEdit, setFolderEdit, isEditFolder, setIsEditFolder, memoryEdit, setMemoryEdit, isEditMemory, setIsMemoryEdit, fromAddFolder, setFromAddFolder, folderLength, setFolderLength, fromAddMemory, setFromAddMemory }}>
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<SignIn />} />
