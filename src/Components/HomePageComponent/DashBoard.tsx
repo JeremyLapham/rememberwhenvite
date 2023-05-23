@@ -11,7 +11,7 @@ import { MyContext } from '../context';
 import DesktopNav from '../DesktopNavComponent/DesktopNav';
 
 export default function DashBoard() {
-    const { username, setSelectedMemory, setUser, setIsMemoryEdit, setIsEditFolder, setFolderName, setSelectedFolder, setMoreMemoryClicked, setFolders, setUsersId, setMemoryItems, folders, moreMemoryClicked, memoryItems } = useContext(MyContext);
+    const { username, setSelectedMemory, setUser, setIsMemoryEdit, setIsEditFolder, setFolderName, setSelectedFolder, setMoreMemoryClicked, setFolders, setUsersId, setMemoryItems, folders, moreMemoryClicked, memoryItems, setFolderLength } = useContext(MyContext);
     const [dots, setDots] = useState('');
     interface Memory {
         id: number,
@@ -39,6 +39,7 @@ export default function DashBoard() {
                 const displayFolder = await getFolderByUserId(parseInt(userId));
                 setMemoryItems(userMemoryItems);
                 setFolders(displayFolder);
+                setFolderLength(folders.length)
             } else {
                 const loggedIn = loggedInData();
                 sessionStorage.setItem('UserId', JSON.stringify(loggedIn.userId));
@@ -48,6 +49,7 @@ export default function DashBoard() {
                 const displayFolder = await getFolderByUserId(loggedIn.userId);
                 setMemoryItems(userMemoryItems);
                 setFolders(displayFolder);
+                setFolderLength(folders.length)
             }
         }
         if (!checkToken()) {
@@ -187,8 +189,14 @@ export default function DashBoard() {
                             :
                             memoryItems.map((cardInfo: Memory, idx: number) => {
                                 let Title = cardInfo.title.substring(0, 10);
-                                if (Title.length === 10) {
-                                    Title = `${Title}...`
+
+                                if (Title.length === 10 && cardInfo.title.length > 10) {
+                                    const lastSpaceIndex = Title.lastIndexOf(' ');
+                                    if (lastSpaceIndex !== -1) {
+                                        Title = Title.substring(0, lastSpaceIndex) + '...';
+                                    } else {
+                                        Title = Title.substring(0, 9) + '...';
+                                    }
                                 }
                                 return (
                                     <Button onClick={() => handlememoryClickDash(cardInfo)} key={idx} style={{ position: 'relative' }} variant=''>

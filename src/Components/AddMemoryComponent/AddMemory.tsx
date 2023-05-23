@@ -32,7 +32,7 @@ export default function AddMemory() {
         setFolderId(target.value);
         setFolder(target.value);
     };
-    const handleTags = (e: { target: { value: string } }) => setMemoryTags(e.target.value);
+    const handleTags = (e: { target: { value: string } }) => setMemoryTags(e.target.value.substring(0,25));
 
     // const [formattedDate, setFormattedDate] = useState('');
 
@@ -185,7 +185,7 @@ export default function AddMemory() {
                                 <Form.Label className='addImgTxt'>Add image</Form.Label>
                                 <Button style={{ position: 'relative' }} id='custom-input' className='selectedImgBtn'>
                                     {memoryImage && <img className='selectedImg' src={memoryImage || URL.createObjectURL(memoryImage)} alt="Selected image" />}
-                                    <Form.Control className='input1' onChange={handleImage} type="file" accept='image/png, image/jpg, image/jpeg' placeholder="Enter an image" />
+                                    <Form.Control className='input1' onChange={handleImage} type="file" accept='image/png, image/jpg' placeholder="Enter an image" />
                                 </Button>
                             </Form.Group>
                         </Col>
