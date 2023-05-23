@@ -14,7 +14,6 @@ export default function AddMemory() {
 
     const navigate = useNavigate()
     const [show, setShow] = useState(false);
-    console.log(isEditMemory);
 
     const [memoryImage, setMemoryImage] = useState(isEditMemory ? memoryEdit.image : '');
     const [memoryTitle, setMemoryTitle] = useState(isEditMemory ? memoryEdit.title : '');
