@@ -37,14 +37,14 @@ export default function DesktopNav() {
         <Navbar>
             <>
                 <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
+                    <Modal.Header closeButton className="logoutModal">
                     </Modal.Header>
-                    <Modal.Body>Are you sure you want to logout?</Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>
+                    <Modal.Body className="logoutModalTxt">Are you sure you want to logout?</Modal.Body>
+                    <Modal.Footer  className="logoutModalFooter">
+                        <Button className="cancelModalBtn" variant="secondary" onClick={handleClose}>
                             Cancel
                         </Button>
-                        <Button variant="primary" onClick={() => LogOut()}>
+                        <Button className="logoutModalBtn" variant="primary" onClick={() => LogOut()}>
                             Logout
                         </Button>
                     </Modal.Footer>

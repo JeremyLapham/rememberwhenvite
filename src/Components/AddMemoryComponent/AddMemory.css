@@ -92,6 +92,7 @@
 .textInputs {
   width: 300px !important;
   border: 1px solid black !important;
+  border-radius: 10px;
 }
 
 .textInputsDescription {

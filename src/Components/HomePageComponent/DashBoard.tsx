@@ -143,8 +143,8 @@ export default function DashBoard() {
             }
 
             {moreMemoryClicked ?
-                <Container>
-                    <Row>
+                <Container fluid className='folderDisplayCont'>
+                    <Row className='folderDisplayRow'>
                         <Col className='d-flex justify-content-center folderDisplay'>
                             <Row className='desktopFolder'>
                                 {folders.length === 0 ?

@@ -13,6 +13,7 @@
 .inputField {
     margin: 0px;
     height: 50px;
+    padding: 0px;
 }
 
 .email {
@@ -50,6 +51,14 @@
 
 .signUpTxt {
     margin-top: -1rem;
+}
+
+.signUpTxt1 {
+    margin-top: 5px;
+} 
+
+.signInBgCol {
+    padding: 0px !important;
 }
 
 @media screen and (min-width: 1024px) {

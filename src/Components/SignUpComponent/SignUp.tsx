@@ -81,15 +81,15 @@ export default function SignUpInfo() {
                 </Col>
             </Row>
             <Row>
-                <Col>
+                <Col className='signInBgCol'>
                     <div className='signInBg'>
                         <Container>
-                            <Row className='pt-4'>
+                            <Row className='d-flex justify-content-center pt-4'>
                                 <Col className='centerInput'>
                                     <Button onClick={handleSignInClick} variant=''><h1 className='signInTxt'>Sign In</h1></Button>
                                 </Col>
                                 <Col className='centerInput'>
-                                    <h1 style={{ textDecoration: 'underline' }}>Sign Up</h1>
+                                    <h1 className='signUpTxt1' style={{ textDecoration: 'underline' }}>Sign Up</h1>
                                 </Col>
                                 <Row>
                                     <Col className='centerInput'>
