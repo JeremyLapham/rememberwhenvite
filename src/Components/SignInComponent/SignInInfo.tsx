@@ -75,7 +75,7 @@ export default function SignInInfo() {
                     <img className='logo mt-5' src={logo} alt='remember when logo, elephant holding balloon' />
                 </Col>
             </Row>
-            <Row className='signInBg pt-4'>
+            <Row className='d-flex justify-content-center signInBg pt-4'>
                 <Row>
                     <Col className='d-flex justify-content-center'>
                         <h1 className='signInTxt' style={{ textDecoration: 'underline' }}>Sign In</h1>
@@ -105,7 +105,8 @@ export default function SignInInfo() {
                             <Form.Group controlId="Password">
                                 <InputGroup className='inputField'>
                                     <Form.Control
-                                        type={`${isClicked ? 'text' : 'password'}`}
+                                        type={`${isClicked ? 'text' : 'password'}`} 
+                                        className='inputField'
                                         placeholder="Enter your password"
                                         onChange={({ target: { value } }) => setPassword(value)}
                                     />
