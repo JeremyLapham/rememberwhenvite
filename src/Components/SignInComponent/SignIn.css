@@ -18,6 +18,10 @@
     display: block !important;
 }
 
+.logo1 {
+    width: 25rem;
+}
+
 .signInBtn {
     width: 250px;
     height: 45px;

@@ -13,7 +13,7 @@
 }
 
 .navBtn {
-    font-size: 25px !important;
+    font-size: 20px !important;
     background-color: #D7D2CE !important;
     color: black !important;
     border-style: none !important;
@@ -28,6 +28,37 @@
 .btnBorder {
     border-left: 2px solid black !important;
     border-right: 2px solid black !important;
+}
+
+.logoutModal {
+    background-color: #D7D2CE !important;
+    border: #D7D2CE !important;
+}
+
+.logoutModalFooter {
+    background-color: #D7D2CE !important;
+    border: #D7D2CE !important;
+    display: flex;
+    justify-content: center !important;
+    justify-content: space-evenly !important;
+}
+
+.logoutModalTxt {
+    font-family: Comfortaa;
+    background-color: #D7D2CE !important;
+    font-size: 25px;
+    text-align: center;
+}
+
+.cancelModalBtn {
+    background-color: #857b74 !important;
+    font-family: Comfortaa !important;
+}
+
+.logoutModalBtn {
+    font-family: Comfortaa !important;
+    background-color: #b83131 !important;
+    border: none !important;
 }
 
 @media screen and (max-width: 1000px) {

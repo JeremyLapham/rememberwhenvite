@@ -358,6 +358,15 @@
     font-size: 20px;
     width: 101px;
   }
+
+  .folderDisplayRow {
+    width: 60rem !important;
+  }
+
+  .folderDisplayCont {
+    display: flex;
+    justify-content: center !important;
+  }
 }
 
 @media only screen and (max-width: 1023px) {
