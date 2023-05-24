@@ -73,24 +73,24 @@ export default function CustomNavbar() {
                     className="offCanvas"
                 >
                     <Offcanvas.Body className="offCanvasBody">
-                        <div style={{ marginLeft: '25px' }}>
-                            <Nav.Link as={Link} to='/DashBoard' onClick={handleMemoryClick}><img src={home} alt='home picture' />
+                        <div className='test' style={{ marginLeft: '10px' }}>
+                            <Nav.Link as={Link} to='/DashBoard' onClick={handleMemoryClick}><img className='navImg' src={home} alt='home picture' />
                                 <h1 className='navWords d-inline'>Home</h1></Nav.Link>
                         </div>
-                        <div style={{ marginLeft: '21px' }}>
-                            <Nav.Link disabled={folderLength === 0 ? true : false} as={Link} to='/AddMemory' onClick={() => setIsMemoryEdit(false)}><img src={addnew} alt='addnew picture' />
+                        <div style={{ marginLeft: '6px' }}>
+                            <Nav.Link disabled={folderLength === 0 ? true : false} as={Link} to='/AddMemory' onClick={() => setIsMemoryEdit(false)}><img className='navImg' src={addnew} alt='addnew picture' />
                                 <h1 className='navWords d-inline'>Add Memory</h1></Nav.Link>
                         </div>
-                        <div style={{ marginLeft: '21px' }}>
-                            <Nav.Link as={Link} to='/AddFolder' onClick={() => setIsEditFolder(false)}><img src={addnew} alt='addnew picture' />
+                        <div style={{ marginLeft: '6px' }}>
+                            <Nav.Link as={Link} to='/AddFolder' onClick={() => setIsEditFolder(false)}><img className='navImg' src={addnew} alt='addnew picture' />
                                 <h1 className='navWords d-inline'>Add Folder</h1></Nav.Link>
                         </div>
-                        <div style={{ marginLeft: '22px' }}>
-                            <Nav.Link as={Link} to='/DashBoard' onClick={handleMoreMemoryClick}><img src={memories} alt='home picture' />
+                        <div style={{ marginLeft: '7px' }}>
+                            <Nav.Link as={Link} to='/DashBoard' onClick={handleMoreMemoryClick}><img className='navImg' src={memories} alt='home picture' />
                                 <h1 className='navWords d-inline'>Memories</h1></Nav.Link>
                         </div>
-                        <div style={{ marginLeft: '24px' }}>
-                            <Nav.Link onClick={handleShow}><img src={setting} alt='home picture' />
+                        <div style={{ marginLeft: '9px' }}>
+                            <Nav.Link onClick={handleShow}><img className='navImg' src={setting} alt='home picture' />
                                 <h1 className='navWords d-inline'>Logout</h1></Nav.Link>
                         </div>
                     </Offcanvas.Body>

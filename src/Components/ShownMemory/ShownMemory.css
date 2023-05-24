@@ -8,7 +8,7 @@
 
 .memoryName {
     font-size: 20px;
-    font-weight: light;
+    font-weight: bold !important;
     margin-bottom: 25px;
     word-wrap: break-word;
 }
@@ -53,8 +53,9 @@
 }
 
 .hashtags {
-    font-size: 15px;
+    font-size: 20px;
     margin: 0 !important;
+    font-weight: bold !important;
 }
 
 .description {
@@ -65,8 +66,8 @@
 }
 
 .memoryDesTxt {
-    font-size: 15px;
-    font-weight: light;
+    font-size: 20px;
+    font-weight: bold !important;
     margin: 19px 10px;
     height: 136px;
     overflow-y: scroll;
@@ -75,25 +76,28 @@
 
 .memoryDesDate {
     font-size: 20px;
-    font-weight: light;
+    font-weight: bold !important;
 }
 
 .editBtn {
     background-color: #ccedc9 !important;
+    font-weight: bold !important;
 }
 
 .deleteBtn {
     background-color: #FF6161 !important;
+    font-weight: bold !important;
 }
 
 .shareBtn {
     background-color: #B7D1DA !important;
+    font-weight: bold !important;
 }
 
 .editBtn,
 .deleteBtn,
 .shareBtn {
-    width: 90px;
+    width: 90px !important;
     height: 31px;
     display: flex;
     justify-content: center;
@@ -291,7 +295,7 @@
     .shareBtn,
     .backBtnDesktop {
         display: block;
-        width: 200px;
+        width: 200px !important;
         height: 65px;
         font-weight: 700;
         font-size: 30px;

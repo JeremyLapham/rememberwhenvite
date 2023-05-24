@@ -172,4 +172,15 @@
     .signUpTxt {
         margin-top: -0.5rem;
     }
+
+    .noAccount {
+        font-size: 24px !important;
+        width: 26rem;
+        text-align: center !important;
+    }
+
+    .dontHaveAccount {
+        font-size: 20px !important;
+        width: 6rem;
+    }
 }
