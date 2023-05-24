@@ -18,7 +18,7 @@ export default function SignUpInfo() {
     const navigate = useNavigate();
 
     const handelSubmit = () => {
-        if (Password.match(regex)) {
+        if (Password.match(regex) || Username !== '' || Email !== '') {
             let userData = {
                 Id: 0,
                 Username,
@@ -59,6 +59,16 @@ export default function SignUpInfo() {
         setIsClicked(!isClicked)
     }
 
+    function userNoSpace(input: any) {
+        const cleanedInput = input.replace(/\s/g, '');
+        setUsername(cleanedInput);
+    }
+
+    function emailNoSpace(input: any) {
+        const cleanedInput = input.replace(/\s/g, '');
+        setEmail(cleanedInput);
+    }
+
     return (
         <Container fluid>
             <Row>
@@ -91,41 +101,37 @@ export default function SignUpInfo() {
                                 <Col className='centerInput'>
                                     <h1 className='signUpTxt1' style={{ textDecoration: 'underline' }}>Sign Up</h1>
                                 </Col>
-                                <Row>
-                                    <Col className='centerInput'>
-                                        <h4 className='signUpInput'>Username</h4>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col className='centerInput'>
-                                        <input onChange={({ target: { value } }) => setUsername(value)} type='text' className='inputField' placeholder='Enter your username' />
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col className='centerInput'>
-                                        <h4 className='email'>Email</h4>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col className='centerInput'>
-                                        <input onChange={({ target: { value } }) => setEmail(value)} className='inputField' type='email' placeholder='Enter your email' />
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col className='centerInput'>
-                                        <h4 className='signUpInputPassword'>Password</h4>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col className='centerInput'>
-                                    <Form>
+                                <Form>
+                                    <Row>
+                                        <Col className='centerInput'>
+                                            <Form.Group className="mb-3 d-flex flex-column align-items-center">
+                                                <Form.Label className='signUpInput'>Username</Form.Label>
+                                                <Form.Control className='inputField' type='text' placeholder='Enter your username' onChange={(e) => userNoSpace(e.target.value)} value={Username} />
+                                            </Form.Group>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col className='centerInput'>
+                                            <Form.Group className="mb-3 d-flex flex-column align-items-center">
+                                                <Form.Label className='email'>Email</Form.Label>
+                                                <Form.Control className='inputField' type='text' placeholder='Enter your email' onChange={(e) => emailNoSpace(e.target.value)} value={Email} />
+                                            </Form.Group>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col className='centerInput'>
+                                            <h4 className='signUpInputPassword'>Password</h4>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col className='centerInput'>
                                             <Form.Group controlId="Password">
                                                 <InputGroup className='inputField'>
                                                     <Form.Control
                                                         type={`${isClicked ? 'text' : 'password'}`}
                                                         placeholder="Enter your password"
                                                         className='inputField'
-                                                        onChange={({ target: { value } }) => setPassword(value)}
+                                                        onChange={({ target: { value } }) => setPassword(value.replace(/\D/g, ''))}
                                                     />
                                                     <Button className='lockBG' variant='' onClick={handleShowPassword}>
                                                         <InputGroup.Text className='lockBG'>
@@ -137,9 +143,9 @@ export default function SignUpInfo() {
                                                     </Button>
                                                 </InputGroup>
                                             </Form.Group>
-                                        </Form>
-                                    </Col>
-                                </Row>
+                                        </Col>
+                                    </Row>
+                                </Form>
                                 <Row>
                                     <Col className='centerInput'>
                                         <Button onClick={handelSubmit} className='signUpBtn' variant='' disabled={clickSignUp}>Sign Up</Button>

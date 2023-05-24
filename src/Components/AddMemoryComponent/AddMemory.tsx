@@ -24,18 +24,12 @@ export default function AddMemory() {
     const [folder, setFolder] = useState(0);
     const [folders, setFolders] = useState([]);
 
-    // console.log(memoryEdit.image)
-
     const handleTitle = (e: { target: { value: string } }) => setMemoryTitle(e.target.value);
     const handleDescription = (e: { target: { value: string } }) => setMemoryDescription(e.target.value);
     const handleFolder = ({ target }: { target: { value: any } }) => {
         setFolderId(target.value);
         setFolder(target.value);
     };
-    const handleTags = (e: { target: { value: string } }) => setMemoryTags(e.target.value.substring(0,25));
-
-    // const [formattedDate, setFormattedDate] = useState('');
-
 
     function formatDate(input: any) {
         const cleanedInput = input.replace(/\D/g, '');
@@ -49,10 +43,11 @@ export default function AddMemory() {
         setMemoryDate(formattedDate);
     }
 
-    // const handleDate = (e: { target: { value: string } }) => {
-    //     // const formatDate = formatAsDate(e.target.value)
-    //     setMemoryDate(e.target.value.substring(0, 10));
-    // }
+    function formattedHashtag(input: any) {
+        const cleanedInput = input.replace(/\s/g, ' ');
+
+        setMemoryTags(cleanedInput.substring(0, 25));
+    }
 
 
     const handleImage = (e: any) => {
@@ -98,7 +93,7 @@ export default function AddMemory() {
             }
             setShow(true);
 
-            if(result === false) {
+            if (result === false) {
                 alert(`Memory was not ${isEditMemory ? 'Updated' : 'Added'}`);
             }
         }
@@ -131,6 +126,21 @@ export default function AddMemory() {
             setSaveClick(false);
         }, 5000);
     }
+
+    const handleInputFocus = () => {
+        if (!memoryTags.startsWith('#')) {
+            setMemoryTags('#' + memoryTags);
+        }
+    };
+
+    const handleKeyDown = (e: any) => {
+        if (e.keyCode === 32) {
+            e.preventDefault();
+            setMemoryTags((prevValue: any) => (prevValue + ' #').substring(0, 25));
+        } else if(e.keyCode === 51) {
+            setMemoryTags((prevValue: any) => (prevValue + ' ').substring(0, 25));
+        }
+    };
 
     return (
         <Container fluid>
@@ -192,7 +202,14 @@ export default function AddMemory() {
                         <Col>
                             <Form.Group className="mb-3 d-flex flex-column align-items-center">
                                 <Form.Label className='addHashtagTxt'>Hashtags</Form.Label>
-                                <Form.Control className='textInputs' type='text' placeholder='#Example, #Example' onChange={handleTags} value={memoryTags} />
+                                <Form.Control
+                                    className='textInputs'
+                                    type='text'
+                                    placeholder='#Example, #Example'
+                                    onChange={(e) => formattedHashtag(e.target.value)}
+                                    onFocus={handleInputFocus}
+                                    onKeyDown={handleKeyDown}
+                                    value={memoryTags} />
                             </Form.Group>
                         </Col>
                     </Row>
@@ -225,7 +242,7 @@ export default function AddMemory() {
                         <Col>
                             <Form.Group className="mb-3 d-flex flex-column align-items-center">
                                 <Form.Label className='addDateTxt'>Date</Form.Label>
-                                <Form.Control className='textInputs' type='text' placeholder='MM/DD/YYYY or DD/MM/YYYY' onChange={(e) => formatDate(e.target.value)} value={memoryDate} />
+                                <Form.Control className='textInputs' type='text' placeholder='MM/DD/YYYY' onChange={(e) => formatDate(e.target.value)} value={memoryDate} />
                             </Form.Group>
                         </Col>
                     </Row>
