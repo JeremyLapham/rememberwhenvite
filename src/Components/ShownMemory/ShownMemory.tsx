@@ -9,7 +9,7 @@ import { DeleteMemory } from '../Services/DataService';
 import DesktopNav from '../DesktopNavComponent/DesktopNav';
 
 export default function ShownMemory() {
-    const { selectedMemory, setIsMemoryEdit, setMemoryEdit, setSelectedMemory } = useContext(MyContext);
+    const { selectedMemory, setIsMemoryEdit, setMemoryEdit, setSelectedMemory, fromAddMemory, setFromAddMemory } = useContext(MyContext);
     const [show, setShow] = useState(false);
     const [showImg, setShowImg] = useState(false);
 
@@ -20,6 +20,7 @@ export default function ShownMemory() {
 
     const handleBackButtonClick = () => {
         navigate('/dashboard');
+        setFromAddMemory(false)
     };
 
     useEffect(() => {
@@ -33,6 +34,7 @@ export default function ShownMemory() {
     }, []);
 
     const handleEditMemory = () => {
+        setIsMemoryEdit(true);
         setMemoryEdit({
             title: selectedMemory.title,
             id: selectedMemory.id,
@@ -42,7 +44,6 @@ export default function ShownMemory() {
             date: selectedMemory.date
 
         });
-        setIsMemoryEdit(true);
         setTimeout(() => {
             navigate('/addMemory');
         }, 500);
@@ -143,7 +144,7 @@ export default function ShownMemory() {
                         <Button onClick={handleBackButtonClick} className='backBtnDesktop' variant=''>Back</Button>
                     </Col>
                     <Col lg={3} md={3} xs={4} className='d-flex justify-content-center'>
-                        <Button onClick={handleEditMemory} className='editBtn' variant=''>Edit</Button>
+                        <Button onClick={handleEditMemory} className='editBtn' variant='' disabled={fromAddMemory}>Edit</Button>
                     </Col>
                     <Col lg={3} md={3} xs={4} className='d-flex justify-content-center'>
                         <Button onClick={() => { setShow(true); }} className='deleteBtn' variant=''>Delete</Button>

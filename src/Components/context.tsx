@@ -30,7 +30,9 @@ interface MyContextType {
   fromAddFolder: boolean;
   setFromAddFolder: (fromAddFolder: boolean) => void;
   folderLength: number;
-  setFolderLength: (folderLength:number) => void;
+  setFolderLength: (folderLength: number) => void;
+  fromAddMemory: boolean;
+  setFromAddMemory: (fromAddMemory: boolean) => void;
 }
 
 export const MyContext = createContext<MyContextType>({
@@ -45,10 +47,11 @@ export const MyContext = createContext<MyContextType>({
   selectedFolder: {}, setSelectedFolder: () => { },
   folderEdit: {}, setFolderEdit: () => { },
   isEditFolder: false, setIsEditFolder: () => { },
-  memoryEdit: {}, setMemoryEdit: () => {},
-  isEditMemory: false, setIsMemoryEdit: () => {},
-  fromAddFolder: false, setFromAddFolder: () => {},
-  folderLength:0, setFolderLength: () => {}
+  memoryEdit: {}, setMemoryEdit: () => { },
+  isEditMemory: false, setIsMemoryEdit: () => { },
+  fromAddFolder: false, setFromAddFolder: () => { },
+  folderLength: 0, setFolderLength: () => { },
+  fromAddMemory: false, setFromAddMemory: () => { },
 });
 
 export const resetContext = (
@@ -59,7 +62,7 @@ export const resetContext = (
   setFolders: (arg0: never[]) => void,
   setIsEditFolder: (arg0: boolean) => void,
   setFolderEdit: { (folderEdit: object): void; (arg0: string): void; }
-  ) => {
+) => {
   setUser('');
   setMemoryItems([]);
   setUsersId(0);

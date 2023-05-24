@@ -108,6 +108,7 @@
     transform: translate(-50%, -50%);
     background-color: rgba(0, 0, 0, 0.5);
     box-shadow: 0 0 1000px 1000px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
 }
 
 .lockBG {
