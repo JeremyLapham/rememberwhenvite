@@ -131,7 +131,7 @@ export default function AddFolder() {
             <Row>
                 <Col className='d-flex justify-content-end'>
                     {isEditFolder ?
-                        <Button onClick={() => { handleFolder(); setShowModal(true); }} className='addBtn' variant=''>Update</Button>
+                        <Button onClick={() => { handleFolder(); }} className='addBtn' variant=''>Update</Button>
                         :
                         <Button onClick={() => { handleFolder(); handleSaveClick()}} className='addBtn' variant='' disabled={saveClick}>Add</Button>
                     }
