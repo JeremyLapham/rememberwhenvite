@@ -196,7 +196,9 @@
   border-radius: 20px;
   border: 1px solid black;
   margin: 0 12px 0 12px;
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
 .folderDisplay::-webkit-scrollbar {
@@ -217,7 +219,7 @@
 .folderFont {
   font-size: 15px;
   font-weight: bold;
-  width: 55px;
+  width: 55px !important;
   word-wrap: break-word;
 }
 
@@ -330,10 +332,15 @@
   }
 
   .folderDisplay {
+    background-color: #d3c0b2;
+    width: 350px;
     height: 550px;
+    border-radius: 20px;
+    border: 1px solid black;
     margin: 0 12px 0 12px;
-    overflow: scroll;
     overflow-x: hidden;
+    overflow-y: auto;
+    scroll-behavior: smooth;
   }
 
   .desktopFolder {
@@ -346,6 +353,8 @@
 
   .spaceFolders {
     margin: 0 0;
+    display: flex;
+    align-items: center;
   }
 
   .folderSize {
@@ -356,7 +365,7 @@
 
   .folderFont {
     font-size: 20px;
-    width: 101px;
+    width: 101px !important;
   }
 
   .folderDisplayRow {
