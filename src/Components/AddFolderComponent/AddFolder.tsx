@@ -29,19 +29,23 @@ export default function AddFolder() {
         if (folderName === '') {
             swal("Please enter a name for your folder");
         } else {
-            let result = false;
-            if (isEditFolder) {
-                const fold = {
-                    Id: folderEdit.id,
+            try {
+                // let token = await login(userData);
+                // if (token.token != null) {
+                //     localStorage.setItem("Token", token.token);
+                //     await GetLoggedInUserData(Username);
+                //     navigate('/DashBoard', { state: { user: name } });
+                // }
+                let result = false;
+                if (isEditFolder) {
+                    const fold = {
+                        Id: folderEdit.id,
                     userId: UserId,
                     name: folderName,
                     isDeleted: false
                 }
                 setSelectedFolder(fold);
                 result = await updateFolder(fold);
-                setTimeout(() => {
-                    navigate('/dashboard');
-                }, 2000);
             } else {
                 const fold = {
                     id: 0,
@@ -52,15 +56,18 @@ export default function AddFolder() {
                 setSelectedFolder(fold);
                 setFromAddFolder(true);
                 result = await Folder(fold);
-                setTimeout(() => {
-                    navigate('/dashboard');
-                }, 2000);
             }
             if (result) {
                 setShowModal(true);
+                setTimeout(() => {
+                    navigate('/dashboard');
+                }, 2000);
             } else {
-                alert('Something went wrong and your folder wasn\'t made or updated');
+                swal(`You already have a folder named ${folderName}`);
             }
+        } catch (error) {
+            swal(`You already have a folder named ${folderName}`);
+        }
         }
     }
 
