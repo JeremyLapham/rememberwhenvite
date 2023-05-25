@@ -182,7 +182,7 @@ export default function AddMemory() {
             <DesktopNav />
             <Row>
                 <Col className='d-flex justify-content-center'>
-                    <h2 style={{ margin: '1rem 0' }}>add your <span style={{ color: '#848383' }}>memory...</span></h2>
+                    <h2 className='addMemoryTitle' style={{ margin: '1rem 0' }}>Add your <span style={{ color: '#848383' }}>memory...</span></h2>
                 </Col>
             </Row>
             <Row className='desktopInfoRow'>

@@ -103,7 +103,7 @@ export default function AddFolder() {
             </Row>
             <Row>
                 <Col className='d-flex justify-content-center'>
-                    <h2 className='addFolderTxt '>add your <p style={{ color: '#848383' }} className='d-inline'>folder...</p></h2>
+                    <h2 className='addFolderTxt '>Add your <p style={{ color: '#848383' }} className='d-inline'>folder...</p></h2>
                 </Col>
             </Row>
             <Row>
