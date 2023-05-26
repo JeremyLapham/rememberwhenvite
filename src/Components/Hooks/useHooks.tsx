@@ -1,9 +1,8 @@
-import { useState } from "react";
-
+import { useState } from 'react';
 
 export default function useInfo() {
   const [username, setUser] = useState('');
-  const [memoryItems, setMemory] = useState<[]>([]);
+  const [memoryItems, setMemoryItems] = useState<any[]>([]);  
   const [usersId, setUsersId] = useState(0);
   const [moreMemoryClicked, setMoreMemoryClicked] = useState(false);
   const [selectedMemory, setSelectedMemory] = useState({});
@@ -18,12 +17,46 @@ export default function useInfo() {
   const [fromAddFolder, setFromAddFolder] = useState(false);
   const [fromAddMemory, setFromAddMemory] = useState(false);
   const [folderLength, setFolderLength] = useState(0);
-  const [audio, setAudio] = useState('');
+  // const [audio, setAudio] = useState('');
 
-    const setMemoryItems = (moreMemory: any) => {
-        setMemory(moreMemory);
-    };
+  // const setMemoryItems = (moreMemory: any) => {
+  //   setMemory(moreMemory);
+  // };
 
-    return { username, setUser, memoryItems, setMemoryItems, usersId, setUsersId, moreMemoryClicked, setMoreMemoryClicked, selectedMemory, setSelectedMemory, folders, setFolders, folderId, setFolderId, folderName, setFolderName, selectedFolder, setSelectedFolder, folderEdit, setFolderEdit, isEditFolder, setIsEditFolder, memoryEdit, setMemoryEdit, isEditMemory, setIsMemoryEdit, fromAddFolder, setFromAddFolder, folderLength, setFolderLength, fromAddMemory, setFromAddMemory, audio, setAudio }
-
+  return {
+    username,
+    setUser,
+    memoryItems,
+    setMemoryItems,
+    usersId,
+    setUsersId,
+    moreMemoryClicked,
+    setMoreMemoryClicked,
+    selectedMemory,
+    setSelectedMemory,
+    folders,
+    setFolders,
+    folderId,
+    setFolderId,
+    folderName,
+    setFolderName,
+    selectedFolder,
+    setSelectedFolder,
+    folderEdit,
+    setFolderEdit,
+    isEditFolder,
+    setIsEditFolder,
+    memoryEdit,
+    setMemoryEdit,
+    isEditMemory,
+    setIsMemoryEdit,
+    fromAddFolder,
+    setFromAddFolder,
+    folderLength,
+    setFolderLength,
+    fromAddMemory,
+    setFromAddMemory,
+    // audio,
+    // setAudio,
+  };
 }

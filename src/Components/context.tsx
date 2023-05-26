@@ -5,8 +5,8 @@ interface MyContextType {
   setUser: (username: string) => void;
   usersId: number;
   setUsersId: (usersId: number) => void;
-  memoryItems: [];
-  setMemoryItems: (memoryItems: object) => void;
+  memoryItems: any[];
+  setMemoryItems: (memoryItems: any[]) => void;
   moreMemoryClicked: boolean;
   setMoreMemoryClicked: (moreMemoryClicked: boolean) => void;
   selectedMemory: any;
@@ -33,44 +33,61 @@ interface MyContextType {
   setFolderLength: (folderLength: number) => void;
   fromAddMemory: boolean;
   setFromAddMemory: (fromAddMemory: boolean) => void;
-  audio: string | undefined;
-  setAudio: (audio: string | undefined) => void;
+  // audio: string | undefined;
+  // setAudio: (audio: string | undefined) => void;
 }
 
 export const MyContext = createContext<MyContextType>({
-  username: '', setUser: () => { },
-  memoryItems: [], setMemoryItems: () => { },
-  usersId: 0, setUsersId: () => { },
-  moreMemoryClicked: false, setMoreMemoryClicked: () => { },
-  selectedMemory: {}, setSelectedMemory: () => { },
-  folders: [], setFolders: () => { },
-  folderId: 0, setFolderId: () => { },
-  folderName: '', setFolderName: () => { },
-  selectedFolder: {}, setSelectedFolder: () => { },
-  folderEdit: {}, setFolderEdit: () => { },
-  isEditFolder: false, setIsEditFolder: () => { },
-  memoryEdit: {}, setMemoryEdit: () => { },
-  isEditMemory: false, setIsMemoryEdit: () => { },
-  fromAddFolder: false, setFromAddFolder: () => { },
-  folderLength: 0, setFolderLength: () => { },
-  fromAddMemory: false, setFromAddMemory: () => { },
-  audio: '', setAudio: () => { }
+  username: '',
+  setUser: () => { },
+  usersId: 0,
+  setUsersId: () => { },
+  memoryItems: [],
+  setMemoryItems: () => { },
+  moreMemoryClicked: false,
+  setMoreMemoryClicked: () => { },
+  selectedMemory: {},
+  setSelectedMemory: () => { },
+  folders: [],
+  setFolders: () => { },
+  folderId: 0,
+  setFolderId: () => { },
+  folderName: '',
+  setFolderName: () => { },
+  selectedFolder: {},
+  setSelectedFolder: () => { },
+  folderEdit: {},
+  setFolderEdit: () => { },
+  isEditFolder: false,
+  setIsEditFolder: () => { },
+  memoryEdit: {},
+  setMemoryEdit: () => { },
+  isEditMemory: false,
+  setIsMemoryEdit: () => { },
+  fromAddFolder: false,
+  setFromAddFolder: () => { },
+  folderLength: 0,
+  setFolderLength: () => { },
+  fromAddMemory: false,
+  setFromAddMemory: () => { },
+  // audio: '',
+  // setAudio: () => { },
 });
 
 export const resetContext = (
-  setUser: { (username: string): void; (arg0: string): void; },
-  setUsersId: { (usersId: number): void; (arg0: number): void; },
-  setMemoryItems: { (memoryItems: object): void; (arg0: never[]): void; },
-  setMoreMemoryClicked: { (moreMemoryClicked: boolean): void; (arg0: boolean): void; },
-  setFolders: (arg0: never[]) => void,
-  setIsEditFolder: (arg0: boolean) => void,
-  setFolderEdit: { (folderEdit: object): void; (arg0: string): void; }
+  setUser: (username: string) => void,
+  setUsersId: (usersId: number) => void,
+  setMemoryItems: (memoryItems: any) => void,
+  setMoreMemoryClicked: (moreMemoryClicked: boolean) => void,
+  setFolders: (folders: any) => void,
+  setIsEditFolder: (isEditFolder: boolean) => void,
+  setFolderEdit: (folderEdit: any) => void
 ) => {
   setUser('');
-  setMemoryItems([]);
   setUsersId(0);
   setMoreMemoryClicked(false);
   setFolders([]);
   setFolderEdit('');
-  setIsEditFolder(false)
-}
+  setIsEditFolder(false);
+  setMemoryItems([]);
+};

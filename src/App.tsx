@@ -7,7 +7,7 @@ import SignInInfo from './Components/SignInComponent/SignInInfo';
 import SignUpInfo from './Components/SignUpComponent/SignUp';
 import AddFolder from './Components/AddFolderComponent/AddFolder';
 import ClickedFolder from './Components/ClickedFolder/ClickedFolder';
-import Logout from './Components/Logout/Logout';
+// import Logout from './Components/Logout/Logout';
 import ShownMemory from './Components/ShownMemory/ShownMemory';
 import useInfo from './Components/Hooks/useHooks';
 import { MyContext } from './Components/context';
@@ -26,7 +26,7 @@ export default function App() {
             <Route path='/AddMemory' element={<AddMemory />} />
             <Route path='/AddFolder' element={<AddFolder />} />
             <Route path='/ClickedFolder' element={<ClickedFolder />} />
-            <Route path='/Settings' element={<Logout />} />
+            {/* <Route path='/Settings' element={<Logout />} /> */}
             <Route path='/Memory' element={<ShownMemory />} />
           </Routes>
         </BrowserRouter>
