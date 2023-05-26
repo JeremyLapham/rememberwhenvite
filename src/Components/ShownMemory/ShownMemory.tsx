@@ -10,7 +10,7 @@ import DesktopNav from '../DesktopNavComponent/DesktopNav';
 
 export default function ShownMemory() {
     const userData = useContext(MyContext);
-    
+
     const [show, setShow] = useState(false);
     const [showImg, setShowImg] = useState(false);
 
@@ -25,6 +25,7 @@ export default function ShownMemory() {
     };
 
     useEffect(() => {
+        console.log(userData.selectedMemory.audio)
         const Memory = sessionStorage.getItem('Memory');
         if (Memory) {
             userData.setSelectedMemory(JSON.parse(Memory));
@@ -87,8 +88,8 @@ export default function ShownMemory() {
                     </Modal.Body>
                 </Modal>
             </Row>
-            <CustomNavbar folderSize={userData.folders.length}/>
-            <DesktopNav folderSize={userData.folders.length}/>
+            <CustomNavbar folderSize={userData.folders.length} />
+            <DesktopNav folderSize={userData.folders.length} />
             <Row>
                 <Row>
                     <Col className='text-center'>
@@ -125,6 +126,16 @@ export default function ShownMemory() {
                 </Col>
                 <Col lg={6} md={6} xs={12} className='infoBoxes'>
                     <Row>
+                        <Col>
+                            <div className="audio-player">
+                                <audio src={userData.selectedMemory.audio} controls></audio>
+                                <a download href={userData.selectedMemory.audio}>
+                                    Download Recording
+                                </a>
+                            </div>
+                        </Col>
+                    </Row>
+                    <Row>
                         <Col className='d-flex justify-content-center'>
                             <div className='displayHashtags'>
                                 <h2 className='hashtags'>{userData.selectedMemory.tags}</h2>
@@ -158,7 +169,7 @@ export default function ShownMemory() {
                         </OverlayTrigger>
                     </Col>
                 </Row>
-                <Row style={{padding:0,margin:0}}>
+                <Row style={{ padding: 0, margin: 0 }}>
                     <Col className='d-flex justify-content-center'>
                         <Button onClick={handleBackButtonClick} className='backBtnMobile' variant=''>Back</Button>
                     </Col>

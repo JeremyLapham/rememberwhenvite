@@ -131,7 +131,7 @@ export default function SignUpInfo() {
                                                         type={`${isClicked ? 'text' : 'password'}`}
                                                         placeholder="Enter your password"
                                                         className='inputField'
-                                                        onChange={({ target: { value } }) => setPassword(value.replace(/\D/g, ''))}
+                                                        onChange={({ target: { value } }) => setPassword(value)}
                                                     />
                                                     <Button className='lockBG' variant='' onClick={handleShowPassword}>
                                                         <InputGroup.Text className='lockBG'>

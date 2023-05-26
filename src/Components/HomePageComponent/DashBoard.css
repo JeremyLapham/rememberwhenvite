@@ -221,6 +221,7 @@
   font-weight: bold;
   width: 55px !important;
   word-wrap: break-word;
+  margin: 0 !important;
 }
 
 .remmeberWhen {
@@ -238,6 +239,7 @@
 .spaceFolders {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 @media screen and (min-width: 1024px) {
@@ -349,10 +351,11 @@
 
   .folderBtn {
     width: 100px;
+    padding:0 !important;
   }
 
   .spaceFolders {
-    margin: 0 0;
+    margin: 0 0 !important;
     display: flex;
     align-items: center;
   }

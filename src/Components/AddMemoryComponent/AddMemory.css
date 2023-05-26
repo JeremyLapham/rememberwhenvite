@@ -20,8 +20,8 @@
 }
 
 .selectedImg {
-  height: 200px;
-  width: 200px;
+  height: 300px;
+  width: 300px;
   border-radius: 20px;
   background-color: #d3c0b2;
   border: 1px solid black;

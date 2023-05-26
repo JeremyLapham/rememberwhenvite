@@ -33,6 +33,8 @@ interface MyContextType {
   setFolderLength: (folderLength: number) => void;
   fromAddMemory: boolean;
   setFromAddMemory: (fromAddMemory: boolean) => void;
+  audio: string | undefined;
+  setAudio: (audio: string | undefined) => void;
 }
 
 export const MyContext = createContext<MyContextType>({
@@ -52,6 +54,7 @@ export const MyContext = createContext<MyContextType>({
   fromAddFolder: false, setFromAddFolder: () => { },
   folderLength: 0, setFolderLength: () => { },
   fromAddMemory: false, setFromAddMemory: () => { },
+  audio: '', setAudio: () => { }
 });
 
 export const resetContext = (

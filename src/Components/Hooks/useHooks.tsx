@@ -18,11 +18,12 @@ export default function useInfo() {
   const [fromAddFolder, setFromAddFolder] = useState(false);
   const [fromAddMemory, setFromAddMemory] = useState(false);
   const [folderLength, setFolderLength] = useState(0);
+  const [audio, setAudio] = useState('');
 
     const setMemoryItems = (moreMemory: any) => {
         setMemory(moreMemory);
     };
 
-    return { username, setUser, memoryItems, setMemoryItems, usersId, setUsersId, moreMemoryClicked, setMoreMemoryClicked, selectedMemory, setSelectedMemory, folders, setFolders, folderId, setFolderId, folderName, setFolderName, selectedFolder, setSelectedFolder, folderEdit, setFolderEdit, isEditFolder, setIsEditFolder, memoryEdit, setMemoryEdit, isEditMemory, setIsMemoryEdit, fromAddFolder, setFromAddFolder, folderLength, setFolderLength, fromAddMemory, setFromAddMemory }
+    return { username, setUser, memoryItems, setMemoryItems, usersId, setUsersId, moreMemoryClicked, setMoreMemoryClicked, selectedMemory, setSelectedMemory, folders, setFolders, folderId, setFolderId, folderName, setFolderName, selectedFolder, setSelectedFolder, folderEdit, setFolderEdit, isEditFolder, setIsEditFolder, memoryEdit, setMemoryEdit, isEditMemory, setIsMemoryEdit, fromAddFolder, setFromAddFolder, folderLength, setFolderLength, fromAddMemory, setFromAddMemory, audio, setAudio }
 
 }

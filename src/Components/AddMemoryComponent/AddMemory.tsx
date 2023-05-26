@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useRef } from 'react';
 import { Col, Container, Row, Button, Form, Modal } from 'react-bootstrap';
 import './AddMemory.css';
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,7 @@ import { addMemoryItem, updateMemoryItem, getFolderByUserId } from '../Services/
 import { MyContext } from '../context';
 import swal from 'sweetalert';
 import DesktopNav from '../DesktopNavComponent/DesktopNav';
-// import AudioRecorder from './AudioRecording';
+import AudioRecorder from './AudioRecording';
 
 export default function AddMemory() {
     const userData = useContext(MyContext);
@@ -77,6 +77,7 @@ export default function AddMemory() {
                 description: memoryDescription,
                 date: memoryDate,
                 tags: memoryTags,
+                audio: userData.audio,
                 isPublished: true,
                 isDeleted: false
             }
@@ -88,6 +89,7 @@ export default function AddMemory() {
                     navigate('/dashboard')
                 }, 500);
             } else {
+                console.log(Audio)
                 userData.setFromAddMemory(true)
                 result = await addMemoryItem(item);
             }
@@ -137,14 +139,13 @@ export default function AddMemory() {
         if (e.keyCode === 32) {
             e.preventDefault();
             setMemoryTags((prevValue: any) => (prevValue + ' #').substring(0, 25));
-        } else if(e.keyCode === 51) {
+        } else if (e.keyCode === 51) {
             setMemoryTags((prevValue: any) => (prevValue + ' ').substring(0, 25));
         }
     };
 
     return (
         <Container fluid>
-            {/* <AudioRecorder /> */}
             <Row>
                 <Modal className='modalBG' show={show} onHide={handleClose} backdrop="static" keyboard={false}>
                     <Modal.Body className={userData.isEditMemory ? `modalBodyUpdate` : `modalBody`}>
@@ -178,8 +179,8 @@ export default function AddMemory() {
                     </Modal.Body>
                 </Modal>
             </Row>
-            <CustomNavbar folderSize={userData.folders.length}/>
-            <DesktopNav folderSize={userData.folders.length}/>
+            <CustomNavbar folderSize={userData.folders.length} />
+            <DesktopNav folderSize={userData.folders.length} />
             <Row>
                 <Col className='d-flex justify-content-center'>
                     <h2 className='addMemoryTitle' style={{ margin: '1rem 0' }}>Add your <span style={{ color: '#848383' }}>memory...</span></h2>
@@ -196,6 +197,32 @@ export default function AddMemory() {
                                     <Form.Control className='input1' onChange={handleImage} type="file" accept='image/png, image/jpg' placeholder="Enter an image" />
                                 </Button>
                             </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            {/* <div>
+                                <button onClick={startRecording} disabled={recording}>
+                                    Start Recording
+                                </button>
+                                <button onClick={stopRecording} disabled={!recording}>
+                                    Stop Recording
+                                </button>
+                                {audioChunks.length > 0 && (
+                                    <div>
+                                        <button onClick={handlePlaybackButtonClick}>Play Recording</button>
+                                        <audio ref={audioPlayerRef} controls />
+                                    </div>
+                                )}
+                            </div> */}
+                            <Row>
+                                <Col>
+                                    <Form.Group className="mb-3 d-flex flex-column align-items-center">
+                                        <Form.Label className='addFolderInputTxt'>Audio Recording</Form.Label>
+                                        <AudioRecorder  />
+                                    </Form.Group>
+                                </Col>
+                            </Row>
                         </Col>
                     </Row>
                     <Row>
