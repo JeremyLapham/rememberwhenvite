@@ -9,7 +9,8 @@ import { DeleteMemory } from '../Services/DataService';
 import DesktopNav from '../DesktopNavComponent/DesktopNav';
 
 export default function ShownMemory() {
-    const { selectedMemory, setIsMemoryEdit, setMemoryEdit, setSelectedMemory, fromAddMemory, setFromAddMemory } = useContext(MyContext);
+    const userData = useContext(MyContext);
+    
     const [show, setShow] = useState(false);
     const [showImg, setShowImg] = useState(false);
 
@@ -20,28 +21,28 @@ export default function ShownMemory() {
 
     const handleBackButtonClick = () => {
         navigate('/dashboard');
-        setFromAddMemory(false)
+        userData.setFromAddMemory(false)
     };
 
     useEffect(() => {
         const Memory = sessionStorage.getItem('Memory');
         if (Memory) {
-            setSelectedMemory(JSON.parse(Memory));
+            userData.setSelectedMemory(JSON.parse(Memory));
         } else {
-            sessionStorage.setItem('Memory', JSON.stringify(selectedMemory));
-            setSelectedMemory(selectedMemory);
+            sessionStorage.setItem('Memory', JSON.stringify(userData.selectedMemory));
+            userData.setSelectedMemory(userData.selectedMemory);
         }
     }, []);
 
     const handleEditMemory = () => {
-        setIsMemoryEdit(true);
-        setMemoryEdit({
-            title: selectedMemory.title,
-            id: selectedMemory.id,
-            image: selectedMemory.image,
-            tags: selectedMemory.tags,
-            description: selectedMemory.description,
-            date: selectedMemory.date
+        userData.setIsMemoryEdit(true);
+        userData.setMemoryEdit({
+            title: userData.selectedMemory.title,
+            id: userData.selectedMemory.id,
+            image: userData.selectedMemory.image,
+            tags: userData.selectedMemory.tags,
+            description: userData.selectedMemory.description,
+            date: userData.selectedMemory.date
 
         });
         setTimeout(() => {
@@ -50,7 +51,7 @@ export default function ShownMemory() {
     }
 
     const handleDeleteMemory = async () => {
-        await DeleteMemory(selectedMemory);
+        await DeleteMemory(userData.selectedMemory);
         navigate("/Dashboard");
     }
 
@@ -82,12 +83,12 @@ export default function ShownMemory() {
 
                 <Modal contentClassName="custom-modal-content" show={showImg} onHide={handleCloseImg}>
                     <Modal.Body className='imgModal'>
-                        <img className='memoryImgModal' src={selectedMemory.image} alt='the picture of the memory that was selected' />
+                        <img className='memoryImgModal' src={userData.selectedMemory.image} alt='the picture of the memory that was selected' />
                     </Modal.Body>
                 </Modal>
             </Row>
-            <CustomNavbar />
-            <DesktopNav />
+            <CustomNavbar folderSize={userData.folders.length}/>
+            <DesktopNav folderSize={userData.folders.length}/>
             <Row>
                 <Row>
                     <Col className='text-center'>
@@ -96,7 +97,7 @@ export default function ShownMemory() {
                 </Row>
                 <Row>
                     <Col className='text-center'>
-                        <h5 className='memoryName'>{selectedMemory.title}</h5>
+                        <h5 className='memoryName'>{userData.selectedMemory.title}</h5>
                     </Col>
                 </Row>
                 <Row>
@@ -116,7 +117,7 @@ export default function ShownMemory() {
                                 }>
 
                                 <Button variant='' onClick={() => setShowImg(true)}>
-                                    <img className='memoryImg' src={selectedMemory.image} alt='the picture of the memory that was selected' />
+                                    <img className='memoryImg' src={userData.selectedMemory.image} alt='the picture of the memory that was selected' />
                                 </Button>
                             </OverlayTrigger>
                         </Col>
@@ -126,15 +127,15 @@ export default function ShownMemory() {
                     <Row>
                         <Col className='d-flex justify-content-center'>
                             <div className='displayHashtags'>
-                                <h2 className='hashtags'>{selectedMemory.tags}</h2>
+                                <h2 className='hashtags'>{userData.selectedMemory.tags}</h2>
                             </div>
                         </Col>
                     </Row>
                     <Row>
                         <Col className='d-flex justify-content-center'>
                             <div className='description'>
-                                <h2 className='memoryDesTxt text-center'>{selectedMemory.description}</h2>
-                                <h2 className='memoryDesDate text-center'>{selectedMemory.date}</h2>
+                                <h2 className='memoryDesTxt text-center'>{userData.selectedMemory.description}</h2>
+                                <h2 className='memoryDesDate text-center'>{userData.selectedMemory.date}</h2>
                             </div>
                         </Col>
                     </Row>
@@ -144,7 +145,7 @@ export default function ShownMemory() {
                         <Button onClick={handleBackButtonClick} className='backBtnDesktop' variant=''>Back</Button>
                     </Col>
                     <Col lg={3} md={3} xs={4} className='d-flex justify-content-center'>
-                        <Button onClick={handleEditMemory} className='editBtn' variant='' disabled={fromAddMemory}>Edit</Button>
+                        <Button onClick={handleEditMemory} className='editBtn' variant='' disabled={userData.fromAddMemory}>Edit</Button>
                     </Col>
                     <Col lg={3} md={3} xs={4} className='d-flex justify-content-center'>
                         <Button onClick={() => { setShow(true); }} className='deleteBtn' variant=''>Delete</Button>

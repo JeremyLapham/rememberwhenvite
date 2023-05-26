@@ -11,7 +11,7 @@ import { MyContext } from '../context';
 import DesktopNav from '../DesktopNavComponent/DesktopNav';
 
 export default function DashBoard() {
-    const { username, setSelectedMemory, setUser, setIsMemoryEdit, setIsEditFolder, setFolderName, setSelectedFolder, setMoreMemoryClicked, setFolders, setUsersId, setMemoryItems, folders, moreMemoryClicked, memoryItems, setFolderLength } = useContext(MyContext);
+    const userData = useContext(MyContext)
     const [dots, setDots] = useState('');
     interface Memory {
         id: number,
@@ -25,7 +25,7 @@ export default function DashBoard() {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        setMoreMemoryClicked(!moreMemoryClicked);
+        userData.setMoreMemoryClicked(!userData.moreMemoryClicked);
     }
 
     useEffect(() => {
@@ -33,23 +33,21 @@ export default function DashBoard() {
             const userId = sessionStorage.getItem('UserId');
             const userName = sessionStorage.getItem('Username');
             if (userId && userName) {
-                setUsersId(parseInt(userId));
-                setUser(userName);
+                userData.setUsersId(parseInt(userId));
+                userData.setUser(userName);
                 const userMemoryItems = await getMemoryItemsByUserId(parseInt(userId));
                 const displayFolder = await getFolderByUserId(parseInt(userId));
-                setMemoryItems(userMemoryItems);
-                setFolders(displayFolder);
-                setFolderLength(folders.length)
+                userData.setMemoryItems(userMemoryItems);
+                userData.setFolders(displayFolder);
             } else {
                 const loggedIn = loggedInData();
                 sessionStorage.setItem('UserId', JSON.stringify(loggedIn.userId));
                 sessionStorage.setItem('Username', loggedIn.publisherName);
-                setUsersId(loggedIn.userId);
+                userData.setUsersId(loggedIn.userId);
                 const userMemoryItems = await getMemoryItemsByUserId(loggedIn.userId);
                 const displayFolder = await getFolderByUserId(loggedIn.userId);
-                setMemoryItems(userMemoryItems);
-                setFolders(displayFolder);
-                setFolderLength(folders.length)
+                userData.setMemoryItems(userMemoryItems);
+                userData.setFolders(displayFolder);
             }
         }
         if (!checkToken()) {
@@ -77,21 +75,21 @@ export default function DashBoard() {
     }, []);
 
     const handleFolderClick = (folder: { id: number, name: string, isDeleted: boolean, folderId: number, userId: number }, name: string) => {
-        setSelectedFolder(folder);
-        setFolderName(name);
+        userData.setSelectedFolder(folder);
+        userData.setFolderName(name);
         sessionStorage.setItem('Folder', JSON.stringify(folder));
         navigate('/ClickedFolder');
     }
 
     const handlememoryClickDash = (memory: Memory) => {
         sessionStorage.setItem('Memory', JSON.stringify(memory));
-        setSelectedMemory(memory);
+        userData.setSelectedMemory(memory);
         navigate('/memory')
     }
     return (
         <Container fluid>
-            <CustomNavbar />
-            <DesktopNav />
+            <CustomNavbar folderSize={userData.folders.length}/>
+            <DesktopNav folderSize={userData.folders.length}/>
             <Row className='d-flex align-items-center'>
                 <Col xs={6}>
                     <img className='logoEle' src={logo} alt='remember when logo, elephant holding balloon' />
@@ -99,7 +97,7 @@ export default function DashBoard() {
                 <Col xs={6} className='d-flex flex-column justify-content-end'>
                     <Row>
                         <div className='d-flex justify-content-end'>
-                            <Button onClick={() => { navigate('/AddFolder'); setIsEditFolder(false); }} className='addNewFolder' variant='' style={{ display: 'flex', alignItems: 'center' }}>
+                            <Button onClick={() => { navigate('/AddFolder'); userData.setIsEditFolder(false); }} className='addNewFolder' variant='' style={{ display: 'flex', alignItems: 'center' }}>
                                 <Col xs={9}>
                                     <p className='addNewTxt'>Add Folder</p>
                                 </Col>
@@ -111,9 +109,9 @@ export default function DashBoard() {
                     </Row>
                     <Row>
                         <div className='d-flex justify-content-end'>
-                            <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">{folders.length === 0 ? 'Add folders to be able to add memories' : ''}</Tooltip>}>
+                            <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">{userData.folders.length === 0 ? 'Add folders to be able to add memories' : ''}</Tooltip>}>
                                 <span>
-                                    <Button onClick={() => { navigate('/AddMemory'); setIsMemoryEdit(false); }} className='addNew' variant='' style={{ display: 'flex', alignItems: 'center' }} disabled={folders.filter((item: { isDeleted: boolean; }) => !item.isDeleted).length === 0}>
+                                    <Button onClick={() => { navigate('/AddMemory'); userData.setIsMemoryEdit(false); }} className='addNew' variant='' style={{ display: 'flex', alignItems: 'center' }} disabled={userData.folders.length === 0}>
                                         <Col xs={9}>
                                             <p className='addNewTxt'>Add Memory</p>
                                         </Col>
@@ -127,7 +125,7 @@ export default function DashBoard() {
                     </Row>
                 </Col>
             </Row>
-            {moreMemoryClicked ?
+            {userData.moreMemoryClicked ?
                 <Row>
                     <Col className='rememberWhenTop'>
                         <h1 className='remmeberWhen'>Remember When...</h1>
@@ -136,18 +134,18 @@ export default function DashBoard() {
                 :
                 <Row>
                     <Col className='helloTopTxt'>
-                        <h1 className='helloTxt'>Hello, <p style={{ color: 'black' }} className='d-inline'>{username}</p></h1>
+                        <h1 className='helloTxt'>Hello, <p style={{ color: 'black' }} className='d-inline'>{userData.username}</p></h1>
                         <p className='welcomeTxt'>Welcome to your memories, remember when...</p>
                     </Col>
                 </Row>
             }
 
-            {moreMemoryClicked ?
+            {userData.moreMemoryClicked ?
                 <Container fluid className='folderDisplayCont'>
                     <Row className='folderDisplayRow'>
                         <Col className='d-flex justify-content-center folderDisplay'>
                             <Row className='desktopFolder'>
-                                {folders.length === 0 ?
+                                {userData.folders.length === 0 ?
                                     <Col className="text-center">
                                         {showNoMemoriesMessage ?
                                             <h1>You have no folders</h1>
@@ -156,7 +154,7 @@ export default function DashBoard() {
                                         }
                                     </Col>
                                     :
-                                    folders.map((folder: { id: number; name: string; isDeleted: boolean; folderId: number; userId: number }, idx: number) => {
+                                    userData.folders.map((folder: { id: number; name: string; isDeleted: boolean; folderId: number; userId: number }, idx: number) => {
                                         let Title = folder.name.substring(0, 6);
                                         if (Title.length === 6) {
                                             Title = `${Title}...`;
@@ -177,8 +175,8 @@ export default function DashBoard() {
                 </Container>
                 :
                 <Row>
-                    <Col className={`${memoryItems.length >= 6 ? 'longMemoryBox' : 'memoryBox'}`}>
-                        {memoryItems.length === 0 ?
+                    <Col className={`${userData.memoryItems.length >= 6 ? 'longMemoryBox' : 'memoryBox'}`}>
+                        {userData.memoryItems.length === 0 ?
                             <Col className="text-center">
                                 {showNoMemoriesMessage ?
                                     <h1>You have no memories</h1>
@@ -187,7 +185,7 @@ export default function DashBoard() {
                                 }
                             </Col>
                             :
-                            memoryItems.map((cardInfo: Memory, idx: number) => {
+                            userData.memoryItems.map((cardInfo: Memory, idx: number) => {
                                 let Title = cardInfo.title.substring(0, 10);
 
                                 if (Title.length === 10 && cardInfo.title.length > 10) {
@@ -213,22 +211,22 @@ export default function DashBoard() {
 
             <Row className="desktopBtnRow">
                 <Col className="desktopAddCol">
-                    <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">{folders.length === 0 ? 'Add folders to be able to add memories' : ''}</Tooltip>}>
+                    <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">{userData.folders.length === 0 ? 'Add folders to be able to add memories' : ''}</Tooltip>}>
                         <span className="d-inline-block">
                             <Button variant=''
-                                onClick={() => { navigate("/AddMemory"); setIsMemoryEdit(false); }}
+                                onClick={() => { navigate("/AddMemory"); userData.setIsMemoryEdit(false); }}
                                 className="desktopAddBtn"
-                                disabled={folders.length === 0}>Add Memory +</Button>
+                                disabled={userData.folders.length === 0}>Add Memory +</Button>
                         </span>
                     </OverlayTrigger>
                 </Col>
                 <Col className="d-flex justify-content-center">
                     <Button onClick={handleClick} className="moreMemories" variant="">
-                        {moreMemoryClicked ? "Go Back" : "Click for all memories"}
+                        {userData.moreMemoryClicked ? "Go Back" : "Click for all memories"}
                     </Button>
                 </Col>
                 <Col className="desktopAddCol">
-                    <Button variant='' onClick={() => { setIsEditFolder(false); navigate("/AddFolder"); }} className="desktopAddBtn2">Add Folder +</Button>
+                    <Button variant='' onClick={() => { userData.setIsEditFolder(false); navigate("/AddFolder"); }} className="desktopAddBtn2">Add Folder +</Button>
                 </Col>
             </Row>
         </Container >

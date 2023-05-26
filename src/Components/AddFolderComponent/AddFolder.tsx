@@ -10,10 +10,10 @@ import swal from 'sweetalert';
 import DesktopNav from '../DesktopNavComponent/DesktopNav';
 
 export default function AddFolder() {
-    const { setFromAddFolder, setSelectedFolder, folderEdit, isEditFolder } = useContext(MyContext);
+    const userData = useContext(MyContext)
 
     const [showModal, setShowModal] = useState(false);
-    const [folderName, setFolderName] = useState(isEditFolder ? folderEdit.name : '');
+    const [folderName, setFolderName] = useState(userData.isEditFolder ? userData.folderEdit.name : '');
 
     const navigate = useNavigate();
 
@@ -30,21 +30,15 @@ export default function AddFolder() {
             swal("Please enter a name for your folder");
         } else {
             try {
-                // let token = await login(userData);
-                // if (token.token != null) {
-                //     localStorage.setItem("Token", token.token);
-                //     await GetLoggedInUserData(Username);
-                //     navigate('/DashBoard', { state: { user: name } });
-                // }
                 let result = false;
-                if (isEditFolder) {
+                if (userData.isEditFolder) {
                     const fold = {
-                        Id: folderEdit.id,
+                        Id: userData.folderEdit.id,
                     userId: UserId,
                     name: folderName,
                     isDeleted: false
                 }
-                setSelectedFolder(fold);
+                userData.setSelectedFolder(fold);
                 result = await updateFolder(fold);
             } else {
                 const fold = {
@@ -53,8 +47,8 @@ export default function AddFolder() {
                     name: folderName,
                     isDeleted: false
                 }
-                setSelectedFolder(fold);
-                setFromAddFolder(true);
+                userData.setSelectedFolder(fold);
+                userData.setFromAddFolder(true);
                 result = await Folder(fold);
             }
             if (result) {
@@ -89,7 +83,7 @@ export default function AddFolder() {
                     <Modal.Body className='modalBody'>
                         <Row>
                             <Col className='d-flex justify-content-center'>
-                                <p className='modalTxt'>Your folder was {isEditFolder ? 'edited' : 'added'}</p>
+                                <p className='modalTxt'>Your folder was {userData.isEditFolder ? 'edited' : 'added'}</p>
                             </Col>
                         </Row>
                     </Modal.Body>
@@ -97,8 +91,8 @@ export default function AddFolder() {
             </Row>
             <Row>
                 <Col>
-                    <CustomNavbar />
-                    <DesktopNav />
+                    <CustomNavbar folderSize={userData.folders.length}/>
+                    <DesktopNav folderSize={userData.folders.length}/>
                 </Col>
             </Row>
             <Row>
@@ -130,7 +124,7 @@ export default function AddFolder() {
 
             <Row>
                 <Col className='d-flex justify-content-end'>
-                    {isEditFolder ?
+                    {userData.isEditFolder ?
                         <Button onClick={() => { handleFolder(); }} className='addBtn' variant=''>Update</Button>
                         :
                         <Button onClick={() => { handleFolder(); handleSaveClick()}} className='addBtn' variant='' disabled={saveClick}>Add</Button>

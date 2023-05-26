@@ -8,7 +8,7 @@ import { MyContext } from '../context';
 import { SlLock, SlLockOpen } from 'react-icons/sl';
 
 export default function SignInInfo() {
-    const { setUser } = useContext(MyContext);
+    const usersData = useContext(MyContext);
 
     const [Username, setUsername] = useState('');
     const [Password, setPassword] = useState('');
@@ -35,7 +35,7 @@ export default function SignInInfo() {
             Username,
             Password
         }
-        setUser(Username);
+        usersData.setUser(Username);
         try {
             let token = await login(userData);
             if (token.token != null) {

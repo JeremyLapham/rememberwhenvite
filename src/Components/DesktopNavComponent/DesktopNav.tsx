@@ -5,17 +5,17 @@ import { Link, useNavigate } from "react-router-dom";
 import Navlogo from "../../assets/elephantLogo.svg";
 import { MyContext, resetContext } from "../context";
 
-export default function DesktopNav() {
-    const { setMoreMemoryClicked, setUser, setFolders, setUsersId, setFolderEdit, setMemoryItems, setIsEditFolder, setIsMemoryEdit, folderLength } = useContext(MyContext);
+export default function DesktopNav(props: { folderSize: number; }) {
+    const userData = useContext(MyContext); 
 
     const [isActive, setIsActive] = useState(false);
 
     const handleMemoryClick = () => {
-        setMoreMemoryClicked(false);
+        userData.setMoreMemoryClicked(false);
         setIsActive(!isActive);
     };
     const handleMoreMemoryClick = () => {
-        setMoreMemoryClicked(true);
+        userData.setMoreMemoryClicked(true);
         setIsActive(!isActive);
     };
 
@@ -28,7 +28,7 @@ export default function DesktopNav() {
 
 
     const LogOut = () => {
-        resetContext(setUser, setUsersId, setMemoryItems, setMoreMemoryClicked, setFolders, setIsEditFolder, setFolderEdit);
+        resetContext(userData.setUser, userData.setUsersId, userData.setMemoryItems, userData.setMoreMemoryClicked, userData.setFolders, userData.setIsEditFolder, userData.setFolderEdit);
         sessionStorage.clear();
         navigate('/');
     }
@@ -61,16 +61,16 @@ export default function DesktopNav() {
                             <Button className="navBtn navGroup">Home</Button>
                         </Nav.Link>
                         <Nav.Link
-                            disabled={folderLength === 0 ? true : false}
+                            disabled={props.folderSize === 0 ? true : false}
                             as={Link}
                             to="/AddMemory"
-                            onClick={() => setIsMemoryEdit(false)}>
-                            <Button disabled={folderLength === 0 ? true : false} className="navBtn btnBorder">Add Memory</Button>
+                            onClick={() => userData.setIsMemoryEdit(false)}>
+                            <Button disabled={props.folderSize === 0 ? true : false} className="navBtn btnBorder">Add Memory</Button>
                         </Nav.Link>
                         <Nav.Link
                             as={Link}
                             to="/AddFolder"
-                            onClick={() => setIsEditFolder(false)}
+                            onClick={() => userData.setIsEditFolder(false)}
                         >
                             <Button className="navBtn">Add Folder</Button>
                         </Nav.Link>

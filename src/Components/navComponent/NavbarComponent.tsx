@@ -8,10 +8,11 @@ import addnew from '../../assets/addnew.svg';
 import memories from '../../assets/memories.svg';
 import { MyContext, resetContext } from '../context';
 
-export default function CustomNavbar() {
+export default function CustomNavbar(props: {folderSize: number}) {
+    const userData = useContext(MyContext)
+    
     const [isActive, setIsActive] = useState(false);
 
-    const { setMoreMemoryClicked, setIsMemoryEdit, setIsEditFolder, folderLength, setMemoryItems, setUsersId, setUser, setFolders, setFolderEdit } = useContext(MyContext);
 
     const navigate = useNavigate();
 
@@ -20,16 +21,16 @@ export default function CustomNavbar() {
     };
 
     const handleMemoryClick = () => {
-        setMoreMemoryClicked(false);
+        userData.setMoreMemoryClicked(false);
         setIsActive(!isActive);
     }
     const handleMoreMemoryClick = () => {
-        setMoreMemoryClicked(true);
+        userData.setMoreMemoryClicked(true);
         setIsActive(!isActive);
     }
 
     const LogOut = () => {
-        resetContext(setUser, setUsersId, setMemoryItems, setMoreMemoryClicked, setFolders, setIsEditFolder, setFolderEdit);
+        resetContext(userData.setUser, userData.setUsersId, userData.setMemoryItems, userData.setMoreMemoryClicked, userData.setFolders, userData.setIsEditFolder, userData.setFolderEdit);
         sessionStorage.clear();
         navigate('/');
     }
@@ -78,11 +79,11 @@ export default function CustomNavbar() {
                                 <h1 className='navWords d-inline'>Home</h1></Nav.Link>
                         </div>
                         <div style={{ marginLeft: '6px' }}>
-                            <Nav.Link disabled={folderLength === 0 ? true : false} as={Link} to='/AddMemory' onClick={() => setIsMemoryEdit(false)}><img className='navImg' src={addnew} alt='addnew picture' />
+                            <Nav.Link disabled={props.folderSize === 0 ? true : false} as={Link} to='/AddMemory' onClick={() => userData.setIsMemoryEdit(false)}><img className='navImg' src={addnew} alt='addnew picture' />
                                 <h1 className='navWords d-inline'>Add Memory</h1></Nav.Link>
                         </div>
                         <div style={{ marginLeft: '6px' }}>
-                            <Nav.Link as={Link} to='/AddFolder' onClick={() => setIsEditFolder(false)}><img className='navImg' src={addnew} alt='addnew picture' />
+                            <Nav.Link as={Link} to='/AddFolder' onClick={() => userData.setIsEditFolder(false)}><img className='navImg' src={addnew} alt='addnew picture' />
                                 <h1 className='navWords d-inline'>Add Folder</h1></Nav.Link>
                         </div>
                         <div style={{ marginLeft: '7px' }}>

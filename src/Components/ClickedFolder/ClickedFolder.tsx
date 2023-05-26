@@ -10,7 +10,7 @@ import { DeleteFolder, getMemoryByFolderId } from '../Services/DataService';
 import DesktopNav from '../DesktopNavComponent/DesktopNav';
 
 export default function ClickedFolder() {
-    const { folderName, selectedFolder, setSelectedMemory, setFolderEdit, setIsEditFolder, setIsMemoryEdit, fromAddFolder, setFolderName } = useContext(MyContext);
+    const userData = useContext(MyContext);
 
     const [memoryItem, setMemoryItem] = useState([]);
     const [dots, setDots] = useState('');
@@ -19,7 +19,7 @@ export default function ClickedFolder() {
         const GetMemories = async () => {
             const folder: any = JSON.parse(sessionStorage.Folder);
             let memory = await getMemoryByFolderId(folder.id);
-            setFolderName(folder.name);
+            userData.setFolderName(folder.name);
             setMemoryItem(memory);
         }
         GetMemories()
@@ -33,23 +33,23 @@ export default function ClickedFolder() {
     const navigate = useNavigate();
 
     const handleClickedMemory = (memory: any) => {
-        setSelectedMemory(memory);
+        userData.setSelectedMemory(memory);
         sessionStorage.setItem('Memory', JSON.stringify(memory));
         navigate('/memory');
     }
 
     const handleEditFolder = () => {
-        setFolderEdit({
-            name: folderName,
-            id: selectedFolder.id
+        userData.setFolderEdit({
+            name: userData.folderName,
+            id: userData.selectedFolder.id
         });
-        setIsEditFolder(true);
+        userData.setIsEditFolder(true);
         setTimeout(() => {
             navigate('/addfolder');
         }, 500);
     }
     const handleDeleteFolder = async () => {
-        await DeleteFolder(selectedFolder);
+        await DeleteFolder(userData.selectedFolder);
         navigate('/dashboard');
     }
     const [show, setShow] = useState(false);
@@ -92,11 +92,11 @@ export default function ClickedFolder() {
                     </Modal.Body>
                 </Modal>
             </Row>
-            <CustomNavbar />
-            <DesktopNav />
+            <CustomNavbar folderSize={userData.folders.length}/>
+            <DesktopNav folderSize={userData.folders.length}/>
             <Row>
                 <Col>
-                    <h1 className='nameFolder text-center'>{fromAddFolder ? selectedFolder.name : folderName}...</h1>
+                    <h1 className='nameFolder text-center'>{userData.fromAddFolder ? userData.selectedFolder.name : userData.folderName}...</h1>
                 </Col>
             </Row>
             <Row className='d-flex align-items-center rowMaring'>
@@ -106,7 +106,7 @@ export default function ClickedFolder() {
                 <Col className='d-flex flex-column justify-content-end'>
                     <Row>
                         <div className='d-flex justify-content-end'>
-                            <Button onClick={() => { navigate('/AddMemory'); setIsMemoryEdit(false) }} className='addNew' variant='' style={{ display: 'flex', alignItems: 'center' }}>
+                            <Button onClick={() => { navigate('/AddMemory'); userData.setIsMemoryEdit(false) }} className='addNew' variant='' style={{ display: 'flex', alignItems: 'center' }}>
                                 <Col xs={9}>
                                     <p className='addNewTxt'>Add Memory</p>
                                 </Col>
@@ -162,7 +162,7 @@ export default function ClickedFolder() {
             </div>
             <Row className="desktopBtnRow">
                 <Col className="desktopAddCol">
-                    <Button variant='' onClick={() => { navigate("/AddMemory"); setIsMemoryEdit(false); }} className="desktopAddBtn">Add Memory +</Button>
+                    <Button variant='' onClick={() => { navigate("/AddMemory"); userData.setIsMemoryEdit(false); }} className="desktopAddBtn">Add Memory +</Button>
                 </Col>
                 <Col className="d-flex justify-content-center">
                     <Button onClick={() => navigate('/dashboard')} className="moreMemories" variant="">
@@ -170,7 +170,7 @@ export default function ClickedFolder() {
                     </Button>
                 </Col>
                 <Col className="desktopAddCol">
-                    <Button variant='' onClick={() => { navigate("/AddFolder"); setIsEditFolder(false); }} className="desktopAddBtn2">Add Folder +</Button>
+                    <Button variant='' onClick={() => { navigate("/AddFolder"); userData.setIsEditFolder(false); }} className="desktopAddBtn2">Add Folder +</Button>
                 </Col>
             </Row>
         </Container>

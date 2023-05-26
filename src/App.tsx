@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import AddMemory from './Components/AddMemoryComponent/AddMemory';
@@ -10,35 +9,14 @@ import AddFolder from './Components/AddFolderComponent/AddFolder';
 import ClickedFolder from './Components/ClickedFolder/ClickedFolder';
 import Logout from './Components/Logout/Logout';
 import ShownMemory from './Components/ShownMemory/ShownMemory';
+import useInfo from './Components/Hooks/useHooks';
 import { MyContext } from './Components/context';
 
 export default function App() {
-  const [username, setUser] = useState('');
-  const [memoryItems, setMemory] = useState<[]>([]);
-  const [usersId, setUsersId] = useState(0);
-  const [moreMemoryClicked, setMoreMemoryClicked] = useState(false);
-  const [selectedMemory, setSelectedMemory] = useState({});
-  const [folders, setFolders] = useState([]);
-  const [folderId, setFolderId] = useState(0);
-  const [folderName, setFolderName] = useState('');
-  const [selectedFolder, setSelectedFolder] = useState([]);
-  const [folderEdit, setFolderEdit] = useState('');
-  const [isEditFolder, setIsEditFolder] = useState(false);
-  const [memoryEdit, setMemoryEdit] = useState({});
-  const [isEditMemory, setIsMemoryEdit] = useState(false);
-  const [fromAddFolder, setFromAddFolder] = useState(false);
-  const [fromAddMemory, setFromAddMemory] = useState(false);
-  const [folderLength, setFolderLength] = useState(0);
-
-
-
-  const setMemoryItems = (moreMemory: any) => {
-    setMemory(moreMemory);
-  };
 
   return (
     <div className='body'>
-      <MyContext.Provider value={{ username, setUser, memoryItems, setMemoryItems, usersId, setUsersId, moreMemoryClicked, setMoreMemoryClicked, selectedMemory, setSelectedMemory, folders, setFolders, folderId, setFolderId, folderName, setFolderName, selectedFolder, setSelectedFolder, folderEdit, setFolderEdit, isEditFolder, setIsEditFolder, memoryEdit, setMemoryEdit, isEditMemory, setIsMemoryEdit, fromAddFolder, setFromAddFolder, folderLength, setFolderLength, fromAddMemory, setFromAddMemory }}>
+      <MyContext.Provider value={useInfo()}>
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<SignIn />} />

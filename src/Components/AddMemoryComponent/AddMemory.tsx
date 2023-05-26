@@ -10,24 +10,24 @@ import DesktopNav from '../DesktopNavComponent/DesktopNav';
 // import AudioRecorder from './AudioRecording';
 
 export default function AddMemory() {
-    const { usersId, setSelectedMemory, isEditMemory, memoryEdit, setFolderId, folderId, setFromAddMemory } = useContext(MyContext);
+    const userData = useContext(MyContext);
 
     const navigate = useNavigate()
     const [show, setShow] = useState(false);
 
-    const [memoryImage, setMemoryImage] = useState(isEditMemory ? memoryEdit.image : '');
-    const [memoryTitle, setMemoryTitle] = useState(isEditMemory ? memoryEdit.title : '');
-    const [memoryDescription, setMemoryDescription] = useState(isEditMemory ? memoryEdit.description : '');
-    const [memoryTags, setMemoryTags] = useState(isEditMemory ? memoryEdit.tags : '');
-    const [memoryDate, setMemoryDate] = useState(isEditMemory ? memoryEdit.date : '');
-    const [memoryId] = useState(isEditMemory ? memoryEdit.id : 0);
+    const [memoryImage, setMemoryImage] = useState(userData.isEditMemory ? userData.memoryEdit.image : '');
+    const [memoryTitle, setMemoryTitle] = useState(userData.isEditMemory ? userData.memoryEdit.title : '');
+    const [memoryDescription, setMemoryDescription] = useState(userData.isEditMemory ? userData.memoryEdit.description : '');
+    const [memoryTags, setMemoryTags] = useState(userData.isEditMemory ? userData.memoryEdit.tags : '');
+    const [memoryDate, setMemoryDate] = useState(userData.isEditMemory ? userData.memoryEdit.date : '');
+    const [memoryId] = useState(userData.isEditMemory ? userData.memoryEdit.id : 0);
     const [folder, setFolder] = useState(0);
     const [folders, setFolders] = useState([]);
 
     const handleTitle = (e: { target: { value: string } }) => setMemoryTitle(e.target.value);
     const handleDescription = (e: { target: { value: string } }) => setMemoryDescription(e.target.value);
     const handleFolder = ({ target }: { target: { value: any } }) => {
-        setFolderId(target.value);
+        userData.setFolderId(target.value);
         setFolder(target.value);
     };
 
@@ -61,7 +61,7 @@ export default function AddMemory() {
 
     const handleSave = async () => {
         if (memoryImage === '' || memoryDate === '' || memoryTitle === '' || memoryDescription === '' || memoryTags === '' || folder === 0) {
-            if (isEditMemory && folder === 0) {
+            if (userData.isEditMemory && folder === 0) {
                 swal("Please check to make sure a folder has been selected or changed");
             } else {
                 swal("Please make sure you enter in every field");
@@ -70,8 +70,8 @@ export default function AddMemory() {
         } else {
             let item = {
                 Id: memoryId,
-                Userid: usersId,
-                FolderId: folderId,
+                Userid: userData.usersId,
+                FolderId: userData.folderId,
                 title: memoryTitle,
                 image: memoryImage,
                 description: memoryDescription,
@@ -80,21 +80,21 @@ export default function AddMemory() {
                 isPublished: true,
                 isDeleted: false
             }
-            setSelectedMemory(item);
+            userData.setSelectedMemory(item);
             let result = false;
-            if (isEditMemory) {
+            if (userData.isEditMemory) {
                 result = await updateMemoryItem(item);
                 setTimeout(() => {
                     navigate('/dashboard')
                 }, 500);
             } else {
-                setFromAddMemory(true)
+                userData.setFromAddMemory(true)
                 result = await addMemoryItem(item);
             }
             setShow(true);
 
             if (result === false) {
-                alert(`Memory was not ${isEditMemory ? 'Updated' : 'Added'}`);
+                alert(`Memory was not ${userData.isEditMemory ? 'Updated' : 'Added'}`);
             }
         }
     }
@@ -106,7 +106,7 @@ export default function AddMemory() {
             if (UserId !== null) {
                 let displayFolder = await getFolderByUserId(parseInt(UserId));
                 setFolders(displayFolder);
-                setFolderId(displayFolder.id);
+                userData.setFolderId(displayFolder.id);
             }
         }
         GetFolders()
@@ -147,10 +147,10 @@ export default function AddMemory() {
             {/* <AudioRecorder /> */}
             <Row>
                 <Modal className='modalBG' show={show} onHide={handleClose} backdrop="static" keyboard={false}>
-                    <Modal.Body className={isEditMemory ? `modalBodyUpdate` : `modalBody`}>
+                    <Modal.Body className={userData.isEditMemory ? `modalBodyUpdate` : `modalBody`}>
                         <Row>
                             <Col className='d-flex justify-content-center'>
-                                {isEditMemory ?
+                                {userData.isEditMemory ?
                                     <p className='modalTxt'>Do you wish to save the changes to your memory?</p>
                                     :
                                     <p className='modalTxt'>Your memory was added!</p>
@@ -159,7 +159,7 @@ export default function AddMemory() {
                         </Row>
                         <Row>
                             <Col className='d-flex justify-content-center'>
-                                {isEditMemory ?
+                                {userData.isEditMemory ?
                                     <Row className='d-flex justify-content-center'>
                                         <Col>
                                             <Button onClick={() => {
@@ -178,8 +178,8 @@ export default function AddMemory() {
                     </Modal.Body>
                 </Modal>
             </Row>
-            <CustomNavbar />
-            <DesktopNav />
+            <CustomNavbar folderSize={userData.folders.length}/>
+            <DesktopNav folderSize={userData.folders.length}/>
             <Row>
                 <Col className='d-flex justify-content-center'>
                     <h2 className='addMemoryTitle' style={{ margin: '1rem 0' }}>Add your <span style={{ color: '#848383' }}>memory...</span></h2>
@@ -219,7 +219,7 @@ export default function AddMemory() {
                         <Col>
                             <Form.Group className="mb-3 d-flex flex-column align-items-center">
                                 <Form.Label className='addFolderInputTxt'>Folder</Form.Label>
-                                <Form.Select className='textInputs' onChange={handleFolder} value={folderId}>
+                                <Form.Select className='textInputs' onChange={handleFolder} value={userData.folderId}>
                                     <option hidden>Folder</option>
                                     {folders.map((option: any, idx: number) => {
                                         return (
@@ -257,7 +257,7 @@ export default function AddMemory() {
                 </Col>
                 <Row className='desktopAddRow'>
                     <Col className='d-flex justify-content-end'>
-                        {isEditMemory ?
+                        {userData.isEditMemory ?
                             <Button onClick={() => { setShow(true); }} className='addBtn' variant=''>Update</Button>
                             :
                             <Button onClick={() => { handleSave(); handleSaveClick() }} className='addBtn' variant='' disabled={saveClick}>Add</Button>
