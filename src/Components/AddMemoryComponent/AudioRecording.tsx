@@ -7,14 +7,6 @@ const mimeType = "audio/webm";
 
 const AudioRecorder = () => {
     const userData = useContext(MyContext);
-    interface myStream {
-        active: boolean,
-        id: string,
-        onactive: null,
-        onaddtrack: null,
-        oninactive:null,
-        onremovetrack: null
-    }
 
     const [permission, setPermission] = useState(false);
     const mediaRecorder: any = useRef<MediaStream | null>(null);
@@ -48,23 +40,26 @@ const AudioRecorder = () => {
 
 
     const startRecording = async () => {
-        setRecordingStatus("recording");
-        const media: any = new MediaRecorder(stream, { mimeType });
-        mediaRecorder.current = media;
-        mediaRecorder.current.start();
-        let localAudioChunks: any = [];
-        mediaRecorder.current.ondataavailable = (event: any) => {
-            if (typeof event.data === "undefined") return;
-            if (event.data.size === 0) return;
-            localAudioChunks.push(event.data);
-        };
-        setAudioChunks(localAudioChunks);
+        if(stream) {
+            setRecordingStatus("recording");
+            const media: any = new MediaRecorder(stream, { mimeType });
+            mediaRecorder.current = media;
+            mediaRecorder.current.start();
+            let localAudioChunks: any = [];
+            mediaRecorder.current.ondataavailable = (event: any) => {
+                if (typeof event.data === "undefined") return;
+                if (event.data.size === 0) return;
+                localAudioChunks.push(event.data);
+            };
+            setAudioChunks(localAudioChunks);
+        }
     };
 
     const stopRecording = () => {
         setRecordingStatus("inactive");
         mediaRecorder.current.stop();
         mediaRecorder.current.onstop = () => {
+            console.log(audioChunks)
             const audioBlob = new Blob(audioChunks, { type: mimeType });
             const audioUrl = URL.createObjectURL(audioBlob);
             setAudioChunks([]);
@@ -76,6 +71,7 @@ const AudioRecorder = () => {
                 const newRecordings: any = [...recordings, audioUrl];
                 setRecordings(newRecordings);
                 userData.setAudio(base64String)
+                console.log(base64String)
             };
         };
     };
