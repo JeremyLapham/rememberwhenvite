@@ -25,7 +25,6 @@ export default function ShownMemory() {
     };
 
     useEffect(() => {
-        console.log(userData.selectedMemory.audio)
         const Memory = sessionStorage.getItem('Memory');
         if (Memory) {
             userData.setSelectedMemory(JSON.parse(Memory));

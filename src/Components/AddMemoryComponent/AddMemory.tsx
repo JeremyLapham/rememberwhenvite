@@ -7,7 +7,7 @@ import { addMemoryItem, updateMemoryItem, getFolderByUserId } from '../Services/
 import { MyContext } from '../context';
 import swal from 'sweetalert';
 import DesktopNav from '../DesktopNavComponent/DesktopNav';
-// import AudioRecorder from './AudioRecording';
+import AudioRecorder from './AudioRecording';
 
 export default function AddMemory() {
     const userData = useContext(MyContext);
@@ -77,7 +77,7 @@ export default function AddMemory() {
                 description: memoryDescription,
                 date: memoryDate,
                 tags: memoryTags,
-                // audio: userData.audio,
+                audio: userData.audio,
                 isPublished: true,
                 isDeleted: false
             }
@@ -215,14 +215,14 @@ export default function AddMemory() {
                                     </div>
                                 )}
                             </div> */}
-                            {/* <Row>
+                            <Row>
                                 <Col>
                                     <Form.Group className="mb-3 d-flex flex-column align-items-center">
                                         <Form.Label className='addFolderInputTxt'>Audio Recording</Form.Label>
                                         <AudioRecorder  />
                                     </Form.Group>
                                 </Col>
-                            </Row> */}
+                            </Row>
                         </Col>
                     </Row>
                     <Row>

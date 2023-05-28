@@ -17,7 +17,7 @@ export default function useInfo() {
   const [fromAddFolder, setFromAddFolder] = useState(false);
   const [fromAddMemory, setFromAddMemory] = useState(false);
   const [folderLength, setFolderLength] = useState(0);
-  // const [audio, setAudio] = useState('');
+  const [audio, setAudio] = useState('');
 
   // const setMemoryItems = (moreMemory: any) => {
   //   setMemory(moreMemory);
@@ -56,7 +56,7 @@ export default function useInfo() {
     setFolderLength,
     fromAddMemory,
     setFromAddMemory,
-    // audio,
-    // setAudio,
+    audio,
+    setAudio,
   };
 }

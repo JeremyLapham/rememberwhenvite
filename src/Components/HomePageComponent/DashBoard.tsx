@@ -39,6 +39,7 @@ export default function DashBoard() {
                 const displayFolder = await getFolderByUserId(parseInt(userId));
                 userData.setMemoryItems(userMemoryItems);
                 userData.setFolders(displayFolder);
+                userData.setAudio('');
             } else {
                 const loggedIn = loggedInData();
                 sessionStorage.setItem('UserId', JSON.stringify(loggedIn.userId));
@@ -48,6 +49,7 @@ export default function DashBoard() {
                 const displayFolder = await getFolderByUserId(loggedIn.userId);
                 userData.setMemoryItems(userMemoryItems);
                 userData.setFolders(displayFolder);
+                userData.setAudio('');
             }
         }
         if (!checkToken()) {
