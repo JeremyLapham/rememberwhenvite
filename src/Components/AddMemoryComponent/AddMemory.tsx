@@ -12,18 +12,20 @@ import AudioRecorder from './AudioRecording';
 export default function AddMemory() {
     const userData = useContext(MyContext);
 
+    
     const navigate = useNavigate()
     const [show, setShow] = useState(false);
-
+    
     const [memoryImage, setMemoryImage] = useState(userData.isEditMemory ? userData.memoryEdit.image : '');
     const [memoryTitle, setMemoryTitle] = useState(userData.isEditMemory ? userData.memoryEdit.title : '');
     const [memoryDescription, setMemoryDescription] = useState(userData.isEditMemory ? userData.memoryEdit.description : '');
     const [memoryTags, setMemoryTags] = useState(userData.isEditMemory ? userData.memoryEdit.tags : '');
     const [memoryDate, setMemoryDate] = useState(userData.isEditMemory ? userData.memoryEdit.date : '');
     const [memoryId] = useState(userData.isEditMemory ? userData.memoryEdit.id : 0);
+    const [userAudio, setUserAudio] = useState(userData.isEditMemory ? userData.memoryEdit.audio : '');
     const [folder, setFolder] = useState(0);
     const [folders, setFolders] = useState([]);
-
+    
     const handleTitle = (e: { target: { value: string } }) => setMemoryTitle(e.target.value);
     const handleDescription = (e: { target: { value: string } }) => setMemoryDescription(e.target.value);
     const handleFolder = ({ target }: { target: { value: any } }) => {
@@ -77,7 +79,7 @@ export default function AddMemory() {
                 description: memoryDescription,
                 date: memoryDate,
                 tags: memoryTags,
-                audio: userData.audio,
+                audio: userAudio,
                 isPublished: true,
                 isDeleted: false
             }
@@ -201,25 +203,11 @@ export default function AddMemory() {
                     </Row>
                     <Row>
                         <Col>
-                            {/* <div>
-                                <button onClick={startRecording} disabled={recording}>
-                                    Start Recording
-                                </button>
-                                <button onClick={stopRecording} disabled={!recording}>
-                                    Stop Recording
-                                </button>
-                                {audioChunks.length > 0 && (
-                                    <div>
-                                        <button onClick={handlePlaybackButtonClick}>Play Recording</button>
-                                        <audio ref={audioPlayerRef} controls />
-                                    </div>
-                                )}
-                            </div> */}
                             <Row>
                                 <Col>
                                     <Form.Group className="mb-3 d-flex flex-column align-items-center">
                                         <Form.Label className='addFolderInputTxt'>Audio Recording</Form.Label>
-                                        <AudioRecorder  />
+                                        <AudioRecorder setaudio={setUserAudio} audio={userAudio}/>
                                     </Form.Group>
                                 </Col>
                             </Row>

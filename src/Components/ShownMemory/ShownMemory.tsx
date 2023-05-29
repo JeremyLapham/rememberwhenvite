@@ -42,7 +42,8 @@ export default function ShownMemory() {
             image: userData.selectedMemory.image,
             tags: userData.selectedMemory.tags,
             description: userData.selectedMemory.description,
-            date: userData.selectedMemory.date
+            date: userData.selectedMemory.date,
+            audio: userData.selectedMemory.audio
 
         });
         setTimeout(() => {

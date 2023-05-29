@@ -1,12 +1,11 @@
-import { useState, useRef, useContext } from "react";
-import { MyContext } from "../context";
+import { useState, useRef } from "react";
 import swal from "sweetalert";
+const pako = require('pako');
 
 const mimeType = "audio/webm";
 
 
-const AudioRecorder = () => {
-    const userData = useContext(MyContext);
+const AudioRecorder = (props: any) => {
 
     const [permission, setPermission] = useState(false);
     const mediaRecorder: any = useRef<MediaStream | null>(null);
@@ -59,7 +58,6 @@ const AudioRecorder = () => {
         setRecordingStatus("inactive");
         mediaRecorder.current.stop();
         mediaRecorder.current.onstop = () => {
-            console.log(audioChunks)
             const audioBlob = new Blob(audioChunks, { type: mimeType });
             const audioUrl = URL.createObjectURL(audioBlob);
             setAudioChunks([]);
@@ -70,8 +68,9 @@ const AudioRecorder = () => {
                 const base64String = reader.result;
                 const newRecordings: any = [...recordings, audioUrl];
                 setRecordings(newRecordings);
-                userData.setAudio(base64String)
-                console.log(base64String)
+                props.setaudio(base64String)
+                console.log(pako.deflate(base64String))
+                // console.log(base64String)
             };
         };
     };
@@ -96,12 +95,12 @@ const AudioRecorder = () => {
                     </button>
                 ) : null}
             </div>
-            {userData.audio === '' ?
+            {props.audio === '' ?
                 null
                 :
                 <div className="audio-player">
-                    <audio src={userData.audio} controls></audio>
-                    <a download href={userData.audio}>
+                    <audio src={props.audio} controls></audio>
+                    <a download href={props.audio}>
                         Download Recording
                     </a>
                 </div>}
