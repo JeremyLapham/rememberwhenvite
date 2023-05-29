@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import swal from "sweetalert";
-const pako = require('pako');
+import pako from 'pako';
 
 const mimeType = "audio/webm";
 
@@ -39,7 +39,7 @@ const AudioRecorder = (props: any) => {
 
 
     const startRecording = async () => {
-        if(stream) {
+        if (stream) {
             setRecordingStatus("recording");
             const media: any = new MediaRecorder(stream, { mimeType });
             mediaRecorder.current = media;
@@ -53,6 +53,11 @@ const AudioRecorder = (props: any) => {
             setAudioChunks(localAudioChunks);
         }
     };
+
+    // const compressAudioData = (audioData: any) => {
+    //     const compressedData = pako.deflate(audioData);
+    //     return compressedData;
+    // };
 
     const stopRecording = () => {
         setRecordingStatus("inactive");
@@ -69,8 +74,9 @@ const AudioRecorder = (props: any) => {
                 const newRecordings: any = [...recordings, audioUrl];
                 setRecordings(newRecordings);
                 props.setaudio(base64String)
-                console.log(pako.deflate(base64String))
-                // console.log(base64String)
+                // const compressedData = compressAudioData(base64String);
+                // console.log(compressedData);
+                console.log(base64String)
             };
         };
     };
