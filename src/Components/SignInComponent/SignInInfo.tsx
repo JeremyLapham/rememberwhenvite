@@ -3,7 +3,7 @@ import logo from '../../assets/elephantLogo.svg';
 import './SignIn.css';
 import { Button, Col, Container, Row, Toast, Form, InputGroup } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { GetLoggedInUserData, login } from '../Services/DataService';
+import { GetLoggedInUserData, login } from '../../Services/DataService';
 import { MyContext } from '../context';
 import { SlLock, SlLockOpen } from 'react-icons/sl';
 

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import './ClickedFolder.css';
 import { IoAddSharp } from 'react-icons/io5';
 import { MyContext } from '../context';
-import { DeleteFolder, getMemoryByFolderId } from '../Services/DataService';
+import { DeleteFolder, getMemoryByFolderId } from '../../Services/DataService';
 import DesktopNav from '../DesktopNavComponent/DesktopNav';
 
 export default function ClickedFolder() {

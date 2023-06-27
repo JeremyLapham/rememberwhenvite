@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './SignUp.css';
 import { Button, Col, Container, InputGroup, Row, Toast, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { createAccount } from '../Services/DataService';
+import { createAccount } from '../../Services/DataService';
 import swal from 'sweetalert';
 import { SlLock, SlLockOpen } from 'react-icons/sl';
 

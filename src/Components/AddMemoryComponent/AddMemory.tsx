@@ -3,7 +3,7 @@ import { Col, Container, Row, Button, Form, Modal } from 'react-bootstrap';
 import './AddMemory.css';
 import { useNavigate } from 'react-router-dom';
 import CustomNavbar from '../navComponent/NavbarComponent';
-import { addMemoryItem, updateMemoryItem, getFolderByUserId } from '../Services/DataService';
+import { addMemoryItem, updateMemoryItem, getFolderByUserId } from '../../Services/DataService';
 import { MyContext } from '../context';
 import swal from 'sweetalert';
 import DesktopNav from '../DesktopNavComponent/DesktopNav';

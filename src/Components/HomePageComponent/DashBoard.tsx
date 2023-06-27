@@ -6,7 +6,7 @@ import './DashBoard.css';
 import { useNavigate } from 'react-router-dom';
 import CustomNavbar from '../navComponent/NavbarComponent';
 import { IoAddSharp } from 'react-icons/io5';
-import { checkToken, getFolderByUserId, getMemoryItemsByUserId, loggedInData } from '../Services/DataService';
+import { checkToken, getFolderByUserId, getMemoryItemsByUserId, loggedInData } from '../../Services/DataService';
 import { MyContext } from '../context';
 import DesktopNav from '../DesktopNavComponent/DesktopNav';
 

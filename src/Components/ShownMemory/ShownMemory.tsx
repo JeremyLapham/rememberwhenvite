@@ -5,7 +5,7 @@ import { Button, Col, Container, Modal, OverlayTrigger, Row, Tooltip } from 'rea
 import elephantLogo from '../../assets/elephantLogo.svg';
 import { useNavigate } from 'react-router-dom';
 import { MyContext } from '../context';
-import { DeleteMemory } from '../Services/DataService';
+import { DeleteMemory } from '../../Services/DataService';
 import DesktopNav from '../DesktopNavComponent/DesktopNav';
 
 export default function ShownMemory() {

@@ -1,6 +1,5 @@
 import { useState, useRef } from "react";
 import swal from "sweetalert";
-import pako from 'pako';
 
 const mimeType = "audio/webm";
 
@@ -54,10 +53,6 @@ const AudioRecorder = (props: any) => {
         }
     };
 
-    // const compressAudioData = (audioData: any) => {
-    //     const compressedData = pako.deflate(audioData);
-    //     return compressedData;
-    // };
 
     const stopRecording = () => {
         setRecordingStatus("inactive");
@@ -74,9 +69,6 @@ const AudioRecorder = (props: any) => {
                 const newRecordings: any = [...recordings, audioUrl];
                 setRecordings(newRecordings);
                 props.setaudio(base64String)
-                // const compressedData = compressAudioData(base64String);
-                // console.log(compressedData);
-                console.log(base64String)
             };
         };
     };

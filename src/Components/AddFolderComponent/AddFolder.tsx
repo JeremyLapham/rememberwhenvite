@@ -5,7 +5,7 @@ import heart from '../../assets/folderpic.png';
 import { useNavigate } from 'react-router-dom';
 import './AddFolder.css';
 import { MyContext } from '../context';
-import { Folder, updateFolder } from '../Services/DataService';
+import { Folder, updateFolder } from '../../Services/DataService';
 import swal from 'sweetalert';
 import DesktopNav from '../DesktopNavComponent/DesktopNav';
 
