@@ -1,4 +1,4 @@
-# rememberwhenvite
+# Remember When
 
 Remember When was an idea from Elizar Garcia (the project lead). 
 During Code Stack Academy Elizar had acquired Lerrisa and Jeremy to his team. 
