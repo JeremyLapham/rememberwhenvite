@@ -22,6 +22,7 @@ export default function SignIn() {
 
     return (
         <Container fluid className='signInPlacing'>
+            <h1 style={{color: '#FF6161'}}>Currently not in use due to complications with databases</h1>
             <Row>
                 <Col className='d-flex justify-content-center'>
                     <img className='logo' src={logo} alt='remember when logo, elephant holding balloon' />

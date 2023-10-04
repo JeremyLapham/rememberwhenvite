@@ -74,6 +74,7 @@ export default function SignInInfo() {
                 <Col className='d-flex justify-content-center'>
                     <img className='logo mt-5' src={logo} alt='remember when logo, elephant holding balloon' />
                 </Col>
+                <h1 style={{color: '#FF6161'}}>Currently not in use due to complications with databases</h1>
             </Row>
             <Row className='d-flex justify-content-center signInBg pt-4'>
                 <Row>

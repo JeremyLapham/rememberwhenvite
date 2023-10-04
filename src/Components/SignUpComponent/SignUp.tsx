@@ -89,72 +89,71 @@ export default function SignUpInfo() {
                 <Col className='d-flex justify-content-center'>
                     <img className='logo mt-5' src={logo} alt='remember when logo, elephant holding balloon' />
                 </Col>
+                <h1 style={{ color: '#FF6161' }}>Currently not in use due to complications with databases</h1>
             </Row>
-            <Row>
-                <Col className='signInBgCol'>
-                    <div className='signInBg'>
-                        <Container>
-                            <Row className='d-flex justify-content-center pt-4'>
+            <Row className='d-flex justify-content-center signInBg pt-4'>
+                <Row>
+                    <Col className='centerInput'>
+                        <Button onClick={handleSignInClick} variant=''><h1 className='signInTxt'>Sign In</h1></Button>
+                    </Col>
+                    <Col className='centerInput'>
+                        <h1 className='signUpTxt1' style={{ textDecoration: 'underline' }}>Sign Up</h1>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col className='d-flex justify-content-center'>
+                        <Form>
+                            <Row>
                                 <Col className='centerInput'>
-                                    <Button onClick={handleSignInClick} variant=''><h1 className='signInTxt'>Sign In</h1></Button>
+                                    <Form.Group className="mb-3 d-flex flex-column align-items-center">
+                                        <Form.Label className='signUpInput'>Username</Form.Label>
+                                        <Form.Control className='inputField' type='text' placeholder='Enter your username' onChange={(e) => userNoSpace(e.target.value)} value={Username} />
+                                    </Form.Group>
                                 </Col>
-                                <Col className='centerInput'>
-                                    <h1 className='signUpTxt1' style={{ textDecoration: 'underline' }}>Sign Up</h1>
-                                </Col>
-                                <Form>
-                                    <Row>
-                                        <Col className='centerInput'>
-                                            <Form.Group className="mb-3 d-flex flex-column align-items-center">
-                                                <Form.Label className='signUpInput'>Username</Form.Label>
-                                                <Form.Control className='inputField' type='text' placeholder='Enter your username' onChange={(e) => userNoSpace(e.target.value)} value={Username} />
-                                            </Form.Group>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col className='centerInput'>
-                                            <Form.Group className="mb-3 d-flex flex-column align-items-center">
-                                                <Form.Label className='email'>Email</Form.Label>
-                                                <Form.Control className='inputField' type='text' placeholder='Enter your email' onChange={(e) => emailNoSpace(e.target.value)} value={Email} />
-                                            </Form.Group>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col className='centerInput'>
-                                            <h4 className='signUpInputPassword'>Password</h4>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col className='centerInput'>
-                                            <Form.Group controlId="Password">
-                                                <InputGroup className='inputField'>
-                                                    <Form.Control
-                                                        type={`${isClicked ? 'text' : 'password'}`}
-                                                        placeholder="Enter your password"
-                                                        className='inputField'
-                                                        onChange={({ target: { value } }) => setPassword(value)}
-                                                    />
-                                                    <Button className='lockBG' variant='' onClick={handleShowPassword}>
-                                                        <InputGroup.Text className='lockBG'>
-                                                            {isClicked ?
-                                                                <SlLockOpen size={25} />
-                                                                :
-                                                                <SlLock size={25} />}
-                                                        </InputGroup.Text>
-                                                    </Button>
-                                                </InputGroup>
-                                            </Form.Group>
-                                        </Col>
-                                    </Row>
-                                </Form>
-                                <Row>
-                                    <Col className='centerInput'>
-                                        <Button onClick={handelSubmit} className='signUpBtn' variant='' disabled={clickSignUp}>Sign Up</Button>
-                                    </Col>
-                                </Row>
                             </Row>
-                        </Container>
-                    </div>
-                </Col>
+                            <Row>
+                                <Col className='centerInput'>
+                                    <Form.Group className="mb-3 d-flex flex-column align-items-center">
+                                        <Form.Label className='email'>Email</Form.Label>
+                                        <Form.Control className='inputField' type='text' placeholder='Enter your email' onChange={(e) => emailNoSpace(e.target.value)} value={Email} />
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col className='centerInput'>
+                                    <h4 className='signUpInputPassword'>Password</h4>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col className='centerInput'>
+                                    <Form.Group controlId="Password">
+                                        <InputGroup className='inputField'>
+                                            <Form.Control
+                                                type={`${isClicked ? 'text' : 'password'}`}
+                                                placeholder="Enter your password"
+                                                className='inputField'
+                                                onChange={({ target: { value } }) => setPassword(value)}
+                                            />
+                                            <Button className='lockBG' variant='' onClick={handleShowPassword}>
+                                                <InputGroup.Text className='lockBG'>
+                                                    {isClicked ?
+                                                        <SlLockOpen size={25} />
+                                                        :
+                                                        <SlLock size={25} />}
+                                                </InputGroup.Text>
+                                            </Button>
+                                        </InputGroup>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                        </Form>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col className='centerInput'>
+                        <Button onClick={handelSubmit} className='signUpBtn' variant='' disabled={clickSignUp}>Sign Up</Button>
+                    </Col>
+                </Row>
             </Row>
         </Container>
     )
