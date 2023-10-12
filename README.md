@@ -1,3 +1,8 @@
+<div>
+<img alt="Static Badge" src="https://img.shields.io/badge/Database-Inactive-red">
+<a href="https://rememberwhen.vercel.app/">Deployment here</a>
+</div>
+
 # Remember When
 
 Remember When was an idea from Elizar Garcia (the project lead). 
