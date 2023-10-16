@@ -1,7 +1,5 @@
-<div>
-<img alt="Static Badge" src="https://img.shields.io/badge/Database-Inactive-red">
-<a href="https://rememberwhen.vercel.app/">Deployment here</a>
-</div>
+![Deployment](https://img.shields.io/badge/Database-Inactive-red.svg)
+[![Deployment](https://img.shields.io/badge/Deployment-Active-green.svg)](https://rememberwhen.vercel.app/)
 
 # Remember When
 
